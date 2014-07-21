@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ChicagoRecyclingSucks.com</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link href="css/leaflet.css" rel="stylesheet">
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/leaflet.css")">
+
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="col-sm-12 col-lg-8 col-lg-offset-2">
+                <div id="map" style="height: 500px"></div>    
+            </div>
+        </div>
+        
+        <script src="js/leaflet.js"></script>
+        
+        <script>
+            var map = L.map('map').setView([41.881, -87.629], 11);
+
+            L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                id: 'scottbeslow.ijk19b6c'
+            }).addTo(map);
+            
+    		L.marker([41.881, -87.629]).addTo(map)
+                .bindPopup("Merchandise Mart");
+
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    </body>
+</html>
