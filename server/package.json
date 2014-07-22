@@ -1,0 +1,14 @@
+{
+  "name": "recycling-server",
+  "description": "recycling API",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "express": "3.x",
+    "lodash": "^2.4.1",
+    "pg": "3.x",
+    "sequelize": "^1.7.9",
+    "sequelize-cli": "^0.2.3"
+  },
+  "main": "server.js"
+}
