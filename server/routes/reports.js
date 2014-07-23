@@ -17,3 +17,10 @@ exports.create = function(req, res){
     res.json({'error': 'Failed to store report'})
   })
 }
+
+exports.show = function(req, res){
+  db.Report.find({'where': {'id': req.params.id}})
+  .success(function(report){
+    res.json({'report': report})
+  })
+}

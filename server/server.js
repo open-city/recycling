@@ -15,6 +15,7 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', routes.index)
+app.get('/reports/:id.json', reports.show)
 app.get('/reports.json', reports.index)
 app.post('/reports.json', reports.create)
 
