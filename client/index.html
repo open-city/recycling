@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ChicagoRecyclingSucks.com</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link href="css/leaflet.css" rel="stylesheet">
         <link href="css/recycling.css" rel="stylesheet">
@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="container">
-            
+
             <nav class="navbar navbar-default" role="navigation">
                 <a class="navbar-brand" href="#">ChicagoRecyclingSucks.com</a>
             </nav>
@@ -23,12 +23,12 @@
                 Get On The Map
             </button>
             <div class="col-sm-12 col-lg-8 col-lg-offset-2">
-                <div id="map" style="height: 500px"></div>    
+                <div id="map" style="height: 500px"></div>
             </div>
         </div>
-        
+
         <script src="js/leaflet.js"></script>
-        
+
         <script>
             var map = L.map('map').setView([41.881, -87.629], 11);
 
@@ -37,12 +37,12 @@
                 attribution: 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 id: 'scottbeslow.ijk19b6c'
             }).addTo(map);
-            
+
     		L.marker([41.881, -87.629]).addTo(map)
                 .bindPopup("2121 N. Nowhere<br>No Recyling");
 
         </script>
-        
+
         <!-- Button trigger modal -->
 
         <div class="modal fade" id="getOnMapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -84,6 +84,6 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </body>
 </html>
