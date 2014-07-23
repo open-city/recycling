@@ -1,6 +1,7 @@
 var express = require('express'),
     http = require('http'),
     routes = require('./routes'),
+    reports = require('./routes/reports'),
     db = require('./models');
 var app = express();
 
@@ -14,6 +15,8 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', routes.index)
+app.get('/reports.json', reports.index)
+app.post('/reports.json', reports.create)
 
 db
   .sequelize
