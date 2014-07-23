@@ -17,7 +17,7 @@ app.get('/', routes.index)
 
 db
   .sequelize
-  .sync({ force: true })
+  .sync()
   .complete(function(err) {
     if (err) {
       throw err[0]
