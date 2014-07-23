@@ -4,8 +4,21 @@ var fs        = require('fs')
   , lodash    = require('lodash')
   , env       = process.env.NODE_ENV || 'development'
   , config    = require(__dirname + '/../config/config.json')[env]
-  , sequelize = new Sequelize(config.database, config.username, config.password, config)
   , db        = {}
+  , sequelize;
+
+if(env === 'production' && process.env.HEROKU_POSTGRESQL_PURPLE_URL){
+  var match = process.env.HEROKU_POSTGRESQL_PURPLE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+  sequelize = new Sequelize(match[5], match[1], match[2], {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    port: match[4],
+    host: match[3],
+    logging: true
+  })
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config)
+}
 
 fs
   .readdirSync(__dirname)
