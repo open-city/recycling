@@ -3,7 +3,6 @@ var fs        = require('fs')
   , Sequelize = require('sequelize')
   , lodash    = require('lodash')
   , env       = process.env.NODE_ENV || 'development'
-  , config    = require(__dirname + '/../config/config.json')[env]
   , db        = {}
   , sequelize;
 
@@ -17,6 +16,7 @@ if(env === 'production' && process.env.HEROKU_POSTGRESQL_PURPLE_URL){
     logging: true
   })
 } else {
+  var config = require(__dirname + '/../config/config.json')[env]
   sequelize = new Sequelize(config.database, config.username, config.password, config)
 }
 
