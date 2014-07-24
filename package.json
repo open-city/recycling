@@ -14,5 +14,8 @@
   "main": "server.js",
   "engines": {
     "node": "0.10.x"
+  },
+  "devDependencies": {
+    "hbs": "^2.7.0"
   }
 }
