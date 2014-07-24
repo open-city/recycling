@@ -3,3 +3,4 @@ server/config/config.json
 DS_Store
 config.json
 envvars.json
+envvars.js
