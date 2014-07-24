@@ -1,10 +1,23 @@
-var express = require('express'),
-    hbs = require('hbs');
-    http = require('http'),
-    routes = require('./routes'),
-    reports = require('./routes/reports'),
-    db = require('./models');
+var express = require('express')
+  , fs = require('fs')
+  , hbs = require('hbs')
+  , http = require('http')
+  , routes = require('./routes')
+  , reports = require('./routes/reports')
+  , geocode = require('./routes/geocode')
+  , db = require('./models')
+  ;
+  
 var app = express();
+
+// Load environment vars if present in file
+var envVarsPath = "./config/envvars.js";
+if (fs.existsSync(envVarsPath)) {
+    var envvars = require(envVarsPath);
+    for (var key in envvars) {
+      process.env[key] = envvars[key];
+    }
+}
 
 app.set('view engine','html');
 app.engine('html', hbs.__express);
@@ -23,6 +36,7 @@ app.get('/', routes.index)
 app.get('/reports/:id.json', reports.show)
 app.get('/reports.json', reports.index)
 app.post('/reports.json', reports.create)
+app.get('/geocode.json', geocode.query)
 
 db
   .sequelize
