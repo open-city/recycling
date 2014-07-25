@@ -15,7 +15,11 @@ var envVarsPath = "./config/envvars.js";
 if (fs.existsSync(envVarsPath)) {
     var envvars = require(envVarsPath);
     for (var key in envvars) {
-      process.env[key] = envvars[key];
+        
+        // don't clobber existing vars
+        if (!process.env.hasOwnProperty(key)) {
+            process.env[key] = envvars[key];
+        }
     }
 }
 
