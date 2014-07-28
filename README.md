@@ -16,7 +16,7 @@ npm install
 Setup Database
 --------------
 
-    mv server/config/config.json.sample server/config/config.json
+    cp config/config.json.sample config/config.json
     psql
     postgres=# create role recycling login createdb;
     postgres=# create database recycling;
@@ -24,6 +24,13 @@ Setup Database
     postgres=# create database recycling_test;
     postgres=# \q
     node_modules/sequelize-cli/bin/sequelize db:migrate
+
+Setup Environment Vars
+----------------------
+
+    # Get an existing developer to give you the appropriate values
+    cp config/envvars.js.sample config/envvars.js
+
 
 Running the app
 ---------------

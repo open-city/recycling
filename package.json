@@ -9,10 +9,14 @@
     "logfmt": "^1.1.2",
     "pg": "3.x",
     "sequelize": "^1.7.9",
-    "sequelize-cli": "^0.2.3"
+    "sequelize-cli": "^0.2.3",
+    "request": "^2.39.0"
   },
   "main": "server.js",
   "engines": {
     "node": "0.10.x"
+  },
+  "devDependencies": {
+    "hbs": "^2.7.0"
   }
 }
