@@ -35,5 +35,6 @@ Setup Environment Vars
 Running the app
 ---------------
 
-node server/server.js
-go to http://localhost:3000
+    node server.js
+
+Then visit http://localhost:3000 in your browser
