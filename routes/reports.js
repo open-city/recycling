@@ -22,8 +22,8 @@ exports.create = function(req, res){
 
       report.save().success(function(savedTask){
         res.json({'report': savedTask})
-      }).error(function(){
-        res.json({'error': 'Failed to store report'})
+      }).error(function(error){
+        res.json({'error': 'Failed to store report: ' + error})
       })
     } else {
       var newLocation = db.Location.build({
@@ -39,13 +39,13 @@ exports.create = function(req, res){
 
         report.save().success(function(savedTask){
           res.json({'report': savedTask})
-        }).error(function(){
-          res.json({'error': 'Failed to store report'})
+        }).error(function(error){
+          res.json({'error': 'Failed to store report on new location: ' + error})
         })
       })
     }
   }).error(function(error){
-    console.log('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng)
+    console.log('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + error)
   })
 }
 
