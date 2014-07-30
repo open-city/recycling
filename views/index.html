@@ -12,7 +12,6 @@
         <link href="css/leaflet.css" rel="stylesheet">
         <link href="css/recycling.css" rel="stylesheet">
 
-
     </head>
     <body>
             <nav class="navbar navbar-default navbar-style" role="navigation">
@@ -59,26 +58,25 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                                <input data-bind="value:address" type="text" class="form-control" id="inputAddress" placeholder="Address" />
                             </div>
                             <div class="form-group">
                                 <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip" placeholder="Zip" maxlength="5" size="5">
+                                <input  data-bind="value:zip" type="text" class="form-control" id="inputZip" placeholder="Zip" maxlength="5" size="5" />
                             </div>
                             <div class="form-group">
-                                <select class="form-control">
-                                    <option>My landlord provides recycling</option>
-                                    <option>My building has blue bins</option>
-                                    <option>There is no recycling in my building</option>
-                                    <option>There is a recyling building to get to, but it is not easy to use</option>
-                                    <option>There is a recycling bin at my building, but it doesn't have enough space</option>
-                                </select>
+                                <select class="form-control"
+					data-bind="options:$root.recyclingOptions,
+						   optionsCaption: 'Do you have recycling?',
+						   optionsValue: 'intVal',
+						   optionsText: 'label'"
+				></select>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Get On the Map</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind='click:save'>Get On the Map</button>
                     </div>
                 </div>
             </div>
@@ -86,5 +84,8 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+	<script src="/js/app.js"></script>
+	
     </body>
 </html>
