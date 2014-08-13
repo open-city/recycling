@@ -7,16 +7,16 @@ exports.index = function(req, res){
 };
 
 exports.create = function(req, res){
-  var lat = req.param('latitude'),
-      lng = req.param('longitude'),
-      address = req.param('address');
+  var lat = req.body['latitude'],
+      lng = req.body['longitude'],
+      address = req.body['address'];
 
   db.Location.find({
     'where': {'latitude': lat, 'longitude': lng}
   }).success(function(location){
     if(location){
       var report = db.Report.build({
-        'recyclingAvailable': req.param('recyclingAvailable'),
+        'recyclingAvailable': Number(req.body['recyclingAvailable']),
         'locationId': location['id']
       })
 
@@ -33,7 +33,7 @@ exports.create = function(req, res){
       })
       newLocation.save().success(function(location){
         var report = db.Report.build({
-          'recyclingAvailable': req.param('recyclingAvailable'),
+          'recyclingAvailable': Number(req.body['recyclingAvailable']),
           'locationId': location['id']
         })
 

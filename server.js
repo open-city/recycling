@@ -29,6 +29,7 @@ app.use(express.static('public'));
 
 app.set('port', process.env.PORT || 3000)
 app.use(express.logger('dev'))
+app.use(express.urlencoded())
 app.use(express.json())
 app.use(app.router)
 

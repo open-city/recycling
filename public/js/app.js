@@ -5,6 +5,8 @@ function ReportViewModel() {
   self.zip = ko.observable('');
   self.selectedAddress = ko.observable('');
   self.possibleAddresses = ko.observable('');
+  self.recyclingAvailable = ko.observable('');
+  self.modalMessage = ko.observable('');
   
   self.recyclingOptions = [
     {intVal: 1, label: "My landlord provides recycling"},
@@ -15,6 +17,19 @@ function ReportViewModel() {
   ]
   
   self.save = function(){
+    var address = self.selectedAddress();
+    var data = {'address': address.street, 'latitude': address.latLng.lat, 'longitude': address.latLng.lng, 'recyclingAvailable': self.recyclingAvailable};
+    $.post('/reports.json', data)
+      .done(function(response){
+        $('.modal').modal('hide');
+        self.modalMessage('Thanks for contributing!');
+        $('#infoModal').modal('show');
+      })
+      .fail(function(){
+        $('.modal').modal('hide');
+        self.modalMessage('Failed to create your report, please try again');
+        $('#infoModal').modal('show');
+      })
     // here we will do some client-side validation
     // and then POST the values to the geocoding endpoint, etc.
     console.log(self.address() + ", " + self.zip());
@@ -22,7 +37,7 @@ function ReportViewModel() {
 
   self.selectAddress = function(address){
     self.selectedAddress(address);
-    $('#searchResultsModal').modal('hide');
+    $('.modal').modal('hide');
     $('#getOnMapModal').modal('show');
   }
 
@@ -42,19 +57,18 @@ function ReportViewModel() {
         self.selectAddress(response[0]);
       } else if(response.length > 1) {
         self.possibleAddresses(response);
-        $('#searchModal').modal('hide');
+        $('.modal').modal('hide');
         $('#searchResultsModal').modal('show');
       } else {
         self.possibleAddresses([]);
-        $('#searchModal').modal('hide');
+        $('.modal').modal('hide');
         $('#searchResultsModal').modal('show');
       }
     })
   }
 
-  self.startSearch = function(model, event){
-    var parent_modal = $(event.target).parents('.modal')
-    parent_modal.modal('hide');
+  self.startSearch = function(){
+    $('.modal').modal('hide');
     self.clearSearchForm();
     self.selectedAddress('');
     self.possibleAddresses([]);
