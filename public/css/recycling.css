@@ -34,3 +34,7 @@
 .clickable {
   cursor: pointer;
 }
+
+.side-content {
+  display: none;
+}

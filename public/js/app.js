@@ -6,7 +6,7 @@ function ReportViewModel() {
   self.selectedAddress = ko.observable('');
   self.possibleAddresses = ko.observable('');
   self.recyclingAvailable = ko.observable('');
-  self.modalMessage = ko.observable('');
+  self.infoMessage = ko.observable('');
   
   self.recyclingOptions = [
     {intVal: 1, label: "My landlord provides recycling"},
@@ -21,14 +21,14 @@ function ReportViewModel() {
     var data = {'address': address.street, 'latitude': address.latLng.lat, 'longitude': address.latLng.lng, 'recyclingAvailable': self.recyclingAvailable};
     $.post('/reports.json', data)
       .done(function(response){
-        $('.modal').modal('hide');
-        self.modalMessage('Thanks for contributing!');
-        $('#infoModal').modal('show');
+        $('.side-content').hide();
+        self.infoMessage('Thanks for contributing!');
+        $('#infoContent').show();
       })
       .fail(function(){
-        $('.modal').modal('hide');
-        self.modalMessage('Failed to create your report, please try again');
-        $('#infoModal').modal('show');
+        $('.side-content').hide();
+        self.infoMessage('Failed to create your report, please try again');
+        $('#infoContent').show();
       })
     // here we will do some client-side validation
     // and then POST the values to the geocoding endpoint, etc.
@@ -37,8 +37,8 @@ function ReportViewModel() {
 
   self.selectAddress = function(address){
     self.selectedAddress(address);
-    $('.modal').modal('hide');
-    $('#getOnMapModal').modal('show');
+    $('.side-content').hide();
+    $('#getOnMapForm').show();
   }
 
   self.clearSearchForm = function(){
@@ -53,29 +53,30 @@ function ReportViewModel() {
       url += "&zip=" + zip;
 
     $.get(url, function(response){
-      if(response.length == 1){
+      if(response.length == 1 && address){
         self.selectAddress(response[0]);
       } else if(response.length > 1) {
         self.possibleAddresses(response);
-        $('.modal').modal('hide');
-        $('#searchResultsModal').modal('show');
+        $('.side-content').hide();
+        $('#searchResultsForm').show();
       } else {
         self.possibleAddresses([]);
-        $('.modal').modal('hide');
-        $('#searchResultsModal').modal('show');
+        $('.side-content').hide();
+        $('#searchResultsForm').show();
       }
     })
   }
 
   self.startSearch = function(){
-    $('.modal').modal('hide');
+    $('.side-content').hide();
     self.clearSearchForm();
     self.selectedAddress('');
     self.possibleAddresses([]);
 
-    $('#searchModal').modal('show');
+    $('#searchForm').show();
   }
 
 }
 
 ko.applyBindings(new ReportViewModel());
+$('#searchForm').show();
