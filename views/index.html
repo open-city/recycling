@@ -14,140 +14,144 @@
 
   </head>
   <body>
-    <div class="container">
-      <nav class="navbar navbar-default navbar-style" role="navigation">
-        <a class="navbar-type navbar-brand" href="#">Where is my recycling?</a>
-        <button class="btn btn-success btn-lg btn-style" data-bind="click:startSearch" id="centerContent">
-          Report Your Residence
-        </button>
-      </nav>
-
-      <div class="">
-        <div id="map" style="height: 600px"></div>
+    <div class="row">
+      <div class="col-md-4">
       </div>
+      <div class="col-md-8">
+        <nav class="navbar navbar-default navbar-style" role="navigation">
+          <a class="navbar-type navbar-brand" href="#">Where is my recycling?</a>
+          <button class="btn btn-success btn-lg btn-style" data-bind="click:startSearch" id="centerContent">
+            Report Your Residence
+          </button>
+        </nav>
 
-      <script src="js/leaflet.js"></script>
-      <script>
-        var map = L.map('map').setView([41.881, -87.629], 11);
+        <div class="">
+          <div id="map" style="height: 600px"></div>
+        </div>
 
-        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-          maxZoom: 18,
-          attribution: 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-          id: 'scottbeslow.ijk19b6c'
-          }).addTo(map);
+        <script src="js/leaflet.js"></script>
+        <script>
+          var map = L.map('map').setView([41.881, -87.629], 11);
 
-        L.marker([41.881, -87.629]).addTo(map)
-        .bindPopup("2121 N. Nowhere<br>No Recyling");
-      </script>
+          L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'scottbeslow.ijk19b6c'
+            }).addTo(map);
 
-      <!-- Button trigger modal -->
+          L.marker([41.881, -87.629]).addTo(map)
+          .bindPopup("2121 N. Nowhere<br>No Recyling");
+        </script>
 
-      <div class="modal fade" id="getOnMapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <form role="form" id="getOnMapForm">
+        <!-- Button trigger modal -->
+
+        <div class="modal fade" id="getOnMapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form role="form" id="getOnMapForm">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">Get On the Map</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <span data-bind="text: selectedAddress().street"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="recyclingAvailable">Do you have recycling?</label>
+                    <select id="recyclingAvailable" class="form-control"
+                      data-bind="options:$root.recyclingOptions,
+                      optionsValue: 'intVal',
+                      optionsText: 'label',
+                      value: recyclingAvailable">
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <input type="submit" value="Get On the Map" class="btn btn-primary" data-dismiss="modal" data-bind='click:save'>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form role="form" id="searchForm">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                  <h4 class="modal-title" id="searchModalLabel">Find Your Residence</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="inputAddress">Street Address</label>
+                    <input data-bind="value:address" type="text" class="form-control" id="inputAddress" placeholder="Address" />
+                  </div>
+                  <div class="form-group">
+                    <label for="inputZip">Zip</label>
+                    <input data-bind="value:zip" type="text" class="form-control" id="inputZip" placeholder="Zip" maxlength="5" size="5" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <input type="submit" value="Search" class="btn btn-primary" data-dismiss="modal" data-bind='click:search'>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="searchResultsModal" tabindex="-1" role="dialog" aria-labelledby="searchResultsModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
                   <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Get On the Map</h4>
+                <h4 class="modal-title" id="searchResultsModalLabel">Is one of these your residence?</h4>
               </div>
               <div class="modal-body">
-                <div class="form-group">
-                  <span data-bind="text: selectedAddress().street"></span>
-                </div>
-                <div class="form-group">
-                  <label for="recyclingAvailable">Do you have recycling?</label>
-                  <select id="recyclingAvailable" class="form-control"
-                    data-bind="options:$root.recyclingOptions,
-                    optionsValue: 'intVal',
-                    optionsText: 'label',
-                    value: recyclingAvailable">
-                  </select>
-                </div>
+                <ul data-bind="foreach: possibleAddresses">
+                  <li>
+                  <a class="clickable" data-bind="text: street, click: $parent.selectAddress"></a>
+                  </li>
+                </ul>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <input type="submit" value="Get On the Map" class="btn btn-primary" data-dismiss="modal" data-bind='click:save'>
+                <button type="button" class="btn btn-default" data-bind="click:startSearch">Search Again</button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <form role="form" id="searchForm">
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
                   <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="searchModalLabel">Find Your Residence</h4>
+                <h4 class="modal-title" id="infoModal">Where is my recycling?</h4>
               </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="inputAddress">Street Address</label>
-                  <input data-bind="value:address" type="text" class="form-control" id="inputAddress" placeholder="Address" />
-                </div>
-                <div class="form-group">
-                  <label for="inputZip">Zip</label>
-                  <input data-bind="value:zip" type="text" class="form-control" id="inputZip" placeholder="Zip" maxlength="5" size="5" />
-                </div>
+              <div class="modal-body" data-bind="text: modalMessage">
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <input type="submit" value="Search" class="btn btn-primary" data-dismiss="modal" data-bind='click:search'>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="searchResultsModal" tabindex="-1" role="dialog" aria-labelledby="searchResultsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-              </button>
-              <h4 class="modal-title" id="searchResultsModalLabel">Is one of these your residence?</h4>
-            </div>
-            <div class="modal-body">
-              <ul data-bind="foreach: possibleAddresses">
-                <li>
-                <a class="clickable" data-bind="text: street, click: $parent.selectAddress"></a>
-                </li>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-default" data-bind="click:startSearch">Search Again</button>
             </div>
           </div>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+        <script src="/js/app.js"></script>
+
       </div>
-
-      <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModal" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-              </button>
-              <h4 class="modal-title" id="infoModal">Where is my recycling?</h4>
-            </div>
-            <div class="modal-body" data-bind="text: modalMessage">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-      <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
-      <script src="/js/app.js"></script>
-
     </div>
   </body>
 </html>
