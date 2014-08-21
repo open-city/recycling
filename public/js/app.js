@@ -44,7 +44,7 @@ function ReportViewModel() {
     $.post('/reports.json', data)
       .done(function(response){
         $('.side-content').hide();
-        self.infoMessage('Thanks for contributing!');
+        self.infoMessage('Thank you for your report!');
         $('#infoContent').show();
       })
       .fail(function(){
