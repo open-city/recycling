@@ -3,20 +3,18 @@
     <div>
       <form role="form" id="searchForm">
         <div>
-          <h4 id="searchFormLabel">Find Your Residence</h4>
+          <h2 id="searchFormLabel">No recycling in your building?</h2>
+          <h3>Report it!</h3>
         </div>
         <div>
+          <h4>Search for your building</h4>
           <div class="form-group">
-            <label for="inputAddress">Street Address</label>
+            <label for="inputAddress">Enter your Chicago street address:</label>
             <input data-bind="value:address" type="text" class="form-control" id="inputAddress" placeholder="Address" />
           </div>
-          <div class="form-group">
-            <label for="inputZip">Zip</label>
-            <input data-bind="value:zip" type="text" class="form-control" id="inputZip" placeholder="Zip" maxlength="5" size="5" />
-          </div>
         </div>
         <div>
-          <input type="submit" value="Search" class="btn btn-primary" data-bind='click:search'>
+          <input type="submit" value="Find my building" class="btn btn-primary" data-bind='click:search'>
         </div>
       </form>
     </div>
