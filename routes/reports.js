@@ -1,7 +1,12 @@
 var db = require('../models');
 
 exports.index = function(req, res){
-  db.Report.findAll().success(function(reports){
+  var query = {};
+  var locationId = req.query.locationId;
+  if(locationId){
+    query['where'] = {'locationId': locationId};
+  }
+  db.Report.findAll(query).success(function(reports){
     res.json({'reports': reports});
   })
 };
