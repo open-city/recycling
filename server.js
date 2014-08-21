@@ -23,7 +23,7 @@ if (fs.existsSync(envVarsPath)) {
     }
 }
 
-app.set('view engine','html');
+app.set('view engine','ejs');
 app.engine('html', hbs.__express);
 app.use(express.static('public'));
 

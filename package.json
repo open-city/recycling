@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "private": "true",
   "dependencies": {
+    "ejs": "^1.0.0",
     "express": "3.x",
     "hbs": "^2.7.0",
     "lodash": "^2.4.1",
