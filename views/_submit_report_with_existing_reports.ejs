@@ -1,0 +1,21 @@
+<div class="side-content" id="getOnMap" tabindex="-1" role="dialog" aria-labelledby="getOnMapForm" aria-hidden="true">
+  <div>
+    <div>
+      <form role="form" id="getOnMapForm">
+        <div class="row">
+          <p class="col-md-6" data-bind="text: selectedAddress().street"></p>
+          <h4 class="col-md-6" id="myFormLabel">does not recycle!</h4>
+        </div>
+        <div>
+          <div class="form-group">
+            <p data-bind="text: reportCountForLocation()"></p>
+            <p>people report NO recycling</p>
+          </div>
+        </div>
+        <div>
+          <input type="submit" value="I agree!" class="btn btn-primary" data-bind='click:save'>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

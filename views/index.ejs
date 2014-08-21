@@ -22,7 +22,8 @@
       <div class="col-md-3">
         <% include _search_form %>
         <% include _search_results %>
-        <% include _submit_report %>
+        <% include _submit_report_without_existing_reports.ejs %>
+        <% include _submit_report_with_existing_reports.ejs %>
         <% include _info_content %>
       </div>
 

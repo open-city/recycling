@@ -1,22 +1,43 @@
 function ReportViewModel() {
   var self = this;
-  
+
   self.address = ko.observable('');
   self.zip = ko.observable('');
   self.selectedAddress = ko.observable('');
   self.possibleAddresses = ko.observable('');
-  self.recyclingAvailable = ko.observable('');
+  self.recyclingAvailable = ko.observable(0);
   self.infoMessage = ko.observable('');
   self.buildingsFoundMessage = ko.observable('');
-  
-  self.recyclingOptions = [
-    {intVal: 1, label: "My landlord provides recycling"},
-    {intVal: 2, label: "My building has blue bins"},
-    {intVal: 3, label: "There is no recycling in my building"},
-    {intVal: 4, label: "There is a recycling building to get to, but it is not easy to use"},
-    {intVal: 5, label: "There is a recycling bin at my building, but it does not have enough space"}
-  ]
-  
+  self.reportCountForLocation = ko.observable(0);
+  self.existingAddress = ko.observable('');
+
+  self.getReportCountForAddressAndDisplayForm = function(address){
+    var latitude = address.latLng.lat;
+    var longitude = address.latLng.lng;
+    $.get('/locations.json?latitude=' + latitude + '&longitude=' + longitude)
+      .done(function(response){
+        console.log(response.locations)
+        if(response['locations'].length >= 1){
+          $.get('/reports.json?locationId=' + response['locations'][0].id)
+            .done(function(res){
+              console.log(res);
+              self.reportCountForLocation(res.reports.length);
+              $('.side-content').hide();
+              $('#getOnMap').show();
+            })
+            .fail(function(res){
+              console.log('Failed retrieving a report count for location with id ' + response['locations'][0].id)
+            })
+        } else {
+          $('.side-content').hide();
+          $('#getOnMapFirst').show();
+        }
+      })
+      .fail(function(response){
+        console.log("Errored while looking for an existing location");
+      })
+  }
+
   self.save = function(){
     var address = self.selectedAddress();
     var data = {'address': address.street, 'latitude': address.latLng.lat, 'longitude': address.latLng.lng, 'recyclingAvailable': self.recyclingAvailable};
@@ -38,8 +59,7 @@ function ReportViewModel() {
 
   self.selectAddress = function(address){
     self.selectedAddress(address);
-    $('.side-content').hide();
-    $('#getOnMapForm').show();
+    self.getReportCountForAddressAndDisplayForm(address);
   }
 
   self.clearSearchForm = function(){
