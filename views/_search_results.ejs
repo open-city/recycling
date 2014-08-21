@@ -2,7 +2,7 @@
   <div>
     <div>
       <div>
-        <h4 id="searchResultsFormLabel">Is one of these your residence?</h4>
+        <p id="searchResultsFormLabel" data-bind="text: buildingsFoundMessage"></p>
       </div>
       <div>
         <ul data-bind="foreach: possibleAddresses">
@@ -10,9 +10,6 @@
           <a class="clickable" data-bind="text: street, click: $parent.selectAddress"></a>
           </li>
         </ul>
-      </div>
-      <div>
-        <button type="button" class="btn btn-default" data-bind="click:startSearch">Search Again</button>
       </div>
     </div>
   </div>

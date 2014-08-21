@@ -7,6 +7,7 @@ function ReportViewModel() {
   self.possibleAddresses = ko.observable('');
   self.recyclingAvailable = ko.observable('');
   self.infoMessage = ko.observable('');
+  self.buildingsFoundMessage = ko.observable('');
   
   self.recyclingOptions = [
     {intVal: 1, label: "My landlord provides recycling"},
@@ -55,13 +56,11 @@ function ReportViewModel() {
     $.get(url, function(response){
       if(response.length == 1 && address){
         self.selectAddress(response[0]);
-      } else if(response.length > 1) {
-        self.possibleAddresses(response);
-        $('.side-content').hide();
-        $('#searchResultsForm').show();
       } else {
-        self.possibleAddresses([]);
+        self.possibleAddresses(response || []);
+        self.buildingsFoundMessage(response.length + " buildings found");
         $('.side-content').hide();
+        $('#searchForm').show();
         $('#searchResultsForm').show();
       }
     })
