@@ -5,6 +5,7 @@ var express = require('express')
   , routes = require('./routes')
   , reports = require('./routes/reports')
   , geocode = require('./routes/geocode')
+  , locations = require('./routes/locations')
   , db = require('./models')
   ;
   
@@ -42,6 +43,7 @@ app.get('/reports/:id.json', reports.show)
 app.get('/reports.json', reports.index)
 app.post('/reports.json', reports.create)
 app.get('/geocode.json', geocode.query)
+app.get('/locations.json', locations.index)
 
 db
   .sequelize
