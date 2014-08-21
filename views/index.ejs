@@ -20,90 +20,10 @@
 
     <div class="row">
       <div class="col-md-3">
-        <div class="side-content" id="searchForm" tabindex="-1" role="dialog" aria-labelledby="searchFormLabel" aria-hidden="true">
-          <div>
-            <div>
-              <form role="form" id="searchForm">
-                <div>
-                  <h4 id="searchFormLabel">Find Your Residence</h4>
-                </div>
-                <div>
-                  <div class="form-group">
-                    <label for="inputAddress">Street Address</label>
-                    <input data-bind="value:address" type="text" class="form-control" id="inputAddress" placeholder="Address" />
-                  </div>
-                  <div class="form-group">
-                    <label for="inputZip">Zip</label>
-                    <input data-bind="value:zip" type="text" class="form-control" id="inputZip" placeholder="Zip" maxlength="5" size="5" />
-                  </div>
-                </div>
-                <div>
-                  <input type="submit" value="Search" class="btn btn-primary" data-bind='click:search'>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="side-content" id="searchResultsForm" tabindex="-1" role="dialog" aria-labelledby="searchResultsFormLabel" aria-hidden="true">
-          <div>
-            <div>
-              <div>
-                <h4 id="searchResultsFormLabel">Is one of these your residence?</h4>
-              </div>
-              <div>
-                <ul data-bind="foreach: possibleAddresses">
-                  <li>
-                  <a class="clickable" data-bind="text: street, click: $parent.selectAddress"></a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <button type="button" class="btn btn-default" data-bind="click:startSearch">Search Again</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="side-content" id="getOnMapForm" tabindex="-1" role="dialog" aria-labelledby="myFormLabel" aria-hidden="true">
-          <div>
-            <div>
-              <form role="form" id="getOnMapForm">
-                <div>
-                  <h4 id="myFormLabel">Get On the Map</h4>
-                </div>
-                <div>
-                  <div class="form-group">
-                    <span data-bind="text: selectedAddress().street"></span>
-                  </div>
-                  <div class="form-group">
-                    <label for="recyclingAvailable">Do you have recycling?</label>
-                    <select id="recyclingAvailable" class="form-control"
-                      data-bind="options:$root.recyclingOptions,
-                      optionsValue: 'intVal',
-                      optionsText: 'label',
-                      value: recyclingAvailable">
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <input type="submit" value="Get On the Map" class="btn btn-primary" data-bind='click:save'>
-                  <button type="button" class="btn btn-default" data-bind="click:startSearch">Search Again</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="side-content" id="infoContent" tabindex="-1" role="dialog" aria-labelledby="infoContent" aria-hidden="true">
-          <div>
-            <div>
-              <div data-bind="text: infoMessage">
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <% include _search_form %>
+        <% include _search_results %>
+        <% include _submit_report %>
+        <% include _info_content %>
       </div>
 
       <div class="col-md-9">

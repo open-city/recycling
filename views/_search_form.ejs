@@ -1,0 +1,25 @@
+<div class="side-content" id="searchForm" tabindex="-1" role="dialog" aria-labelledby="searchFormLabel" aria-hidden="true">
+  <div>
+    <div>
+      <form role="form" id="searchForm">
+        <div>
+          <h4 id="searchFormLabel">Find Your Residence</h4>
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="inputAddress">Street Address</label>
+            <input data-bind="value:address" type="text" class="form-control" id="inputAddress" placeholder="Address" />
+          </div>
+          <div class="form-group">
+            <label for="inputZip">Zip</label>
+            <input data-bind="value:zip" type="text" class="form-control" id="inputZip" placeholder="Zip" maxlength="5" size="5" />
+          </div>
+        </div>
+        <div>
+          <input type="submit" value="Search" class="btn btn-primary" data-bind='click:search'>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

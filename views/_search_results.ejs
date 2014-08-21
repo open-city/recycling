@@ -1,0 +1,19 @@
+<div class="side-content" id="searchResultsForm" tabindex="-1" role="dialog" aria-labelledby="searchResultsFormLabel" aria-hidden="true">
+  <div>
+    <div>
+      <div>
+        <h4 id="searchResultsFormLabel">Is one of these your residence?</h4>
+      </div>
+      <div>
+        <ul data-bind="foreach: possibleAddresses">
+          <li>
+          <a class="clickable" data-bind="text: street, click: $parent.selectAddress"></a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <button type="button" class="btn btn-default" data-bind="click:startSearch">Search Again</button>
+      </div>
+    </div>
+  </div>
+</div>
