@@ -1,10 +1,2 @@
 module.exports = {
-
-  /**
-   * For whatever reason, MapQuest URI-Encodes your App Key
-   * before delivering it to you, which causes POST requests
-   * to fail. Unencoding it here so you can paste it in as
-   * given.
-   */
-  MAPQUEST_APP_KEY: decodeURIComponent("YOUR_APPLICATION_KEY_HERE")
 }

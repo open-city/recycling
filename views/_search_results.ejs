@@ -7,7 +7,7 @@
       <div>
         <ul data-bind="foreach: possibleAddresses">
           <li>
-          <a class="clickable" data-bind="text: street, click: $parent.selectAddress"></a>
+          <a class="clickable" data-bind="text: formatted_address, click: $parent.selectAddress"></a>
           </li>
         </ul>
       </div>

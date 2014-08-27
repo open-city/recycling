@@ -12,8 +12,8 @@ function ReportViewModel() {
   self.existingAddress = ko.observable('');
 
   self.getReportCountForAddressAndDisplayForm = function(address){
-    var latitude = address.latLng.lat;
-    var longitude = address.latLng.lng;
+    var latitude = address.geometry.location.lat;
+    var longitude = address.geometry.location.lng;
     $.get('/locations.json?latitude=' + latitude + '&longitude=' + longitude)
       .done(function(response){
         console.log(response.locations)
@@ -40,7 +40,7 @@ function ReportViewModel() {
 
   self.save = function(){
     var address = self.selectedAddress();
-    var data = {'address': address.street, 'latitude': address.latLng.lat, 'longitude': address.latLng.lng, 'recyclingAvailable': self.recyclingAvailable};
+    var data = {'address': address.formatted_address, 'latitude': address.geometry.location.lat, 'longitude': address.geometry.location.lng, 'recyclingAvailable': self.recyclingAvailable};
     $.post('/reports.json', data)
       .done(function(response){
         $('.side-content').hide();
