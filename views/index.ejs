@@ -32,21 +32,9 @@
           <div id="map" style="height: 600px"></div>
         </div>
 
-        <script src="js/leaflet.js"></script>
-        <script>
-          var map = L.map('map').setView([41.881, -87.629], 11);
-
-          L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'scottbeslow.ijk19b6c'
-            }).addTo(map);
-
-          L.marker([41.881, -87.629]).addTo(map)
-          .bindPopup("2121 N. Nowhere<br>No Recyling");
-        </script>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="/js/map.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
         <script src="/js/app.js"></script>
