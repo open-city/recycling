@@ -1,62 +1,75 @@
-var db = require('../models');
+var Location = require('../models/Location')
+  , Report = require('../models/Report')
+  ;
+
 
 exports.index = function(req, res){
   var query = {};
-  var locationId = req.query.locationId;
-  if(locationId){
-    query['where'] = {'locationId': locationId};
+  var location = req.query.location;
+  if(location){
+    query = {'location': location };
   }
-  db.Report.findAll(query).success(function(reports){
+  Report.find(query, function(reports){
     res.json({'reports': reports});
   })
 };
 
 exports.create = function(req, res){
-  var lat = req.body['latitude'],
-      lng = req.body['longitude'],
-      address = req.body['address'];
+  var lat = parseFloat(req.body.latitude)
+    , lng = parseFloat(req.body.longitude)
+    , address = req.body['address']
+    ;
 
-  db.Location.find({
-    'where': {'latitude': lat, 'longitude': lng}
-  }).success(function(location){
+  Location.findOne({ geoPoint: [lng,lat] }, function(err, location){
+    if (err) {
+      console.log('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + err)
+    }
+    
     if(location){
-      var report = db.Report.build({
-        'recyclingAvailable': Number(req.body['recyclingAvailable']),
-        'locationId': location['id']
+      console.log('found location');
+      var report = new Report({
+        'location': [location._id]
       })
 
-      report.save().success(function(savedTask){
-        res.json({'report': savedTask})
-      }).error(function(error){
-        res.json({'error': 'Failed to store report: ' + error})
+      report.save(function(err, savedTask){
+        if (err) {
+          res.json({'error': 'Failed to store report: ' + err})
+        } else {
+          res.json({'report': savedTask})
+        }
       })
     } else {
-      var newLocation = db.Location.build({
-        'latitude': lat,
-        'longitude': lng,
-        'address': address
+      console.log('no location');
+      var newLocation = new Location({
+        'address': address,
+        'geoPoint': [lng, lat]
       })
-      newLocation.save().success(function(location){
-        var report = db.Report.build({
-          'recyclingAvailable': Number(req.body['recyclingAvailable']),
-          'locationId': location['id']
+      
+      console.log(newLocation);
+      newLocation.save(function(err, location){
+        if (err) {
+          var txt = 'Failed to save new location: ' + err;
+          return res.json({'error': txt});
+        }
+        
+        var report = new Report({
+          'location': [location._id]
         })
 
-        report.save().success(function(savedTask){
-          res.json({'report': savedTask})
-        }).error(function(error){
-          res.json({'error': 'Failed to store report on new location: ' + error})
+        report.save(function(err, savedTask){
+          if (err) {
+            res.json({'error': 'Failed to store report on new location: ' + err})
+          } else {
+            res.json({'report': savedTask})
+          }
         })
       })
     }
-  }).error(function(error){
-    console.log('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + error)
   })
 }
 
 exports.show = function(req, res){
-  db.Report.find({'where': {'id': req.params.id}})
-  .success(function(report){
+  Report.find(req.params.id, function(report){
     res.json({'report': report})
   })
 }

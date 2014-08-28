@@ -1,18 +1,16 @@
-var db = require('../models');
+var Location = require('../models/Location')
+  ;
 
 exports.index = function(req, res){
   var query = {};
-  var latitude = req.query.latitude;
-  var longitude = req.query.longitude;
+  var latitude = parseFloat(req.query.latitude);
+  var longitude = parseFloat(req.query.longitude);
   if(latitude && longitude){
-    query['where'] = {'latitude': latitude, 'longitude': longitude};
-  } else if(latitude){
-    query['where'] = {'latitude': latitude};
-  } else if(longitude){
-    query['where'] = {'longitude': longitude};
+    query = {'geoPoint': [longitude, latitude]};
   }
 
-  db.Location.findAll(query).success(function(locations){
+  console.log(query);
+  Location.find(query, function(err, locations){
     res.json({'locations': locations});
   })
 };

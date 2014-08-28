@@ -11,8 +11,10 @@ $(function(){
     .done(function(response){
       for (var i = 0; i < response.locations.length; i++){
         var current_loc = response.locations[i]
-        if(current_loc.latitude && current_loc.longitude){
-          L.marker([current_loc.latitude, current_loc.longitude]).addTo(map)
+        if(current_loc.geoPoint){
+          var lat = current_loc.geoPoint[1];
+          var lng = current_loc.geoPoint[0]
+          L.marker([lat,lng]).addTo(map)
           .bindPopup(current_loc.address);
         }
       }

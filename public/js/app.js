@@ -16,9 +16,9 @@ function ReportViewModel() {
     var longitude = address.geometry.location.lng;
     $.get('/locations.json?latitude=' + latitude + '&longitude=' + longitude)
       .done(function(response){
-        console.log(response.locations)
-        if(response['locations'].length >= 1){
-          $.get('/reports.json?locationId=' + response['locations'][0].id)
+        console.log(response);
+        if(response.locations && response.locations.length >= 1){
+          $.get('/reports.json?location=' + response['locations'][0].id)
             .done(function(res){
               console.log(res);
               self.reportCountForLocation(res.reports.length);

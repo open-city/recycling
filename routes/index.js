@@ -1,7 +1,9 @@
-var db = require('../models');
+var mongoose = require('mongoose')
+  , Report = require('../models/Report')
+  ;
 
 exports.index = function(req, res){
-  db.Report.findAll().success(function(reports){
+  Report.find(function(err, reports){
     res.render('index');
-  })
+  });
 };

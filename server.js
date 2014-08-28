@@ -1,15 +1,19 @@
 var express = require('express')
+  , config = require('./config/config')
   , fs = require('fs')
   , hbs = require('hbs')
   , http = require('http')
+  , mongoose = require('mongoose')
   , routes = require('./routes')
   , reports = require('./routes/reports')
   , geocode = require('./routes/geocode')
   , locations = require('./routes/locations')
-  , db = require('./models')
   ;
   
 var app = express();
+var env = app.get('env');
+
+var db = mongoose.connect(config.db[env]);
 
 // Load environment vars if present in file
 var envVarsPath = "./config/envvars.js";
@@ -45,15 +49,6 @@ app.post('/reports.json', reports.create)
 app.get('/geocode.json', geocode.query)
 app.get('/locations.json', locations.index)
 
-db
-  .sequelize
-  .sync()
-  .complete(function(err) {
-    if (err) {
-      throw err[0]
-    } else {
-      http.createServer(app).listen(app.get('port'), function(){
-        console.log('Express server listening on port ' + app.get('port'))
-      })
-    }
-  })
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'))
+})
