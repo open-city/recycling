@@ -16,18 +16,11 @@ function ReportViewModel() {
     var longitude = address.geometry.location.lng;
     $.get('/locations.json?latitude=' + latitude + '&longitude=' + longitude)
       .done(function(response){
-        console.log(response);
         if(response.locations && response.locations.length >= 1){
-          $.get('/reports.json?location=' + response['locations'][0].id)
-            .done(function(res){
-              console.log(res);
-              self.reportCountForLocation(res.reports.length);
-              $('.side-content').hide();
-              $('#getOnMap').show();
-            })
-            .fail(function(res){
-              console.log('Failed retrieving a report count for location with id ' + response['locations'][0].id)
-            })
+          var loc = response['locations'][0];
+          self.reportCountForLocation(loc.reports.length);
+          $('.side-content').hide();
+          $('#getOnMap').show();
         } else {
           $('.side-content').hide();
           $('#getOnMapFirst').show();

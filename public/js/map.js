@@ -14,8 +14,12 @@ $(function(){
         if(current_loc.geoPoint){
           var lat = current_loc.geoPoint[1];
           var lng = current_loc.geoPoint[0]
+          
+          var txt = current_loc.address + "<br>";
+          txt += current_loc.reports.length + " reports";
+          
           L.marker([lat,lng]).addTo(map)
-          .bindPopup(current_loc.address);
+          .bindPopup(txt);
         }
       }
     })

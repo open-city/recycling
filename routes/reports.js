@@ -1,4 +1,5 @@
-var Location = require('../models/Location')
+var async = require('async')
+  , Location = require('../models/Location')
   , Report = require('../models/Report')
   ;
 
@@ -19,6 +20,7 @@ exports.create = function(req, res){
     , lng = parseFloat(req.body.longitude)
     , address = req.body.address
     , zip = req.body.zip
+    , comment = req.body.comment || ''
     ;
 
   Location.findOne({ geoPoint: [lng,lat] }, function(err, location){
@@ -26,46 +28,70 @@ exports.create = function(req, res){
       console.log('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + err)
     }
     
-    if(location){
-      console.log('found location');
-      var report = new Report({
-        'location': [location._id]
-      })
-
-      report.save(function(err, savedTask){
-        if (err) {
-          res.json({'error': 'Failed to store report: ' + err})
-        } else {
-          res.json({'report': savedTask})
-        }
-      })
-    } else {
-      console.log('no location');
-      var newLocation = new Location({
-        'address': address,
-        'zip': zip,
-        'geoPoint': [lng, lat]
-      })
-      
-      console.log(newLocation);
-      newLocation.save(function(err, location){
-        if (err) {
-          var txt = 'Failed to save new location: ' + err;
-          return res.json({'error': txt});
-        }
+    var ret = null;
         
-        var report = new Report({
-          'location': [location._id]
-        })
+    if(location){
 
-        report.save(function(err, savedTask){
-          if (err) {
-            res.json({'error': 'Failed to store report on new location: ' + err})
-          } else {
-            res.json({'report': savedTask})
-          }
-        })
-      })
+      async.waterfall([
+        function(cb){
+          var report = new Report({
+            'comment': comment
+          });
+          report.save(function(err, r){
+            cb(err, r);
+          });
+        },
+        function(report, cb){
+          location.reports.push(report._id);
+          location.save(function(err, location){
+            cb(err, {'location': location, 'report': report});
+          })
+        }
+      ], function(err, rslt){
+        if (err) {
+          res.json({'error': 'Failed to store report: ' + err});
+        } else {
+          res.json({'report': rslt.report});
+        }
+      });
+      
+    // creating new location for report
+    } else {
+
+      var newReport, newLocation, ret;
+      async.waterfall([        
+        function(cb){
+          newReport = new Report({
+            'comment': comment
+          });
+          newReport.save(function(err, r){
+            cb(err, r);
+          });
+        },
+        
+        function(report, cb){
+          console.log(cb);
+          newLocation = new Location({
+            'address': address,
+            'zip': zip,
+            'geoPoint': [lng, lat],
+            'reports': [report._id]
+          });
+          newLocation.save(function(err, location){
+            cb(err, {'location': location, 'report': report});
+          });
+        }
+      
+      ], function(err, rslt){
+        if (err) {
+          if (newLocation) newLocation.remove().exec();
+          if (newReport)   newReport.remove().exec();
+          return res.json({'error': 'Failed to store report: ' + err});
+        } else {
+          res.json({'report': rslt.report});
+        }
+      });
+
     }
   })
 }

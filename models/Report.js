@@ -3,11 +3,6 @@ var mongoose = require('mongoose')
   ;
   
 var ReportSchema = new Schema({
-  location: {
-    type: Schema.ObjectId,
-    ref: 'Location'
-  },
-  
   comment: {
     type: String
   }
