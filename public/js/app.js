@@ -1,5 +1,8 @@
+
 function ReportViewModel() {
   var self = this;
+  var wmrMap = window.leafletMap;
+  wmrMap.wmrInit();
 
   self.address = ko.observable('');
   self.zip = ko.observable('');
@@ -18,10 +21,12 @@ function ReportViewModel() {
       .done(function(response){
         if(response.locations && response.locations.length >= 1){
           var loc = response['locations'][0];
+          wmrMap.zoomToPin(loc);
           self.reportCountForLocation(loc.reports.length);
           $('.side-content').hide();
           $('#getOnMap').show();
         } else {
+          wmrMap.dropPin(latitude, longitude);
           $('.side-content').hide();
           $('#getOnMapFirst').show();
         }
@@ -48,14 +53,13 @@ function ReportViewModel() {
         $('.side-content').hide();
         self.infoMessage('Thank you for your report!');
         $('#infoContent').show();
+        wmrMap.wmrReset();
       })
       .fail(function(){
         $('.side-content').hide();
         self.infoMessage('Failed to create your report, please try again');
         $('#infoContent').show();
     })
-    // here we will do some client-side validation
-    // and then POST the values to the geocoding endpoint, etc.
   }
 
   self.selectAddress = function(address){
@@ -95,7 +99,7 @@ function ReportViewModel() {
 
     $('#searchForm').show();
   }
-
+  
 }
 
 ko.applyBindings(new ReportViewModel());
