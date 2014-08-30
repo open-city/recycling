@@ -22,6 +22,8 @@ exports.create = function(req, res){
     , zip = req.body.zip
     , comment = req.body.comment || ''
     ;
+    
+    console.log(comment);
 
   Location.findOne({ geoPoint: [lng,lat] }, function(err, location){
     if (err) {

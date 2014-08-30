@@ -5,7 +5,7 @@ function ReportViewModel() {
   self.zip = ko.observable('');
   self.selectedAddress = ko.observable('');
   self.possibleAddresses = ko.observable('');
-  self.recyclingAvailable = ko.observable(0);
+  self.comment = ko.observable('');
   self.infoMessage = ko.observable('');
   self.buildingsFoundMessage = ko.observable('');
   self.reportCountForLocation = ko.observable(0);
@@ -35,7 +35,14 @@ function ReportViewModel() {
     var address = self.selectedAddress();
     var formatted_address = address.address_components[0].long_name + " " + address.address_components[1].short_name
     var zip = address.address_components[7].long_name
-    var data = {'address': formatted_address, 'zip': zip, 'latitude': address.geometry.location.lat, 'longitude': address.geometry.location.lng, 'recyclingAvailable': self.recyclingAvailable};
+    var data = {
+      'address': formatted_address,
+      'zip': zip,
+      'latitude': address.geometry.location.lat,
+      'longitude': address.geometry.location.lng,
+      'comment': self.comment()
+    };
+    
     $.post('/reports.json', data)
       .done(function(response){
         $('.side-content').hide();
@@ -46,10 +53,9 @@ function ReportViewModel() {
         $('.side-content').hide();
         self.infoMessage('Failed to create your report, please try again');
         $('#infoContent').show();
-      })
+    })
     // here we will do some client-side validation
     // and then POST the values to the geocoding endpoint, etc.
-    console.log(self.address() + ", " + self.zip());
   }
 
   self.selectAddress = function(address){

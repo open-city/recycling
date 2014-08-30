@@ -12,9 +12,11 @@
             <p>people report NO recycling</p>
           </div>
         </div>
-        <div>
-          <input type="submit" value="I agree!" class="btn btn-primary" data-bind='click:save'>
+        <div class='form-group'>
+          <label class='control-label'>Comment (optional)</label>
+          <textarea data-bind="value:comment" class='form-control' name='comment' id='comment'></textarea>
         </div>
+        <input type="submit" value="I agree!" class="btn btn-primary" data-bind='click:save'>
       </form>
     </div>
   </div>
