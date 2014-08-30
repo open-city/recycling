@@ -9,6 +9,11 @@ var LocationSchema = new Schema({
     required: true
   },
   
+  zip: {
+    type: String,
+    required: true
+  },
+  
   geoPoint: {
     type: [Number],
     required: true,

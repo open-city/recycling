@@ -25,7 +25,6 @@ module.exports.query = function(req,res) {
     }
 
     var body = JSON.parse(body);
-    console.error(body.results)
     res.json(body.results);
   });
 }

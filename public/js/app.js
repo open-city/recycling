@@ -40,7 +40,9 @@ function ReportViewModel() {
 
   self.save = function(){
     var address = self.selectedAddress();
-    var data = {'address': address.formatted_address, 'latitude': address.geometry.location.lat, 'longitude': address.geometry.location.lng, 'recyclingAvailable': self.recyclingAvailable};
+    var formatted_address = address.address_components[0].long_name + " " + address.address_components[1].short_name
+    var zip = address.address_components[7].long_name
+    var data = {'address': formatted_address, 'zip': zip, 'latitude': address.geometry.location.lat, 'longitude': address.geometry.location.lng, 'recyclingAvailable': self.recyclingAvailable};
     $.post('/reports.json', data)
       .done(function(response){
         $('.side-content').hide();

@@ -17,7 +17,8 @@ exports.index = function(req, res){
 exports.create = function(req, res){
   var lat = parseFloat(req.body.latitude)
     , lng = parseFloat(req.body.longitude)
-    , address = req.body['address']
+    , address = req.body.address
+    , zip = req.body.zip
     ;
 
   Location.findOne({ geoPoint: [lng,lat] }, function(err, location){
@@ -42,6 +43,7 @@ exports.create = function(req, res){
       console.log('no location');
       var newLocation = new Location({
         'address': address,
+        'zip': zip,
         'geoPoint': [lng, lat]
       })
       
