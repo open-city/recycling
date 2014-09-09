@@ -14,7 +14,7 @@ var app = express();
 var env = app.get('env');
 
 var dbCnx = config.db.hasOwnProperty(env) ? config.db[env] : process.env.MONGOLAB_URI;
-var db = mongoose.connect(config.db[env]);
+var db = mongoose.connect(dbCnx);
 
 // Load environment vars if present in file
 var envVarsPath = "./config/envvars.js";
