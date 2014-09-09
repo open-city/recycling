@@ -1,6 +1,6 @@
 {
   "db": {
     "development": "mongodb://localhost/recycling_development",
-    "test": "mongodb://localhost/recycling_test",
+    "test": "mongodb://localhost/recycling_test"
   }
 }
