@@ -13,6 +13,7 @@ var express = require('express')
 var app = express();
 var env = app.get('env');
 
+var dbCnx = config.db[env] || MONGOLAB_URI;
 var db = mongoose.connect(config.db[env]);
 
 // Load environment vars if present in file

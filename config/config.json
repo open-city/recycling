@@ -1,0 +1,7 @@
+{
+  "db": {
+    "development": "mongodb://localhost/recycling_development",
+    "test": "mongodb://localhost/recycling_test",
+    "production": false
+  }
+}
