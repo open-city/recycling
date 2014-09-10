@@ -16,19 +16,6 @@ var env = app.get('env');
 var dbCnx = config.db.hasOwnProperty(env) ? config.db[env] : process.env.MONGOLAB_URI;
 var db = mongoose.connect(dbCnx);
 
-// Load environment vars if present in file
-var envVarsPath = "./config/envvars.js";
-if (fs.existsSync(envVarsPath)) {
-    var envvars = require(envVarsPath);
-    for (var key in envvars) {
-        
-        // don't clobber existing vars
-        if (!process.env.hasOwnProperty(key)) {
-            process.env[key] = envvars[key];
-        }
-    }
-}
-
 app.set('view engine','ejs');
 app.engine('html', hbs.__express);
 app.use(express.static('public'));
