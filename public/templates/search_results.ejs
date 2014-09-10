@@ -1,0 +1,17 @@
+<p id="searchResultsFormLabel"><%= buildingsFoundMessage %></p>
+<ul>
+  <% for (var i=0; i<possibleAddresses.length; i++) { %>
+  <% var addr = possibleAddresses[i] %>
+  <% var lat = addr.geometry.location.lat; %>
+  <% var lng = addr.geometry.location.lng; %>
+  <li class='search-result'>
+    <a class="clickable"
+       href='/locations.json?latitude=<%= lat %>&longitude=<%= lng %>'
+       data-latitude='<%= lat %>'
+       data-longitude='<%= lng %>'
+    >
+      <%= possibleAddresses[i].formatted_address %>
+    </a>
+  </li>
+  <% } %>
+</ul>

@@ -84,8 +84,16 @@ exports.create = function(req, res){
       
       ], function(err, rslt){
         if (err) {
-          if (newLocation) newLocation.remove().exec();
-          if (newReport)   newReport.remove().exec();
+          
+          // rolling back 
+          if (typeof newLocation == 'object' && !newLocation.isNew) {
+            Location.findOneAndRemove({_id: newLocation._id}).exec();
+          }
+          
+          if (typeof newReport == 'object' && !newReport.isNew) {
+            Report.findOneAndRemove({_id: newReport._id}).exec();
+          }
+          
           return res.json({'error': 'Failed to store report: ' + err});
         } else {
           res.json({'report': rslt.report});

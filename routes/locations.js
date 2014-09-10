@@ -9,7 +9,6 @@ exports.index = function(req, res){
     query = {'geoPoint': [longitude, latitude]};
   }
 
-  console.log(query);
   Location.find(query, function(err, locations){
     res.json({'locations': locations});
   })

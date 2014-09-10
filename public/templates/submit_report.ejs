@@ -1,0 +1,31 @@
+<form role="form" id="getOnMapForm">
+
+  <input type='hidden' name='latitude' value='<%= latitude %>' />
+  <input type='hidden' name='longitude' value='<%= longitude %>' />
+
+  <% if (reportCount > 0) { %>
+    <p>
+      <span class='reported-address'><%= formattedAddress %></span>
+      <strong>does not recycle!</strong>
+    </p>
+    <p class="form-group report-count">
+      <%= reportCount %> people report NO recycling
+    </p>
+  <% } else { %>
+    <p>
+      No reports for
+      <span class='reported-address'>
+        <%= formattedAddress %>
+      </span>
+    </p>
+    <div class="form-group">
+      <span>Be the first to report NO recycling in your building</span>
+    </div>
+  <% } %>
+
+  <div class='form-group'>
+    <label class='control-label'>Comment (optional)</label>
+    <textarea class='form-control' name='comment' id='comment'></textarea>
+  </div>
+  <input name='submit' type="submit" value="I agree!" class="btn btn-primary" >
+</form>

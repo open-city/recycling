@@ -9,11 +9,6 @@ var LocationSchema = new Schema({
     required: true
   },
   
-  zip: {
-    type: String,
-    required: true
-  },
-  
   reports: {
     type: [Schema.ObjectId],
     ref: 'Report'
