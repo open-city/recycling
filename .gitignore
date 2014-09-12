@@ -1,5 +1,5 @@
+*.DS_Store
 node_modules
 server/config/config.json
-DS_Store
 envvars.json
 envvars.js
