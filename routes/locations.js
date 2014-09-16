@@ -9,7 +9,7 @@ exports.index = function(req, res){
     query = {'geoPoint': [longitude, latitude]};
   }
 
-  Location.find(query, function(err, locations){
+  Location.find(query).populate('reports').exec(function(err, locations){
     res.json({'locations': locations});
   })
 };

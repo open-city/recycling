@@ -10,6 +10,13 @@
     </p>
     <p class="form-group report-count">
       <%= reportCount %> people report NO recycling
+      <% if (comments.length) { %>
+        <h3>Comments</h3>
+        <% for (var i=0; i<comments.length; i++) { %>
+          <% var comment = comments[i]; %>
+          <blockquote class='comment>"<%= comment %>"</blockquote>
+        <% } %>
+      <% } %>
     </p>
   <% } else { %>
     <p>

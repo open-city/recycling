@@ -9,10 +9,10 @@ var LocationSchema = new Schema({
     required: true
   },
   
-  reports: {
-    type: [Schema.ObjectId],
+  reports: [{
+    type: Schema.ObjectId,
     ref: 'Report'
-  },
+  }],
   
   geoPoint: {
     type: [Number],

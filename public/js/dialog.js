@@ -31,7 +31,14 @@
       renderExistingResult: function(response, viewVars) {  
         var loc = response['locations'][0];
         WIMR.map.zoomToPin(loc);
+        viewVars.comments = [];
         viewVars.reportCount = loc.reports.length;
+        loc.reports.forEach(function(report){
+          if (report.comment) {
+            viewVars.comments.push(report.comment);
+          }
+        });
+        
         viewVars.latitude = loc.geoPoint[1];
         viewVars.longitude = loc.geoPoint[0];
         self.publicMethods.showTemplate('submit_report', viewVars);
