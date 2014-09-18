@@ -51,21 +51,46 @@
     
         var marker = L.marker([lat,lng])
         marker.addTo(map).bindPopup(txt);
+        marker.update();
         self.locations[loc._id] = marker;
       } else {
         var marker = self.locations[loc._id];
         marker.unbindPopup();
         marker.bindPopup(txt);
-        self.locations[loc._id] = loc;
+        marker.update();
+        //self.locations[loc._id] = loc;
       }
     }
     
     map.wimrReset = function(done) {
+      
       map.setView([41.881, -87.629], 11);
-      map.wimrRefreshLocations();
-    }
+      map.wimrRefreshLocations(function(){
+        for (var loc in self.locations) {
+          var mkr = self.locations[loc];
+          
+          // not sure why it's necessary to open then close,
+          // but the popup won't close with just .closePopup()
+          mkr.openPopup().closePopup();
+          
+        }
+        
+        if (done) {
+          done(self);
+        }
+      });
+    },
     
-
+    map.wimrOpenPopup = function(loc_id) {
+      var mkr = self.locations[loc_id];
+      mkr.openPopup();
+    },
+    
+    map.wimrClosePopup = function(loc_id) {
+      var mkr = self.locations[loc_id];
+      mkr.closePopup();
+    },
+    
 
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
       maxZoom: 18,

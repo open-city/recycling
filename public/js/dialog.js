@@ -34,7 +34,7 @@
         viewVars.comments = [];
         viewVars.reportCount = loc.reports.length;
         loc.reports.forEach(function(report){
-          if (report.comment) {
+          if (report.comment.replace(/\s/g,'')) {
             viewVars.comments.push(report.comment);
           }
         });

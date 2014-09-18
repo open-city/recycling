@@ -51,7 +51,10 @@ exports.create = function(req, res){
         if (err) {
           res.json({'error': 'Failed to store report: ' + err});
         } else {
-          res.json({'report': rslt.report});
+          res.json({
+            'report': rslt.report,
+            'location': rslt.location
+          });
         }
       });
       
@@ -70,7 +73,6 @@ exports.create = function(req, res){
         },
         
         function(report, cb){
-          console.log(cb);
           newLocation = new Location({
             'address': address,
             'zip': zip,
@@ -96,7 +98,10 @@ exports.create = function(req, res){
           
           return res.json({'error': 'Failed to store report: ' + err});
         } else {
-          res.json({'report': rslt.report});
+          res.json({
+            'report': rslt.report,
+            'location': rslt.location
+          });
         }
       });
 

@@ -18,7 +18,7 @@
           var latitude = address.geometry.location.lat;
           var longitude = address.geometry.location.lng;
           var viewVars = {
-            formattedAddress: address.formatted_address
+            formattedAddress: WIMR.shortAddress(address)
           }
           
           /**
@@ -41,6 +41,9 @@
           var viewVars = {};
           viewVars.possibleAddresses = response || [];
           viewVars.buildingsFoundMessage = response.length + " buildings found" ;
+          viewVars.possibleAddresses.forEach(function(obj){
+            obj.short_address = WIMR.shortAddress(obj);
+          })
           WIMR.dialog.showTemplate('search_results', viewVars);
         }
       })

@@ -2,7 +2,6 @@ Requirements
 ============
 
 * node (http://nodejs.org/)
-* postgres (http://www.postgresql.org/)
 * mongodb (http://docs.mongodb.org/manual/)
 
 

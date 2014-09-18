@@ -16,8 +16,10 @@
       $.post('/reports.json', data)
       .done(function(response){
         viewVars.infoMessage = "Thank you for your report!";
-        WIMR.map.wimrReset();
-        WIMR.dialog.showTemplate('finished', viewVars);
+        WIMR.map.wimrReset(function(){
+          WIMR.map.wimrOpenPopup(response.location._id);
+          WIMR.dialog.showTemplate('finished', viewVars);
+        });
       })
       .fail(function(){
         viewVars.infoMessage = 'Failed to create your report, please try again';
