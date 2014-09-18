@@ -14,11 +14,21 @@
   </a>
 </p>
 
-<p>
-  <div class="form-group">
-    Join our mailing list and get project updates.
-    <input name='submit_email' type="email" class="form-control">
-  </div>
-</p>
+<hr>
 
-<a href='/' class='start-over btn btn-default'>Start Over</a>
+<div>
+  <p>Join our mailing list and get project updates.</p>
+
+  <form id='email_form' method='post' action='/contacts.json' class='form-inline'>
+    <div class="form-group">
+      <input placeholder='Email Address' id='email_address' name='email_address' type="email" class="form-control">
+      <input class='btn btn-default' type='submit' value='Send' />
+    </div>
+  </form>
+</div>
+
+<hr>
+
+<p>
+  <a href='/' class='start-over btn btn-default btn-block'>Start Over</a>
+</p>

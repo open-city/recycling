@@ -4,7 +4,11 @@ var mongoose = require('mongoose')
   
 var ContactSchema = new Schema({
   email: {
-    type: String
+    type: String,
+    index: {
+      unique: true,
+      dropDups: true
+    }
   }
 });
 

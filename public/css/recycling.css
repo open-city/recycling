@@ -44,3 +44,7 @@
 	font-size: large;
 	font-weight: bold;
 }
+
+#email_form {
+	clear: both;
+}
