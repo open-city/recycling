@@ -35,9 +35,12 @@
   cursor: pointer;
 }
 
+#viewContent {
+	margin-top: 2em;
+}
+
 #getOnMapForm .reported-address {
 	display: block;
 	font-size: large;
 	font-weight: bold;
-	margin-top: 2em;
 }

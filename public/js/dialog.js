@@ -52,6 +52,7 @@
         viewVars.reportCount = 0;
         viewVars.latitude = latitude;
         viewVars.longitude = longitude;
+        viewVars.comments = [];
         self.publicMethods.showTemplate('submit_report', viewVars);
       }
     }
