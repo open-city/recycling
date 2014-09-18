@@ -5,9 +5,11 @@ var fs = require('fs')
 
 exports.index = function(req, res){
   Report.find(function(err, reports){
-    
     var tplFiles = fs.readdirSync('./public/js/view_handlers');
-    
     res.render('index', {tplFiles: tplFiles});
   });
 };
+
+exports.about = function(req, res) {
+  res.render('about');
+}

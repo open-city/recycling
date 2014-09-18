@@ -7,11 +7,19 @@
 
     WIMR.dialog.showTemplate('search_form');
     
-    $('#main_nav a.home').click(function(e){
+    $('body').on('click', '.start-over', function(e){
       e.preventDefault();
       WIMR.map.wimrReset();
       WIMR.dialog.showTemplate('search_form');
     });
+    
+    WIMR.reflow();
+    $(window).on('resize', function(){
+      clearTimeout(WIMR.resizeTimer);
+      WIMR.resizeTimer = setTimeout(function(){
+        WIMR.reflow();
+      }, 250);
+    })
   })
 })(jQuery);
 
@@ -30,4 +38,12 @@ WIMR.shortAddress = function(gAddr) {
   addr += " ";
   addr += gAddr.address_components[1].short_name;
   return addr;
+}
+
+WIMR.reflow = function() {
+  var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  var navH = $("#main_nav").outerHeight(true);
+  var contentHeight = winH - navH;
+  $('#map').height(contentHeight);
+  $('#viewContent').height(contentHeight).css('overflowX','auto');
 }

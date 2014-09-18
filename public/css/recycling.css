@@ -35,3 +35,9 @@
   cursor: pointer;
 }
 
+#getOnMapForm .reported-address {
+	display: block;
+	font-size: large;
+	font-weight: bold;
+	margin-top: 2em;
+}

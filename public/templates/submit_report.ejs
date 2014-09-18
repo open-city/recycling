@@ -4,6 +4,7 @@
   <input type='hidden' name='longitude' value='<%= longitude %>' />
 
   <% if (reportCount > 0) { %>
+    <% var bttnLabel = "I Agree!" %>
     <p>
       <span class='reported-address'><%= formattedAddress %></span>
       <strong>does not recycle!</strong>
@@ -12,6 +13,7 @@
       <%= reportCount %> people report NO recycling
     </p>
   <% } else { %>
+    <% var bttnLabel = "Report it!" %>
     <p>
       No reports for
       <span class='reported-address'>
@@ -27,7 +29,11 @@
     <label class='control-label'>Comment (optional)</label>
     <textarea class='form-control' name='comment' id='comment'></textarea>
   </div>
-  <input name='submit' type="submit" value="I agree!" class="btn btn-primary" >
+
+  <p>
+    <input name='submit' type="submit" value="<%= bttnLabel %>" class="btn btn-primary btn-block" >
+    <a class='btn btn-default btn-block start-over' href='/'>Start Over</a>
+  </p>
 
   <% if (comments.length) { %>
     <h4>Resident Comments</h4>
