@@ -18,4 +18,4 @@ Running the app
 
     node server.js
 
-Then visit http://localhost:3000 in your browser
+Then visit [http://localhost:3000](http://localhost:3000) in your browser.
