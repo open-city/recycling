@@ -6,35 +6,9 @@
       WIMR.dialog.showTemplate('search_form');
     });
     
-    
-    $el.find('form#email_form').submit(function(e){
-      e.preventDefault();
-      var action = $(this).attr('action');
-      var email = $(this).find('#email_address').val();
-      var $container = $(this).parent();
-      
-      $.post(action, {email: email}, function(resp){
-        switch (resp.status) {
-          case 'success':
-            var path = "/templates/finished/email_success.ejs" ;
-            var data = { email: resp.contact.email };
-            break;
-          
-          case 'duplicate':
-            var path = "/templates/finished/email_duplicate.ejs" ;
-            var data = {};
-            break;
-          
-          default:
-            var path = "/templates/finished/email_error.ejs" ;
-            var data = { message: resp.error_message };
-            break;
-        }
-
-        var html = new EJS({url: path}).render(data);
-        $container.html(html);
-      });
-    });
+    // email form functionality defined
+    // in app.js because it is common to
+    // multiple pages...
     
   });
 })(jQuery, WIMR);

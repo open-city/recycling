@@ -39,6 +39,12 @@
 	margin-top: 2em;
 }
 
+#hey_chicagoans {
+	font-size: large;
+	font-weight: bold;
+	color: #8cf;
+}
+
 #getOnMapForm .reported-address {
 	display: block;
 	font-size: large;
@@ -47,4 +53,17 @@
 
 #email_form {
 	clear: both;
+}
+
+
+#static_page_main {
+	padding: 2em;
+}
+
+#static_page_sidebar {
+	padding-top: 2em;
+}
+
+#static_page_sidebar h4 {
+	margin-top: 2em;
 }
