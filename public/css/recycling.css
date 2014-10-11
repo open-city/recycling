@@ -27,6 +27,10 @@ p {
   text-transform: uppercase;
 }
 
+.navbar-default .navbar-nav > li > a:hover {
+	color: #ddd;
+}
+
 .btn-style{
   border-radius: 0px;
   float: right;
