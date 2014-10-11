@@ -6,9 +6,7 @@
       WIMR.dialog.showTemplate('search_form');
     });
     
-    // email form functionality defined
-    // in app.js because it is common to
-    // multiple pages...
+    $el.find('form#email_form').submit(WIMR.emailFormHandler);
     
   });
 })(jQuery, WIMR);

@@ -13,6 +13,7 @@
       }
       
       var viewVars = {};
+      WIMR.dialog.loading();
       $.post('/reports.json', data)
       .done(function(response){
         viewVars.infoMessage = "Thank you for your report!";

@@ -12,6 +12,7 @@
           formattedAddress: $a.text()
         }
         
+        WIMR.dialog.loading();
         $.get(theHref)
         .done(function(response){
           if(response.locations && response.locations.length >= 1){
@@ -22,6 +23,7 @@
         })
         .fail(function(){
           console.log("Error fetching location");
+          WIMR.dialog.loading('clear');
         })
       });
     });

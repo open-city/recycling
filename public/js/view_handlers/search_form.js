@@ -3,6 +3,7 @@
     var $form = $el.find('form');
     $form.submit(function(e){
       e.preventDefault();
+      WIMR.dialog.loading();
       var address = $form.find('#inputAddress').val();
       var url = "/geocode.json?address=" + address
       
@@ -34,6 +35,7 @@
           })
           .fail(function(response){
             console.log("Errored while looking for an existing location");
+            WIMR.dialog.loading('clear');
           })
           
         // google returns multiple results or no results at all

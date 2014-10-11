@@ -54,6 +54,14 @@
         viewVars.longitude = longitude;
         viewVars.comments = [];
         self.publicMethods.showTemplate('submit_report', viewVars);
+      },
+      
+      loading: function(arg) {
+        if (arg === 'clear') {
+          $element.wimrLoading('clear');
+        } else {
+          $element.wimrLoading();
+        }
       }
     }
     

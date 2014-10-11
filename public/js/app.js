@@ -23,40 +23,7 @@
       });
     }
     
-    $('form#email_form').submit(function(e){
-      e.preventDefault();
-      var action = $(this).attr('action');
-      var email = $(this).find('#email_address').val();
-      var $respText = $(this).find('.response');
-      
-      $.post(action, {email: email}, function(resp){
-        
-        var clearForm = false;
-        switch (resp.status) {
-          case 'success':
-            var response = "<strong>Thanks!</strong> " ;
-            response += "We've added " + resp.contact.email + " to our mailing list.";
-            clearForm = true;
-            break;
-          
-          case 'duplicate':
-            var response = "<strong>Thanks!</strong> " ;
-            response += "We already have " + email + " on our mailing list.";
-            clearForm = true;
-            break;
-          
-          default:
-            var response = "<strong>Oh no! An error occurred!</strong> ";
-            response += "<br>" + resp.message;
-            break;
-        }
-
-        $respText.html(response);
-        if (clearForm) {
-          $('#email_address').val('');
-        }
-      });
-    });
+    $('form#email_form').submit(WIMR.emailFormHandler);
     
   })
 })(jQuery);
@@ -84,4 +51,49 @@ WIMR.reflow = function() {
   var contentHeight = winH - navH;
   $('#map').height(contentHeight);
   $('#viewContent').height(contentHeight).css('overflowX','auto');
+}
+
+WIMR.emailFormHandler = function(e){
+  
+  e.preventDefault();
+  
+  var $form = $(this);
+  var action = $(this).attr('action');
+  var email = $(this).find('#email_address').val();
+  var $respText = $(this).find('.response');
+
+  
+  if (!email) {
+    $respText.html("Please provide your email address");
+    return;
+  }
+  
+  $form.wimrLoading();
+  $.post(action, {email: email}, function(resp){
+    $form.wimrLoading('clear');
+    var clearForm = false;
+    switch (resp.status) {
+      case 'success':
+        var response = "<strong>Thanks!</strong> " ;
+        response += "We've added " + resp.contact.email + " to our mailing list.";
+        clearForm = true;
+        break;
+      
+      case 'duplicate':
+        var response = "<strong>Thanks!</strong> " ;
+        response += "We already have " + email + " on our mailing list.";
+        clearForm = true;
+        break;
+      
+      default:
+        var response = "<strong>Oh no! An error occurred!</strong> ";
+        response += "<br>" + resp.message;
+        break;
+    }
+
+    $respText.html(response);
+    if (clearForm) {
+      $('#email_address').val('');
+    }
+  });
 }
