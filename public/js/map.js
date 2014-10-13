@@ -66,7 +66,6 @@
       var lng = loc.geoPoint[0];
       
       map.setView([lat,lng], 16);
-      console.log('set icon');
       mkr.setIcon(activeIcon);
       mkr.openPopup();
     }
