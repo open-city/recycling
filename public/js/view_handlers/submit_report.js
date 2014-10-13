@@ -18,7 +18,7 @@
       .done(function(response){
         viewVars.infoMessage = "Thank you for your report!";
         WIMR.map.wimrReset(function(){
-          WIMR.map.wimrOpenPopup(response.location._id);
+          WIMR.map.wimrHighlightPin(response.location._id);
           WIMR.dialog.showTemplate('finished', viewVars);
         });
       })

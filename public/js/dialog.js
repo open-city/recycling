@@ -48,7 +48,10 @@
        * Renders reporting template if no results are found for that lat/long
        */
       renderNewResult: function(latitude, longitude, viewVars) {
-        WIMR.map.dropPin(latitude, longitude);
+        var mkr = WIMR.map.dropPin(latitude, longitude, {
+          popupText: viewVars.formattedAddress
+        });
+        WIMR.map.addPendingLocation(mkr);
         viewVars.reportCount = 0;
         viewVars.latitude = latitude;
         viewVars.longitude = longitude;
