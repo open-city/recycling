@@ -1,3 +1,5 @@
+<a href="/" class="start-over close-dialog">X</a>
+
 <p id="searchResultsFormLabel"><%= buildingsFoundMessage %></p>
 <ul>
   <% for (var i=0; i<possibleAddresses.length; i++) { %>
@@ -15,3 +17,7 @@
   </li>
   <% } %>
 </ul>
+
+<p>
+  <a class='btn btn-default btn-block start-over' href='/'>Start Over</a>
+</p>
