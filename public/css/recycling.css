@@ -43,6 +43,11 @@ p {
   cursor: pointer;
 }
 
+a.close-dialog {
+	float: right;
+	font-size: large;
+}
+
 #viewContent {
 	margin-top: 2em;
 }
