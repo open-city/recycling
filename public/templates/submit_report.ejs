@@ -1,12 +1,19 @@
-<a href="/" class="start-over close-dialog fa fa-close"></a>
+<div class="input-group">
+  <input type="text" class="form-control" id="addressSearch" readonly>
+  <span class="input-group-btn">
+    <a href="/" class="btn btn-default" type="button"><i class="start-over close-dialog fa fa-close"></i></a>
+  </span>
+</div>
 
+<hr/>
+<h2>Submit a Report</h2>
 <form role="form" id="getOnMapForm">
 
   <input type='hidden' name='latitude' value='<%= latitude %>' />
   <input type='hidden' name='longitude' value='<%= longitude %>' />
 
   <% if (reportCount > 0) { %>
-    <% var bttnLabel = "I Agree!" %>
+    
     <p>
       <span class='reported-address'><%= formattedAddress %></span>
       <strong>does not recycle!</strong>
@@ -15,7 +22,7 @@
       <%= reportCount %> people report NO recycling
     </p>
   <% } else { %>
-    <% var bttnLabel = "Report it!" %>
+    
     <p>
       No reports for
       <span class='reported-address'>
@@ -33,8 +40,7 @@
   </div>
 
   <p>
-    <input name='submit' type="submit" value="<%= bttnLabel %>" class="btn btn-primary btn-block" >
-    <a class='btn btn-default btn-block start-over' href='/'>Start Over</a>
+    <input name='submit' type="submit" value="Share Your Report" class="btn btn-info btn-block" >
   </p>
 
   <% if (comments.length) { %>
