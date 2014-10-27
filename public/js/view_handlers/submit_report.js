@@ -1,6 +1,9 @@
 (function($, WIMR){
   WIMR.dialog.registerTemplateCallback('submit_report', function($el){
     var $form = $el.find('form');
+    var $addressSearch = $el.find('#addressSearch');
+    $addressSearch.val($('.reported-address').text().trim());
+
     $form.submit(function(e){
       
       e.preventDefault();
