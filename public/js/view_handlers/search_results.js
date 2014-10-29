@@ -16,7 +16,7 @@
         $.get(theHref)
         .done(function(response){
           if(response.locations && response.locations.length >= 1){
-            WIMR.dialog.renderExistingResult(response, viewVars);
+            WIMR.dialog.renderExistingResult(response.locations[0], viewVars);
           } else {
             WIMR.dialog.renderNewResult(lat, lng, viewVars);
           }

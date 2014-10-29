@@ -28,7 +28,7 @@
           $.get('/locations.json?latitude=' + latitude + '&longitude=' + longitude)
           .done(function(response){
             if(response.locations && response.locations.length >= 1){
-              WIMR.dialog.renderExistingResult(response, viewVars);
+              WIMR.dialog.renderExistingResult(response.locations[0], viewVars);
             } else {
               WIMR.dialog.renderNewResult(latitude, longitude, viewVars);
             }
