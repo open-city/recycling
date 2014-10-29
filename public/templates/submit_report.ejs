@@ -6,21 +6,17 @@
 </div>
 
 <hr/>
-<h2>Submit a Report</h2>
-<form role="form" id="getOnMapForm">
-
-  <input type='hidden' name='latitude' value='<%= latitude %>' />
-  <input type='hidden' name='longitude' value='<%= longitude %>' />
 
   <% if (reportCount > 0) { %>
     
-    <p>
+    <h2>
       <span class='reported-address'><%= formattedAddress %></span>
       <strong>does not recycle!</strong>
-    </p>
+    </h2>
     <p class="form-group report-count">
-      <%= reportCount %> people report NO recycling
+      <%= reportCount %> <%= reportCount == 1 ? 'person reports ' : 'people report '%><strong>NO</strong> recycling
     </p>
+
   <% } else { %>
     
     <p>
@@ -34,22 +30,29 @@
     </div>
   <% } %>
 
-  <div class='form-group'>
-    <label class='control-label'>Comment (optional)</label>
-    <textarea class='form-control' name='comment' id='comment'></textarea>
-  </div>
-
-  <p>
-    <input name='submit' type="submit" value="Share Your Report" class="btn btn-info btn-block" >
-  </p>
-
   <% if (comments.length) { %>
-    <h4>Resident Comments</h4>
+  <div>
+    <h4>Resident Comments:</h4>
     <% for (var i=0; i<comments.length; i++) { %>
       <% var comment = comments[i]; %>
       <blockquote class='comment'>"<%= comment %>"</blockquote>
     <% } %>
+  </div>
   <% } %>
+  
+  <h2>Submit a Report</h2>
+  <p>This report is not official, it's just so we can map out all the places that should be recycling.</p>
+  
+  <form role="form" id="getOnMapForm">
 
+    <input type='hidden' name='latitude' value='<%= latitude %>' />
+    <input type='hidden' name='longitude' value='<%= longitude %>' />
 
-</form>
+    <div class='form-group'>
+      <label class='control-label'>Comment (optional)</label>
+      <textarea class='form-control' name='comment' id='comment'></textarea>
+    </div>
+
+    <input name='submit' type="submit" value="Share Your Report" class="btn btn-info btn-block" >
+  
+  </form>
