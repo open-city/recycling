@@ -12,6 +12,7 @@
         e.preventDefault();
         WIMR.map.wimrReset();
         WIMR.dialog.showTemplate('search_form');
+        window.location.hash = "";
       });
       
       WIMR.reflow();
@@ -25,6 +26,15 @@
     
     $('form#email_form').submit(WIMR.emailFormHandler);
     
+    WIMR.reflow();
+    $(window).on('resize', function(){
+      clearTimeout(WIMR.resizeTimer);
+      WIMR.resizeTimer = setTimeout(function(){
+        WIMR.reflow();
+      }, 250);
+    })
+    
+    $(window).on('hashchange', WIMR.dialog.hashChange);
   })
 })(jQuery);
 

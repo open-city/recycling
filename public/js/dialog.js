@@ -5,6 +5,17 @@
     var $element = $("#viewContent");
     var callbacks = {};
     
+    self.hashRoutes = {
+      'reports': function(params){
+        var report_id = params[0];
+        var loc = WIMR.map.getLocation(report_id);
+        WIMR.dialog.renderExistingResult(loc, {
+          formattedAddress: loc.address
+        });
+      }
+    }
+    
+    
     self.publicMethods = {
       registerTemplateCallback: function(tplName, callback) {
         callbacks[tplName] = callbacks[tplName] || [];
@@ -28,8 +39,8 @@
        * Takes response from /locations.json?latitude=xxx&longitude=xxx
        * and renders result template
        */
-      renderExistingResult: function(response, viewVars) {  
-        var loc = response['locations'][0];
+      renderExistingResult: function(loc, viewVars) {
+        viewVars = viewVars || {};
         WIMR.map.zoomToPin(loc);
         viewVars.comments = [];
         viewVars.reportCount = loc.reports.length;
@@ -48,6 +59,7 @@
        * Renders reporting template if no results are found for that lat/long
        */
       renderNewResult: function(latitude, longitude, viewVars) {
+        viewVars = viewVars || {};
         var mkr = WIMR.map.dropPin(latitude, longitude, {
           popupText: viewVars.formattedAddress
         });
@@ -64,6 +76,18 @@
           $element.wimrLoading('clear');
         } else {
           $element.wimrLoading();
+        }
+      },
+
+      hashChange: function(e) {
+        var hash = window.location.hash;
+        var a = hash.split('/');
+        a.shift();
+        var loc = a.shift();
+        var params = a;
+        
+        if (self.hashRoutes[loc]) {
+          self.hashRoutes[loc](params)
         }
       }
     }

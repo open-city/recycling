@@ -82,6 +82,11 @@
         var marker = L.marker([lat,lng]);
         marker.addTo(map).bindPopup(txt);
         marker.update();
+        
+        marker._id = loc._id;
+        marker.geoPoint = loc.geoPoint;
+        marker.address = loc.address
+        marker.reports = loc.reports;
         self.locations[loc._id] = marker;
       } else {
         var marker = self.locations[loc._id];
@@ -132,6 +137,9 @@
       self.pending = [] ;
     };
     
+    map.getLocation = function(id) {
+      return self.locations[id]
+    };
 
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
       maxZoom: 18,
