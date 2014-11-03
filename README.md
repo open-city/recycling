@@ -1,21 +1,21 @@
+
+Where is my Recycling?
+======================
+
+Crowdsourcing data about which residential buildings do not have recycling in Chicago
+
 Requirements
-============
+------------
 
 * node (http://nodejs.org/)
 * mongodb (http://docs.mongodb.org/manual/)
 
 
 Getting Started
-===============
-
-Install dependencies
---------------------
-
-npm install
-
-Running the app
 ---------------
 
-    node server.js
-
-Then visit [http://localhost:3000](http://localhost:3000) in your browser.
+* install dependencies  
+  `npm install`
+* run the app  
+  `node server.js`
+* Then visit [http://localhost:3000](http://localhost:3000) in your browser.
