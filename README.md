@@ -1,8 +1,9 @@
-
 Where is my Recycling?
 ======================
 
 Crowdsourcing data about which residential buildings do not have recycling in Chicago
+
+The app can currently be found at http://recycling.herokuapp.com
 
 Requirements
 ------------
