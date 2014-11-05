@@ -66,6 +66,10 @@
       var lng = loc.geoPoint[0];
       
       map.setView([lat,lng], 16);
+      
+      for (var id in self.locations) {
+        self.locations[id].setIcon(defaultIcon);
+      }
       mkr.setIcon(activeIcon);
       mkr.openPopup();
     }
