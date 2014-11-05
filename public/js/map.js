@@ -94,6 +94,10 @@
         marker.bindPopup(txt);
         marker.update();
       }
+      
+      marker.on('click', function(e){
+        window.location.hash = '/reports/' + this._id;
+      })
     }
     
     map.wimrReset = function(done) {
