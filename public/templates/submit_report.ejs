@@ -11,7 +11,21 @@
       <strong>does not recycle!</strong>
     </p>
     <p class="form-group report-count">
-      <%= reportCount %> people report NO recycling
+      <%= reportCount %>
+      
+      <% if (reportCount > 1) { %>
+        people
+      <% } else { %>
+        person
+      <% } %>
+      
+      <% if (reportCount > 1) { %>
+        report
+      <% } else { %>
+        reports
+      <% } %>
+      
+      NO recycling
     </p>
   <% } else { %>
     
