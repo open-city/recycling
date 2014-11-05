@@ -10,7 +10,6 @@ module.exports = {
   up: function(next) {
     MongoClient.connect(db_path, function(err, db){
       db.collection('reports').update({comment: {$exists: false}}, {$set: {comment:''}}, {multi:true}, function(err, rslt){
-        console.log('foo');
         next();
       })
     });
