@@ -47,7 +47,8 @@
     <h4>Resident Comments</h4>
     <% for (var i=0; i<comments.length; i++) { %>
       <% var comment = comments[i]; %>
-      <blockquote class='comment'>"<%= comment %>"</blockquote>
+      <small><%= comment.date %></small>
+      <blockquote class='comment'>"<%= comment.text %>"</blockquote>
     <% } %>
   <% } %>
 
