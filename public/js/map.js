@@ -94,6 +94,7 @@
         self.locations[loc._id] = marker;
       } else {
         var marker = self.locations[loc._id];
+        marker.reports = loc.reports;
         marker.unbindPopup();
         marker.bindPopup(txt);
         marker.update();
