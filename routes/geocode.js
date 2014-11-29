@@ -16,7 +16,7 @@ module.exports.query = function(req,res) {
   request.get(url, function(err, resp, body){
     if (err) {
       console.error(err);
-      return res.send(500);
+      return res.sendStatus(500);
     }
 
     if (resp.statusCode !== 200) {
