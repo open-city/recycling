@@ -11,7 +11,7 @@ p {
 }
 
 .navbar-style {
-  background-color: #292929;
+  background-color: #258;
   border-radius: 0px;
   width: 100%;
   padding: 20px 0 20px 0;
@@ -21,19 +21,27 @@ p {
 
 .navbar-type {
   font-family: 'Teko', sans-serif;
-  color: #33CCFF;
   font-size: 32px;
   letter-spacing:2px;
   text-transform: uppercase;
 }
 
+.navbar-default .navbar-nav > li > a {
+	border-radius: 3px;
+	color: #def;
+}
+
+.navbar-default .navbar-brand {
+	color: #fff;
+}
+
 .navbar-default .navbar-nav > li > a:hover {
-	color: #ddd;
+	color: #eee;
 }
 
 .navbar-default .navbar-nav > li > a.active {
-	background-color: #444;
-	color: #eee;
+	background-color: #5ac;
+	color: #fff;
 }
 
 .btn-style{
@@ -42,6 +50,18 @@ p {
   border-color: white;
   border-width: 3px;
   background-color: #292929;
+}
+
+.btn-default {
+	background-color: #f1f8ff;
+	border: 1px solid #cde;
+	color: #258;
+}
+
+.btn-default:hover,
+.btn-default:active {
+	background-color: #def;
+	border-color: #abc;
 }
 
 .clickable {
@@ -76,6 +96,7 @@ a.close-dialog {
 
 #static_page_main {
 	padding: 2em;
+	font-size: 1.2em;
 }
 
 #static_page_sidebar {
@@ -85,3 +106,5 @@ a.close-dialog {
 #static_page_sidebar h4 {
 	margin-top: 2em;
 }
+
+
