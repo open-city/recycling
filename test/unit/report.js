@@ -16,7 +16,7 @@ describe('Unit Tests - Report', function(){
 	// 	], done);
 	// });
 
-	it('Should save a report', function(done){
+	it('should save a report', function(done){
 		var report = new Report({});
 		report.save(function(err, report){
 			expect(err).to.equal(null);
