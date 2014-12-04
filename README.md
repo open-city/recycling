@@ -14,7 +14,7 @@ Requirements
 
 Getting Started
 ---------------
-
+For more detailed instructions see the [wiki](https://github.com/open-city/recycling/wiki)
 * install dependencies  
   `npm install`
 * run the app  
