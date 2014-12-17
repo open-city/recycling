@@ -11,6 +11,10 @@ p {
 	font-size: .9em;
 }
 
+body.index #page_content > .row {
+	margin-right: 0;
+}
+
 #centerContent {
 	text-align: center;
 }

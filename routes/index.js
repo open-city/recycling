@@ -19,16 +19,19 @@ router.use(function(req, res, next){
 
 router.get('/', function(req, res){
   res.locals.navActive.home = 'active';
+  res.locals.bodyClass = 'index';
   res.render('index');
 });
 
 router.get('/about', function(req, res) {
   res.locals.navActive.about = 'active';
+  res.locals.bodyClass = 'about';
   res.render('about');
 });
 
 router.get('/get-involved', function(req, res) {
   res.locals.navActive.getinvolved = 'active';
+  res.locals.bodyClass = 'getinvolved';
   res.render('getinvolved');
 });
 
