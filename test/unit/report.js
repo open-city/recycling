@@ -9,13 +9,6 @@ var app = require('../../server')
 
 describe('Unit Tests - Report', function(){
 
-	// before(function(done){
-	// 	async.series([
-	// 		function(cb) { testHelpers.emptyCollections(cb); }
-	// 		function(cb) { testHelpers.loadFixtures(['reports'], cb) }
-	// 	], done);
-	// });
-
 	it('should save a report', function(done){
 		var report = new Report({comment: "This is a comment", date: new Date()});
 		report.save(function(err, report){
@@ -25,10 +18,20 @@ describe('Unit Tests - Report', function(){
 		});
 	});
 
-	it('should require a comment', function(done){
+	it('should not require a comment', function(done){
 		var report = new Report({date: new Date()});
 		report.save(function(err, report){
-			expect(err).to.exist
+			expect(err).to.equal(null);
+			done();
 		});
 	});
+
+	it('should add a date if one is not provided', function(done){
+		var report = new Report({});
+		report.save(function(err, report){
+			expect(report.date).to.exist;
+			done();
+		});
+	});
+
 });
