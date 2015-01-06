@@ -120,4 +120,10 @@ a.close-dialog {
 	margin-top: 2em;
 }
 
-
+#next-steps { padding-left:20px; list-style:none; }
+li.next-steps { margin-bottom:10px; }
+li.next-steps:before {    
+    font-family: 'FontAwesome';
+    content: '\f1b8';
+    margin:0 5px 0 -15px;
+}

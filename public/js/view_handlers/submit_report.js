@@ -17,7 +17,7 @@
       WIMR.dialog.loading();
       $.post('/reports.json', data)
       .done(function(response){
-        viewVars.infoMessage = "Thank you for your report!";
+        viewVars.infoMessage = "<p>Your report has been <strong>added to our registry</strong>!</p>";
         WIMR.map.wimrReset(function(){
           WIMR.map.wimrHighlightPin(response.location._id);
           WIMR.dialog.showTemplate('finished', viewVars);

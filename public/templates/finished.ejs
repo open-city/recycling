@@ -1,23 +1,31 @@
-<h4><%= infoMessage %></h4>
 
-<p>
+<h4 class="text-center"><%= infoMessage %></h4>
+
+<h4><strong>Now take the next steps:</strong></h4>
+
+<ul id="next-steps">
+
+<li class="next-steps">
+Check out our <a href="/get-involved">Get Involved</a> page and learn about <strong>futher actions</strong> to take to <strong>promote multi-unit recycling</strong> in Chicago!
+</li>
+
+<li class='next-steps'>
   <strong>Share with friends</strong> and help spread the word that Chicagoans demand better recycling services!
-</p>
 
 <p class="social-links">
-  <a href='#' class='btn fa fa-facebook icon-large'>
+  <a href='#' class='btn btn-primary fa fa-facebook icon-large'>
     Facebook
   </a>
-  <a href="#" class='btn fa fa-twitter icon-large'>
+  <a href="#" class='btn btn-primary fa fa-twitter icon-large'>
     Twitter
   </a>
 </p>
+</li>
 
-<hr>
+<li class='next-steps'>
 
-<div>
-  <p>Join our mailing list and get project updates.</p>
-
+  Join our mailing list and get project updates.
+  <br />
   <form id='email_form' method='post' action='/contacts.json' class='form-inline'>
     <div class="form-group">
       <input placeholder='Email Address' id='email_address' name='email_address' type="email" class="form-control">
@@ -25,6 +33,6 @@
     </div>
     <p class='response'></p>
   </form>
-</div>
 
+</li>
 <hr>
