@@ -127,3 +127,7 @@ li.next-steps:before {
     content: '\f1b8';
     margin:0 5px 0 -15px;
 }
+
+#contact-form {
+	padding-bottom: 0.5em;
+}

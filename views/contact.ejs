@@ -1,0 +1,41 @@
+<% include _header %>
+
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
+	
+	<h1>Contact Us</h1>
+	
+	<form action="/contact" method="post" id="contact-form">
+	    
+	    <div class="form-group">
+	    	<label for="name">Name</label>
+	    	<input type="text" class="form-control" id="name" name="name" required />
+		</div>
+	    
+	    <div class="form-group">
+		    <label for="email">Your Email</label>
+		    <input type="email" class="form-control" id="email" name="email" required />
+	    </div>
+
+	    <div class="form-group">
+		    <label for="subject">Choose a Subject</label>
+		    <select name="subject" class="form-control" id="subject" required>
+		        <option value="press">Press Inquiry</option>
+		        <option value="feedback">Feedback on the site</option>
+		        <option value="problem">Problem with the site</option>
+		        <option value="other">Other</option>
+		    </select>
+		</div>
+
+	    <div class="form-group">
+	    	<label for="message">Message</label>
+	    	<textarea name="message" class="form-control" id="message" cols="30" rows="10" required></textarea>
+		</div>
+	    
+	    <button type="submit" class="btn btn-primary">Send</button>
+	</form>
+	
+	</div>
+</div>
+
+<% include _footer %>
