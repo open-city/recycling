@@ -3,6 +3,7 @@ var express = require('express')
   , mongoose = require('mongoose')
   , Report = require('../models/Report')
   , router = express.Router()
+  , transporter = require('../config/transporter')
   ;
 
 
@@ -44,16 +45,37 @@ router.get('/contact', function(req, res) {
 
 router.post('/contact', function(req, res) {
   var form = req.body;
+  
   switch (form['subject']) {
     case "press":
+      form.to = 'claire';
       break;
     case "feedback":
+      form.to = ['alex', 'claire'];
       break;
     case "problem":
+      form.to = 'alex';
       break;
     case "other":
+      form.to = 'claire';
       break;
   }
+  
+  var mailOptions = {
+    from: form['email'],
+    to: form['to'],
+    subject: form['subject'],
+    text: form['message'],
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Message sent: ' + info.response);
+    }
+  });
+
 });
 
 module.exports = router;
