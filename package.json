@@ -25,7 +25,8 @@
     "morgan": "^1.3.2",
     "nodemailer": "^1.3.0",
     "pg": "3.x",
-    "request": "^2.39.0"
+    "request": "^2.39.0",
+    "validator": "^3.27.0"
   },
   "main": "server.js",
   "engines": {
