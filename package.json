@@ -23,6 +23,7 @@
     "mongodb": "^1.4.9",
     "mongoose": "^3.8.15",
     "morgan": "^1.3.2",
+    "nodemailer": "^1.3.0",
     "pg": "3.x",
     "request": "^2.39.0"
   },
