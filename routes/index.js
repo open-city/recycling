@@ -3,6 +3,7 @@ var express = require('express')
   , mongoose = require('mongoose')
   , Report = require('../models/Report')
   , router = express.Router()
+  , validator = require('validator')
   , transporter = require('../config/transporter')
   ;
 
@@ -43,29 +44,26 @@ router.get('/contact', function(req, res) {
   res.render('contact');
 });
 
-router.post('/contact', function(req, res) {
+router.post('/contact', function (req, res, next) {
+  
   var form = req.body;
   
-  switch (form['subject']) {
-    case "press":
-      form.to = 'claire';
-      break;
-    case "feedback":
-      form.to = ['alex', 'claire'];
-      break;
-    case "problem":
-      form.to = 'alex';
-      break;
-    case "other":
-      form.to = 'claire';
-      break;
+  if (!validator.isEmail(form['email'])) {
+    next('/contact');
   }
+
+  form['email'] = validator.normalizeEmail(form['email']);
+  form['message'] = validator.escape(form['message']);
+  
+  next();
+
+}, function (req, res, next) {
   
   var mailOptions = {
-    from: form['email'],
-    to: form['to'],
-    subject: form['subject'],
-    text: form['message'],
+    from: req.body['email'],
+    to: 'me@example.com',         // use process.env['SEND_EMAIL'] or something
+    subject: req.body['subject'],
+    text: req.body['message']
   };
   
   transporter.sendMail(mailOptions, function(error, info) {
@@ -76,6 +74,7 @@ router.post('/contact', function(req, res) {
     }
   });
 
+  res.send("Thanks!, we'll get right on it!");
 });
 
 module.exports = router;
