@@ -61,7 +61,7 @@ router.post('/contact', function (req, res, next) {
   
   var mailOptions = {
     from: req.body['email'],
-    to: 'me@example.com',         // use process.env['SEND_EMAIL'] or something
+    to: transporter.transporter.options.auth.user,
     subject: req.body['subject'],
     text: req.body['message']
   };
