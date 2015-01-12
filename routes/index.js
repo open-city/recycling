@@ -49,7 +49,7 @@ router.post('/contact', function (req, res, next) {
   var form = req.body;
   
   if (!validator.isEmail(form['email'])) {
-    next('/contact');
+    res.json({'status': '422', 'message':'Email address invalid'});
   }
 
   form['email'] = validator.normalizeEmail(form['email']);
@@ -69,12 +69,12 @@ router.post('/contact', function (req, res, next) {
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);
+      res.json({'status': '500', 'message':'Server error'});
     } else {
       console.log('Message sent: ' + info.response);
+      res.json({'status': '200'});
     }
   });
-
-  res.send("Thanks!, we'll get right on it!");
 });
 
 module.exports = router;
