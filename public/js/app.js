@@ -25,6 +25,8 @@
     }
     
     $('form#email_form').submit(WIMR.emailFormHandler);
+
+    $('form#contact-form').submit(WIMR.contactFormHandler);
     
     WIMR.reflow();
     $(window).on('resize', function(){
@@ -116,3 +118,43 @@ WIMR.formatDate = function(date) {
   var y = date.getFullYear();
   return m + " " + d + ", " + y;
 }
+
+WIMR.contactFormHandler = function (e) {
+
+  e.preventDefault();
+
+  var $form = $(this)
+    , action = $(this).attr('action')
+    , $resMsg = $(document).find('#response')
+    , data = {
+        name: $form.find('#name').val(),
+        email: $form.find('#email').val(),
+        subject: $form.find('#subject').val(),
+        message: $form.find('#message').val() 
+    }
+    ;
+  
+  $form.wimrLoading();
+  
+  $.post(action, data, function (res) {
+    $form.wimrLoading('clear');
+    var clearForm = false;
+    if (res.status == "200") {
+      var response = "<strong>Thanks!</strong> Your message has been sent!";
+      $resMsg.html(response);
+      $resMsg.addClass('bg-success');
+      clearForm = true;      
+    } else {
+      var response = "<strong>Oh no! An error occurred!</strong> ";
+      response += "<br>" + resp.message;
+      $resMsg.html(response);
+      $resMsg.addClass('bg-danger');
+    }
+    if (clearForm) {
+      $('#name').val('');
+      $('#email').val('');
+      $('#message').val('');
+    }
+  });
+
+};
