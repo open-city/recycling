@@ -19,6 +19,9 @@ var env = app.get('env');
 var dbCnx = config.db.hasOwnProperty(env) ? config.db[env] : process.env.MONGOLAB_URI;
 var db = mongoose.connect(dbCnx);
 
+// memjs reads appropriate env variables by default.
+// zero configuration necessary
+
 app.set('view engine','ejs');
 app.engine('html', hbs.__express);
 app.use(express.static('public'));
@@ -50,3 +53,4 @@ app.post('/contacts.json', contacts.create);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'))
 })
+
