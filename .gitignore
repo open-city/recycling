@@ -1,6 +1,3 @@
 *.DS_Store
 node_modules
-server/config/config.json
-envvars.json
-envvars.js
 npm-debug.log

@@ -1,6 +1,5 @@
 var express = require('express')
   , bodyParser = require('body-parser')
-  , config = require('./config/config')
   , fs = require('fs')
   , hbs = require('hbs')
   , http = require('http')
@@ -15,8 +14,9 @@ var express = require('express')
   
 var app = express();
 var env = app.get('env');
+var config = require('./config/config')[env];
 
-var dbCnx = config.db.hasOwnProperty(env) ? config.db[env] : process.env.MONGOLAB_URI;
+var dbCnx = process.env.MONGOLAB_URI || config.db;
 var db = mongoose.connect(dbCnx);
 
 // memjs reads appropriate env variables by default.
