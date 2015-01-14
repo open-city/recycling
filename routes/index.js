@@ -4,7 +4,7 @@ var express = require('express')
   , Report = require('../models/Report')
   , router = express.Router()
   , validator = require('validator')
-  , transporter = require('../config/transporter')
+  , transporter = require('../lib/transporter')
   ;
 
 

@@ -146,7 +146,7 @@ WIMR.contactFormHandler = function (e) {
       clearForm = true;      
     } else {
       var response = "<strong>Oh no! An error occurred!</strong> ";
-      response += "<br>" + resp.message;
+      response += "<br>" + res.message;
       $resMsg.html(response);
       $resMsg.addClass('bg-danger');
     }
