@@ -57,9 +57,11 @@ exports.create = function(req, res){
           // and locations.all so they'll be regenerated
           // next time they are requested
           var cacheIdx = 'locations.' + rslt.location._id;
-          console.log("Location Index: ", cacheIdx);
-          //cache.delete(cacheIdx); 
-          cache.delete('locations.all');
+          cache.delete(cacheIdx, function(err, success){
+            // have to wait and do the second in a callback
+            // or memcachier complains about concurrent connections
+            cache.delete('locations.all');
+          }); 
 
           res.json({
             'report': rslt.report,
