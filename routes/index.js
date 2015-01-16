@@ -17,6 +17,7 @@ router.use(function(req, res, next){
     about: '',
     contact: ''
   }
+  res.locals.currentYear = new Date().getFullYear();
   next();
 });
 

@@ -86,7 +86,7 @@ a.close-dialog {
 	font-size: large;
 }
 
-#viewContent {
+#viewWrapper {
 	margin-top: 0;
 }
 
@@ -128,6 +128,12 @@ li.next-steps:before {
     margin:0 5px 0 -15px;
 }
 
+#colophon {
+  color: #777;
+  font-size: small;
+}
+
 #contact-form {
 	padding-bottom: 0.5em;
 }
+

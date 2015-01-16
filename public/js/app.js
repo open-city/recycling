@@ -62,7 +62,7 @@ WIMR.reflow = function() {
   var navH = $("#main_nav").outerHeight(true);
   var contentHeight = winH - navH;
   $('#map').height(contentHeight);
-  $('#viewContent').height(contentHeight).css('overflowX','auto');
+  $('#viewWrapper').height(contentHeight).css('overflowX','auto');
 }
 
 WIMR.emailFormHandler = function(e){
