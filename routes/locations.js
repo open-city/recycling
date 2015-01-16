@@ -60,8 +60,8 @@ exports.index = function(req, res){
       Location.find(query).populate('reports').exec(function(err, locations){
         var locId = locations.length === 1 ? locations[0]._id : 'all';
         var locationKey = 'locations.' + locId;
-        cache.set(geoKey, locationKey);
-        cache.set(locationKey, JSON.stringify(locations));
+        cache.set(geoKey, locationKey, null, 3600);
+        cache.set(locationKey, JSON.stringify(locations), null, 3600);
         res.json({'locations': locations});
         return;
       })      
