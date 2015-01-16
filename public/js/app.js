@@ -114,7 +114,7 @@ WIMR.formatDate = function(date) {
   date = new Date(date);
   var months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var d = date.getDate();
-  var m = months[ date.getMonth() - 1 ];
+  var m = months[ date.getMonth() ];
   var y = date.getFullYear();
   return m + " " + d + ", " + y;
 }
