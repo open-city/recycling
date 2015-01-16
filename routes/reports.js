@@ -1,4 +1,5 @@
 var async = require('async')
+  , cache = require('memjs').Client.create()
   , Location = require('../models/Location')
   , Report = require('../models/Report')
   ;
@@ -25,7 +26,7 @@ exports.create = function(req, res){
 
   Location.findOne({ geoPoint: [lng,lat] }, function(err, location){
     if (err) {
-      console.log('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + err)
+      console.error('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + err)
     }
     
     var ret = null;
@@ -50,7 +51,16 @@ exports.create = function(req, res){
       ], function(err, rslt){
         if (err) {
           res.json({'error': 'Failed to store report: ' + err});
+
         } else {
+          // invalidating cache for this location 
+          // and locations.all so they'll be regenerated
+          // next time they are requested
+          var cacheIdx = 'locations.' + rslt.location._id;
+          console.log("Location Index: ", cacheIdx);
+          cache.delete(cacheIdx); 
+          cache.delete('locations.all');
+
           res.json({
             'report': rslt.report,
             'location': rslt.location
@@ -97,6 +107,7 @@ exports.create = function(req, res){
           }
           
           return res.json({'error': 'Failed to store report: ' + err});
+          
         } else {
           res.json({
             'report': rslt.report,

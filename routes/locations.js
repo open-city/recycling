@@ -1,5 +1,6 @@
-var crypto = require('crypto')
-  , memjs = require('memjs')
+var async = require('async')
+  , crypto = require('crypto')
+  , cache = require('memjs').Client.create()
   , Location = require('../models/Location')
   ;
 
@@ -7,36 +8,63 @@ exports.index = function(req, res){
   var query = {};
   var latitude = parseFloat(req.query.latitude);
   var longitude = parseFloat(req.query.longitude);
+  
+  var geoKey = "geoPoints.all";
   if(latitude && longitude){
     query = {'geoPoint': [longitude, latitude]};
+    geoKey = Location.geoHash(longitude, latitude);
   }
 
-  var cacheIdx = getCacheIndex(query);
-  var memjsClient = memjs.Client.create();
-  memjsClient.get(cacheIdx, function(err, cached){
+  // Need to look up cached location ID from queried
+  // geoPoint. Can't store the location based on the
+  // geoPoint directly because we need to invalidate the 
+  // cached location when new reports are added, and we do
+  // that by ID.
+  async.waterfall([
 
-    if (!err && cached) {
-      res.json({'locations': cached});
-      return;
+    // look up location id by geoKey
+    function(callback) {
+      console.log('geoKey: ', geoKey);
+      cache.get(geoKey, function(err, locationKey){
+        if (locationKey) {
+          locationKey = locationKey.toString();
+        }
+        callback(err, geoKey, locationKey);
+      });
+    },
+    
+    // get location from id
+    function(geoKey, locationKey, callback) {
+      console.log('locationKey: ', locationKey);
+      if (locationKey) {
+        cache.get(locationKey, callback);
+      } else {
+        callback("No cached value for geoKey: " + geoKey);
+      }
     }
 
-    Location.find(query).populate('reports').exec(function(err, locations){
-      res.json({'locations': locations});
+  // final callback
+  ], function(err, cached){
+    if (err) console.error(err);
+    
+    // if all has gone well, return cached location info
+    if (!err && cached) {
+      console.log('returned cached result');
+      cached = JSON.parse(cached.toString());
+      res.json({'locations': cached});
       return;
-    })
 
-  });
-
+    // else look up location info in Mongo and and cache it in memcached.
+    } else {
+      console.log('not cached');
+      Location.find(query).populate('reports').exec(function(err, locations){
+        var locId = locations.length === 1 ? locations[0]._id : 'all';
+        var locationKey = 'locations.' + locId;
+        cache.set(geoKey, locationKey);
+        cache.set(locationKey, JSON.stringify(locations));
+        res.json({'locations': locations});
+        return;
+      })      
+    }
+  })
 };
-
-function getCacheIndex(query) {
-  var idx;
-  if (query.hasOwnProperty('geoPoint')) {
-    idx = query.geoPoint[0] + "" + query.geoPoint[1];
-    idx = crypto.createHash('md5').update(idx).digest('hex');
-    idx = "locations_" + idx;
-  } else {
-    idx = 'locations_all';
-  }
-  return idx;
-}
