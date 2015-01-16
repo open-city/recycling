@@ -58,7 +58,7 @@ exports.create = function(req, res){
           // next time they are requested
           var cacheIdx = 'locations.' + rslt.location._id;
           console.log("Location Index: ", cacheIdx);
-          cache.delete(cacheIdx); 
+          //cache.delete(cacheIdx); 
           cache.delete('locations.all');
 
           res.json({
