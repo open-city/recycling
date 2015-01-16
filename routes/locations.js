@@ -24,7 +24,6 @@ exports.index = function(req, res){
 
     // look up location id by geoKey
     function(callback) {
-      console.log('geoKey: ', geoKey);
       cache.get(geoKey, function(err, locationKey){
         if (locationKey) {
           locationKey = locationKey.toString();
@@ -35,7 +34,6 @@ exports.index = function(req, res){
     
     // get location from id
     function(geoKey, locationKey, callback) {
-      console.log('locationKey: ', locationKey);
       if (locationKey) {
         cache.get(locationKey, callback);
       } else {
@@ -49,14 +47,12 @@ exports.index = function(req, res){
     
     // if all has gone well, return cached location info
     if (!err && cached) {
-      console.log('returned cached result');
       cached = JSON.parse(cached.toString());
       res.json({'locations': cached});
       return;
 
     // else look up location info in Mongo and and cache it in memcached.
     } else {
-      console.log('not cached');
       Location.find(query).populate('reports').exec(function(err, locations){
         var locId = locations.length === 1 ? locations[0]._id : 'all';
         var locationKey = 'locations.' + locId;
