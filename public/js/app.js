@@ -62,7 +62,7 @@ WIMR.reflow = function() {
   
   var contentWidth = $("#viewContent").outerWidth();
   var windowWidth  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  if (contentWidth < (windowWidth * .9)) {
+  if (contentWidth < (windowWidth * .75)) {
     var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     var navH = $("#main_nav").outerHeight(true);
     var contentHeight = winH - navH;
@@ -72,7 +72,10 @@ WIMR.reflow = function() {
     $("#map").height(200);
     $("#viewWrapper").height('auto');
   }
-  WIMR.map.invalidateSize();
+  
+  setTimeout(function(){
+    WIMR.map.invalidateSize();
+  });
 }
 
 WIMR.emailFormHandler = function(e){
