@@ -58,6 +58,8 @@ WIMR.shortAddress = function(gAddr) {
 }
 
 WIMR.reflow = function() {
+  if (!WIMR.map) return;
+  
   var contentWidth = $("#viewContent").outerWidth();
   var windowWidth  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
   if (contentWidth < (windowWidth * .9)) {
