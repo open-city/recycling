@@ -58,11 +58,19 @@ WIMR.shortAddress = function(gAddr) {
 }
 
 WIMR.reflow = function() {
-  var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-  var navH = $("#main_nav").outerHeight(true);
-  var contentHeight = winH - navH;
-  $('#map').height(contentHeight);
-  $('#viewWrapper').height(contentHeight).css('overflowX','auto');
+  var contentWidth = $("#viewContent").outerWidth();
+  var windowWidth  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  if (contentWidth < (windowWidth * .9)) {
+    var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    var navH = $("#main_nav").outerHeight(true);
+    var contentHeight = winH - navH;
+    $('#map').height(contentHeight);
+    $('#viewWrapper').height(contentHeight).css('overflowX','auto');
+  } else {
+    $("#map").height(200);
+    $("#viewWrapper").height('auto');
+  }
+  WIMR.map.invalidateSize();
 }
 
 WIMR.emailFormHandler = function(e){

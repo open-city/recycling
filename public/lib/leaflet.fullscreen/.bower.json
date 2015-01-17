@@ -1,0 +1,40 @@
+{
+  "name": "leaflet.fullscreen",
+  "version": "1.1.4",
+  "homepage": "https://github.com/brunob/leaflet.fullscreen",
+  "authors": [
+    "brunob <brunobergot@gmail.com>"
+  ],
+  "description": "Leaflet.Control.FullScreen for Leaflet",
+  "main": [
+    "Control.FullScreen.js",
+    "Control.FullScreen.css",
+    "icon-fullscreen.png",
+    "icon-fullscreen-2x.png"
+  ],
+  "keywords": [
+    "leaflet",
+    "plugins",
+    "maps",
+    "fullscreen"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "index.html"
+  ],
+  "_release": "1.1.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.4",
+    "commit": "01e641aafc3fc0da1175292ff0a701413c7f2e1a"
+  },
+  "_source": "git://github.com/brunob/leaflet.fullscreen.git",
+  "_target": "~1.1.4",
+  "_originalSource": "leaflet.fullscreen",
+  "_direct": true
+}

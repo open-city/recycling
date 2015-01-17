@@ -11,8 +11,8 @@ p {
 	font-size: .9em;
 }
 
-body.index #page_content > .row {
-	margin-right: 0;
+#mapWrap {
+  padding: 0;
 }
 
 #centerContent {
@@ -137,3 +137,6 @@ li.next-steps:before {
 	padding-bottom: 0.5em;
 }
 
+.clear {
+  clear: both;
+}
