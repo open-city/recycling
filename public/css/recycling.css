@@ -36,6 +36,7 @@ p {
   font-family: 'Teko', sans-serif;
   font-size: 32px;
   letter-spacing:2px;
+  line-height: 1;
   text-transform: uppercase;
 }
 
