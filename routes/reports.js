@@ -111,6 +111,7 @@ exports.create = function(req, res){
           return res.json({'error': 'Failed to store report: ' + err});
           
         } else {
+          cache.delete('locations.all');
           res.json({
             'report': rslt.report,
             'location': rslt.location
