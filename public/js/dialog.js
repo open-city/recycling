@@ -3,6 +3,7 @@
     
     var self = this;
     var $element = $("#viewContent");
+    var $wrapper = $("#viewWrapper");
     var callbacks = {};
     
     self.hashRoutes = {
@@ -27,6 +28,8 @@
         data = data || {};
         var html = new EJS({url: path}).render(data);
         $element.html(html);
+        $('html, body').scrollTo(0, 0);
+        $wrapper.scrollTo(0, 0);
         
         if (callbacks[tplName]) {
           $.each(callbacks[tplName], function(idx, cb){
