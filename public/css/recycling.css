@@ -154,3 +154,16 @@ li.next-steps > div.inner {
 .clear {
   clear: both;
 }
+
+span.footnote-superscript {
+  font-size: .83em;
+  vertical-align: super;
+}
+
+.footnotes {
+  margin-top: 3em;
+}
+
+.footnotes ol {
+  padding-left: 1.5em;
+}
