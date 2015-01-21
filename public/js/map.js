@@ -81,7 +81,8 @@
     map.addOrUpdateLocation = function(loc) {
   
       var txt = loc.address + "<br>";
-      txt += loc.reports.length + " reports";
+      txt += loc.reports.length;
+      txt += loc.reports.length === 1 ? " report" : " reports";
   
       if (!self.locations[loc._id]) {
         var lat = loc.geoPoint[1];
