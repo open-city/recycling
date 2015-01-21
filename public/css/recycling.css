@@ -97,6 +97,15 @@ a.close-dialog {
 	color: #8cf;
 }
 
+.blue-highlight {
+  color: #8cf;
+}
+
+.info-message {
+  margin-top: 1em;
+  text-align: center;
+}
+
 #getOnMapForm .reported-address {
 	display: block;
 	font-size: large;
@@ -121,12 +130,16 @@ a.close-dialog {
 	margin-top: 2em;
 }
 
-#next-steps { padding-left:20px; list-style:none; }
-li.next-steps { margin-bottom:10px; }
+#next-steps { margin-top: 2em; padding-left:30px; list-style:none; }
+li.next-steps { color: #8cf; margin-bottom:1em; }
 li.next-steps:before {    
     font-family: 'FontAwesome';
     content: '\f1b8';
-    margin:0 5px 0 -15px;
+    margin:0 5px 0 -22px;
+}
+li.next-steps > div.inner {
+  display: inline;
+  color: #333;
 }
 
 #colophon {
