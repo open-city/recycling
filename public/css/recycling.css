@@ -127,6 +127,7 @@ a.close-dialog {
 }
 
 #static_page_sidebar h4 {
+  line-height: normal;
 	margin-top: 2em;
 }
 
@@ -145,6 +146,7 @@ li.next-steps > div.inner {
 #colophon {
   color: #777;
   font-size: small;
+  margin-top: 2em;
 }
 
 #contact-form {
