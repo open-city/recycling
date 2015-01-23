@@ -25,6 +25,10 @@ module.exports.query = function(req,res) {
     }
 
     var body = JSON.parse(body);
-    res.json(body.results);
+    if (body.results[0].formatted_address === "Chicago, IL, USA") {
+      res.sendStatus(404);
+    } else {
+      res.json(body.results);
+    }
   });
 }
