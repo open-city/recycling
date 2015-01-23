@@ -34,10 +34,20 @@ p {
 
 .navbar-type {
   font-family: 'Teko', sans-serif;
-  font-size: 32px;
+  font-size: 2.5em;
   letter-spacing:2px;
-  line-height: 1;
   text-transform: uppercase;
+}
+
+@media only screen and (max-width: 405px) {
+	.navbar-type {
+		font-size: 1.3em;
+	}
+}
+@media only screen and (max-width: 463px) and (min-width: 406px){
+	.navbar-type {
+		font-size: 1.5em;
+	}
 }
 
 .navbar-default .navbar-nav > li > a {
