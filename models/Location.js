@@ -22,6 +22,10 @@ var LocationSchema = new Schema({
   }
 });
 
+LocationSchema.path('address').validate(function (address) {
+  return !(address == "")
+}, 'Must provide an address')
+
 // translates the long/lat into a memcached key
 LocationSchema.statics.geoHash = function(lon, lat) {
     idx = lon + "" + lat;
