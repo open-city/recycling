@@ -4,11 +4,11 @@ var request = require('request')
 module.exports.query = function(req,res) {
 
   var badCharsAddr = /[^A-Za-z0-9\.\-\#\s]/g;
-  var addr = req.param('address') || '';
+  var addr = req.query.address || '';
   addr = addr.replace(badCharsAddr,'');
   var city = 'Chicago';
   var state = 'IL';
-  var zip = req.param('zip') || '';
+  var zip = req.query.zip || '';
   zip = zip.replace(/[^0-9\-\s]/g,'');
   var location = [addr,city,state,zip].join(',');
 
