@@ -1,5 +1,5 @@
-Where is my Recycling?
-======================
+My Building Doesn't Recycle
+===========================
 
 Crowdsourcing data about which residential buildings do not have recycling in Chicago
 
@@ -8,16 +8,17 @@ The app can currently be found at http://recycling.herokuapp.com
 Requirements
 ------------
 
-* node (http://nodejs.org/)
-* mongodb (http://docs.mongodb.org/manual/)
+* [Node.js](http://nodejs.org/)
+* [MongoDB](http://docs.mongodb.org/manual/)
+* [Memcached](http://memcached.org/)
 
 
 Getting Started
 ---------------
 For more detailed instructions see the [wiki](https://github.com/open-city/recycling/wiki)
-* install dependencies  
+* install dependencies
   `npm install`
-* run the app  
+* run the app
   `node server.js`
 * Then visit [http://localhost:3000](http://localhost:3000) in your browser.
 
