@@ -1,4 +1,5 @@
 <% include _header %>
+
 <div class="center-block">
 	<p class="text-center" id="response"></p>
 </div>
@@ -8,7 +9,7 @@
 	
 	<h1>Contact Us</h1>
 	
-	<form action="/contact" method="post" id="contact-form">
+	<form class="hidden-sm hidden-xs" action="/contact" method="post" id="contact-form">
 	    
 	    <div class="form-group">
 	    	<label for="name">Name</label>
@@ -35,15 +36,15 @@
 	    	<textarea name="message" class="form-control" id="message" cols="30" rows="10" required></textarea>
 		</div>
 	    
+	    <div class="g-recaptcha" data-sitekey="6Lf08QATAAAAAJK7tQ7Vkg_4AZnVxUqjEq-dOaaX"></div>
+	    
 	    <button type="submit" class="btn btn-primary">Send</button>
 	</form>
 
 	<hr>
-
-	<p>
-		Or email Us: <a href="mailto:mybuildingdoesntrecycle@gmail.com" target="_blank">MyBuildingDoesntRecycle@gmail.com</a>
-	</p>
 	
+	
+	<a href="mailto:mybuildingdoesntrecycle@gmail.com" target="_blank" class="btn btn-primary btn-lg btn-block hidden-lg hidden-md"><i class="fa fa-envelope-o"></i> Send us an email</a>
 	</div>
 </div>
 
