@@ -3,6 +3,7 @@ var express = require('express')
   , mongoose = require('mongoose')
   , Report = require('../models/Report')
   , router = express.Router()
+  , request = require('request')
   , validator = require('validator')
   , transporter = require('../lib/transporter')
   ;
@@ -46,6 +47,23 @@ router.get('/contact', function(req, res) {
 });
 
 router.post('/contact', function (req, res, next) {
+  
+  console.log(req.body);
+  var captcha = req.body['g_recaptcha_response'];
+  var url = 'https://www.google.com/recaptcha/api/siteverify?secret='+process.env['CAPTCHA_SECRET']+'+&response='+captcha;
+  request.get(url, function (err, googResponse, body) {
+    if (err) { console.error(error); }
+    var response = JSON.parse(body);
+    console.log(response);
+    if (response['success'] == true) {
+      next();
+    } else {
+      res.json({status: '422', message: 'Please verify you are a human.'});
+    }
+  });
+
+
+}, function (req, res, next) {
   
   var form = req.body;
   

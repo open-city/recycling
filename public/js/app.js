@@ -125,7 +125,6 @@ WIMR.formatDate = function(date) {
 WIMR.contactFormHandler = function (e) {
 
   e.preventDefault();
-
   var $form = $(this)
     , action = $(this).attr('action')
     , $resMsg = $(document).find('#response')
@@ -133,8 +132,9 @@ WIMR.contactFormHandler = function (e) {
         name: $form.find('#name').val(),
         email: $form.find('#email').val(),
         subject: $form.find('#subject').val(),
-        message: $form.find('#message').val() 
-    }
+        message: $form.find('#message').val(),
+        g_recaptcha_response: grecaptcha.getResponse()
+      }
     ;
   
   $form.wimrLoading();
