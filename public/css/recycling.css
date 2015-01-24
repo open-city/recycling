@@ -173,3 +173,45 @@ span.footnote-superscript {
 .footnotes ol {
   padding-left: 1.5em;
 }
+
+
+/* MailChimp Signup Form overrides
+============================================= */
+
+#mc_embed_signup {
+  font-size: medium;
+  padding: 1em;
+}
+
+#mc_embed_signup .mc-field-group label {
+  font-size: small;
+}
+
+#mc_embed_signup .mc-field-group input {
+  border-radius: 3px;
+  padding: 4px 0;
+}
+
+#mc_embed_signup div#mce-responses {
+  float: none;
+  top: -1.4em;
+  padding: 0em;
+  overflow: hidden;
+  width: auto;
+  margin: 0;
+  clear: both;
+}
+
+#mc_embed_signup div.response {
+  margin: 1em 0;
+  padding: 0;
+  font-weight: normal;
+  float: none;
+  top: -1.5em;
+  z-index: 1;
+  width: auto;
+}
+
+#mc_embed_signup #mce-error-response {
+  color: #a00;
+}
