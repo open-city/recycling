@@ -19,6 +19,8 @@
     
     $('form#email_form').submit(WIMR.emailFormHandler);
     $('form#contact-form').submit(WIMR.contactFormHandler);
+    $('#fb-share').on('click', WIMR.fbShareHandler);
+    $('#tw-share').on('click', WIMR.twShareHandler);
     
     $(window).on('resize', function(){
       clearTimeout(WIMR.resizeTimer);
@@ -161,3 +163,15 @@ WIMR.contactFormHandler = function (e) {
   });
 
 };
+
+WIMR.fbShareHandler = function(e) {
+  e.preventDefault();
+  FB.ui({
+  method: 'share',
+  href: 'http://mybuildingdoesntrecycle.com/',
+  }, function (response) {console.log(response);});
+}
+WIMR.twShareHandler = function(e) {
+  e.preventDefault();
+  alert('share on twitter!');
+}

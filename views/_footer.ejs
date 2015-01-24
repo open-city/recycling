@@ -11,10 +11,10 @@
     <script src="js/jquery/jquery.status.js"></script>
     <script src="/js/map.js"></script>
     <script src="/js/dialog.js"></script>
-    <% for (var i=0; i<tplFiles.length; i++) { %>
-      <% var tplFile = tplFiles[i] %>
-      <script src='/js/view_handlers/<%= tplFile %>'></script>
-    <% } %>
+<% for (var i=0; i<tplFiles.length; i++) { %>
+    <% var tplFile = tplFiles[i] %>
+    <script src='/js/view_handlers/<%= tplFile %>'></script>
+<% } %>
     <script src="/js/app.js"></script>
 
   </body>

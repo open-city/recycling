@@ -1,4 +1,21 @@
 <% include _header %>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '755978994498142',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <div class="container page-static">
   <div class="row">
     <div id='static_page_main' class="col-sm-8">
@@ -47,10 +64,10 @@
       
       <h3>Share this site with your friends</h3>
       <p class="social-links">
-        <a href='#' class='btn btn-default fa fa-facebook'>
+        <a href='#' class='btn btn-default fa fa-facebook' id="fb-share">
           Facebook
         </a>
-        <a href="#" class='btn btn-default fa fa-twitter'>
+        <a href="#" class='btn btn-default fa fa-twitter' id="tw-share">
           Twitter
         </a>
       </p>
