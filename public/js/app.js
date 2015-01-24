@@ -2,10 +2,10 @@
   $(document).ready(function(){
 
     if ($('#map').length) {
+  
       // WIMR is simply an application namespace,
       // defined in /views/index.ejs
       WIMR.map = WIMR.createMap('map');
-  
       WIMR.dialog.showTemplate('search_form');
       
       $('body').on('click', '.start-over', function(e){
@@ -14,21 +14,12 @@
         WIMR.dialog.showTemplate('search_form');
         window.location.hash = "";
       });
-      
-      WIMR.reflow();
-      $(window).on('resize', function(){
-        clearTimeout(WIMR.resizeTimer);
-        WIMR.resizeTimer = setTimeout(function(){
-          WIMR.reflow();
-        }, 250);
-      });
+
     }
     
     $('form#email_form').submit(WIMR.emailFormHandler);
-
     $('form#contact-form').submit(WIMR.contactFormHandler);
     
-    WIMR.reflow();
     $(window).on('resize', function(){
       clearTimeout(WIMR.resizeTimer);
       WIMR.resizeTimer = setTimeout(function(){
@@ -59,21 +50,20 @@ WIMR.shortAddress = function(gAddr) {
 
 WIMR.reflow = function() {
   if (!WIMR.map) return;
-  
-  var contentWidth = $("#viewContent").outerWidth();
-  var windowWidth  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  if (contentWidth < (windowWidth * .75)) {
-    var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    var navH = $("#main_nav").outerHeight(true);
-    var contentHeight = winH - navH;
-    $('#map').height(contentHeight);
-    $('#viewWrapper').height(contentHeight).css('overflowX','auto');
-  } else {
-    $("#map").height(200);
-    $("#viewWrapper").height('auto');
-  }
-  
   setTimeout(function(){
+    var contentWidth = $("#viewContent").outerWidth();
+    var windowWidth  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    if (contentWidth < (windowWidth * .75)) {
+      var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+      var navH = $("#main_nav").outerHeight(true);
+      var contentHeight = winH - navH;
+      $('#map').height(contentHeight);
+      $('#viewWrapper').height(contentHeight).css('overflowX','auto');
+    } else {
+      $("#map").height(200);
+      $("#viewWrapper").height('auto');
+    }
+    
     WIMR.map.invalidateSize();
   });
 }

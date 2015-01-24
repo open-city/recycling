@@ -35,6 +35,7 @@
           $.each(callbacks[tplName], function(idx, cb){
             cb($element);
           });
+          WIMR.reflow();
         }
       },
       
