@@ -4,7 +4,7 @@
     if ($('#map').length) {
   
       // WIMR is simply an application namespace,
-      // defined in /views/index.ejs
+      // defined in /views/_footer.ejs
       WIMR.map = WIMR.createMap('map');
       WIMR.dialog.showTemplate('search_form');
       
