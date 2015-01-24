@@ -7,6 +7,8 @@
     $form.submit(function(e){
       e.preventDefault();
       WIMR.dialog.loading();
+      $("#addressField").removeClass('has-error');
+      $("#status").wimrStatus("");
       
       var address = $form.find('#inputAddress').val();
       
@@ -60,9 +62,9 @@
 
           })
           .fail(function (response){
-            WIMR.dialog.showTemplate('search_form');
+            WIMR.dialog.loading('clear');
             $('#addressField').addClass('has-error');
-            alert("Sorry, either the address was incorrect or doesn't exist.")
+            $('#status').wimrStatus("Sorry, either the address was incorrect or doesn't exist.", 'warning');
           });
     
       }

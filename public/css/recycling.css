@@ -23,6 +23,15 @@ p {
 	text-align: center;
 }
 
+#status {
+  padding: 1em .5em;
+}
+
+#status.bg-warning {
+  background-color: #FE7;
+  color: #552;
+}
+
 .navbar-style {
   background-color: #258;
   border-radius: 0px;
