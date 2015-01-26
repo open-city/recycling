@@ -23,6 +23,8 @@ var LocationSchema = new Schema({
 });
 
 LocationSchema.path('address').validate(function (address) {
+  // also: var check = /\s*/;
+  // !address.match(check)
   return !(address == "")
 }, 'Must provide an address')
 

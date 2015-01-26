@@ -42,7 +42,7 @@ describe('Unit Tests - Location', function(){
     });
     location.save(function(err, location){
       expect(err).to.exist;
-      // err.message.to.equal('Must provide an address');
+      expect(err.errors.address.message).to.equal("Path `address` is required.");
       done();
     });
   });
