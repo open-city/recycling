@@ -24,6 +24,7 @@
       },
       
       showTemplate: function(tplName, data) {
+        WIMR.dialog.loading('clear');
         var path = "/templates/" + tplName + ".ejs" ;
         data = data || {};
         var html = new EJS({url: path}).render(data);

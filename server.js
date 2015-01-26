@@ -9,7 +9,6 @@ var express = require('express')
   , reports = require('./routes/reports')
   , geocode = require('./routes/geocode')
   , locations = require('./routes/locations')
-  , contacts = require('./routes/contacts')
   ;
   
 var app = express();
@@ -48,7 +47,6 @@ app.get('/reports.json', reports.index);
 app.post('/reports.json', reports.create);
 app.get('/geocode.json', geocode.query);
 app.get('/locations.json', locations.index);
-app.post('/contacts.json', contacts.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'))

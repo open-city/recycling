@@ -39,6 +39,7 @@
                **/
               $.get('/locations.json?latitude=' + latitude + '&longitude=' + longitude)
                 .done(function(response){
+                  WIMR.dialog.loading('clear');
                   if(response.locations && response.locations.length >= 1){
                     WIMR.dialog.renderExistingResult(response.locations[0], viewVars);
                   } else {

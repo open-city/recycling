@@ -17,7 +17,6 @@
 
     }
     
-    $('form#email_form').submit(WIMR.emailFormHandler);
     $('form#contact-form').submit(WIMR.contactFormHandler);
     
     $(window).on('resize', function(){
@@ -54,51 +53,6 @@ WIMR.reflow = function() {
     }
     
     WIMR.map.invalidateSize();
-  });
-}
-
-WIMR.emailFormHandler = function(e){
-  
-  e.preventDefault();
-  
-  var $form = $(this);
-  var action = $(this).attr('action');
-  var email = $(this).find('#email_address').val();
-  var $respText = $(this).find('.response');
-
-  
-  if (!email) {
-    $respText.html("Please provide your email address");
-    return;
-  }
-  
-  $form.wimrLoading();
-  $.post(action, {email: email}, function(resp){
-    $form.wimrLoading('clear');
-    var clearForm = false;
-    switch (resp.status) {
-      case 'success':
-        var response = "<strong>Thanks!</strong> " ;
-        response += "We've added " + resp.contact.email + " to our mailing list.";
-        clearForm = true;
-        break;
-      
-      case 'duplicate':
-        var response = "<strong>Thanks!</strong> " ;
-        response += "We already have " + email + " on our mailing list.";
-        clearForm = true;
-        break;
-      
-      default:
-        var response = "<strong>Oh no! An error occurred!</strong> ";
-        response += "<br>" + resp.message;
-        break;
-    }
-
-    $respText.html(response);
-    if (clearForm) {
-      $('#email_address').val('');
-    }
   });
 }
 
