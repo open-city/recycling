@@ -36,17 +36,6 @@
  * generic helpers
  * *****************/
 
-/**
- * formats a short address from the
- * full address returned by the google
- * maps api
- */
-WIMR.shortAddress = function(gAddr) {
-  var addr = gAddr.address_components[0].short_name;
-  addr += " ";
-  addr += gAddr.address_components[1].short_name;
-  return addr;
-}
 
 WIMR.reflow = function() {
   if (!WIMR.map) return;

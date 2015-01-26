@@ -8,9 +8,7 @@ module.exports.query = function(req,res) {
   addr = addr.replace(badCharsAddr,'');
   var city = 'Chicago';
   var state = 'IL';
-  var zip = req.query.zip || '';
-  zip = zip.replace(/[^0-9\-\s]/g,'');
-  var location = [addr,city,state,zip].join(',');
+  var location = [addr,city,state].join(',');
 
   var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location;
   request.get(url, function(err, resp, body){
@@ -25,10 +23,50 @@ module.exports.query = function(req,res) {
     }
 
     var body = JSON.parse(body);
-    if (body.results[0].formatted_address === "Chicago, IL, USA") {
+    var results = filter_results(body.results);
+    if (results.length === 0) {
       res.sendStatus(404);
     } else {
-      res.json(body.results);
+      res.json(results);
     }
   });
+}
+
+/**
+ * Parses the returned address from the Google Maps api 
+ * into an object with properties 'street_number', 'route',
+ * 'city', 'state', 'zip'
+ */
+var parseGoogleAddress = function(addr) {
+  var ret = {};
+  var propMap = {
+    'administrative_area_level_1': 'state',
+    'administrative_area_level_2': 'county',
+    'locality': 'city',
+    'postal_code': 'zip',
+    'postal_code_suffix': 'zip_plus_four'   
+  }
+  addr.address_components.forEach(function(part){
+    var googleProp = part.types[0];
+    var prop = propMap[googleProp] || googleProp;
+    ret[prop] = part.long_name;
+  })
+  ret.number_and_route = ret.street_number + ' ' + ret.route;
+  ret.geometry = addr.geometry;
+  return ret;
+}
+
+var filter_results = function(rslts) {
+  var filtered = [];
+  rslts.forEach(function(address){
+    address = parseGoogleAddress(address);
+    console.log(address);
+    if (address.street_number 
+    &&  address.route
+    &&  address.city === 'Chicago'
+    &&  address.state === 'Illinois') {
+      filtered.push(address);
+    }
+  });
+  return filtered;
 }

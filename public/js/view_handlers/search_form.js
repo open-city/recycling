@@ -31,7 +31,7 @@
               var address = response[0]
                 , latitude = address.geometry.location.lat
                 , longitude = address.geometry.location.lng
-                , viewVars = { formattedAddress: WIMR.shortAddress(address) }
+                , viewVars = { formattedAddress: address.number_and_route }
                 ;
               /**
                * Have lat/long, querying our database for existing reports
@@ -55,7 +55,7 @@
               viewVars.possibleAddresses = response || [];
               viewVars.buildingsFoundMessage = response.length + " buildings found" ;
               viewVars.possibleAddresses.forEach(function(obj){
-                obj.short_address = WIMR.shortAddress(obj);
+                obj.short_address = obj.number_and_route;
               })
               WIMR.dialog.showTemplate('search_results', viewVars);
             }
@@ -64,7 +64,7 @@
           .fail(function (response){
             WIMR.dialog.loading('clear');
             $('#addressField').addClass('has-error');
-            $('#status').wimrStatus("Sorry, either the address was incorrect or doesn't exist.", 'warning');
+            $('#status').wimrStatus("Sorry, either the address was incorrect or doesn't exist in Chicago.", 'warning');
           });
     
       }
