@@ -139,10 +139,18 @@ a.close-dialog {
 	padding-top: 2em;
 }
 
-#static_page_sidebar h4 {
-  line-height: normal;
+#static_page_sidebar > .block {
 	margin-top: 2em;
 }
+
+#static_page_sidebar > .block:first-child {
+  margin-top: 1em;
+}
+
+#static_page_sidebar h4 {
+  line-height: normal;
+}
+
 
 #next-steps { margin-top: 2em; padding-left:30px; list-style:none; }
 li.next-steps { color: #8cf; margin-bottom:1em; }
@@ -190,6 +198,11 @@ span.footnote-superscript {
 #mc_embed_signup {
   font-size: medium;
   padding: 1em;
+}
+
+#mc_embed_signup h4 {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 #mc_embed_signup .mc-field-group label {
