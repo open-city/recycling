@@ -3,7 +3,7 @@
   var self = this;
   self.options = {
     opacity: 0.5,
-    color: [255, 255, 255]
+    color: [127, 191, 255]
   }
   
   var methods = {
@@ -18,8 +18,8 @@
         position: 'absolute',
         left: 0,
         top: 0,
-        width: '100%',
-        height: '100%',
+        width: this[0].scrollWidth,
+        height: this[0].scrollHeight,
         backgroundColor: rgba
       });
       

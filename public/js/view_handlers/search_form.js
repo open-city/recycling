@@ -13,8 +13,9 @@
       var address = $form.find('#inputAddress').val();
       
       if ( address === "") {
-        WIMR.dialog.showTemplate('search_form');
+        WIMR.dialog.loading('clear');
         $('#addressField').addClass('has-error');
+        $("#status").wimrStatus("Address is required", 'warning')
         
       } else {
         var url = "/geocode.json?address=" + address;

@@ -81,9 +81,9 @@
       
       loading: function(arg) {
         if (arg === 'clear') {
-          $element.wimrLoading('clear');
+          $wrapper.wimrLoading('clear');
         } else {
-          $element.wimrLoading();
+          $wrapper.wimrLoading();
         }
       },
 
