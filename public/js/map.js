@@ -1,10 +1,6 @@
 (function($, WIMR){
   WIMR.createMap = function(id) {
     var map = L.map(id).setView([41.881, -87.629], 11);
-    L.control.fullscreen({
-      position: 'topright',
-      forceSeparateButton: true
-    }).addTo(map)
     var self = this;
     self.locations = {};
     self.pending = [];
