@@ -25,7 +25,12 @@ describe("Integration Tests - Index Route", function(){
       });
     });
     
-    it("Highlights the proper nav icon", function (done) {done();});
+    it("Highlights the proper nav icon", function (done) {
+      request.get('http:localhost:3000/', function (err, res, body) {
+        
+        done();
+      });
+    });
     
     it("Renders the map", function (done) {done();})
   });
