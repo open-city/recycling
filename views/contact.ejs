@@ -1,52 +1,56 @@
 <% include _header %>
 
-<div class="center-block">
-	<p class="text-center" id="response"></p>
-</div>
+<div class="container">
+	<div class="center-block">
+		<p class="text-center" id="response"></p>
+	</div>
 
-<div class="row">
-	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
-	
-	<h1>Contact Us</h1>
-	
-	<form class="hidden-sm hidden-xs" action="/contact" method="post" id="contact-form">
-	    
-	    <div class="form-group">
-	    	<label for="name">Name</label>
-	    	<input type="text" class="form-control" id="name" name="name" required />
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
+		
+		<h1>Contact Us</h1>
+		
+		<form class="hidden-sm hidden-xs" action="/contact" method="post" id="contact-form">
+		    
+		    <div class="form-group">
+		    	<label for="name">Name</label>
+		    	<input type="text" class="form-control" id="name" name="name" required />
+			</div>
+		    
+		    <div class="form-group">
+			    <label for="email">Your Email</label>
+			    <input type="email" class="form-control" id="email" name="email" required />
+		    </div>
+
+		    <div class="form-group">
+			    <label for="subject">Choose a Subject</label>
+			    <select name="subject" class="form-control" id="subject" required>
+			        <option value="press">Press Inquiry</option>
+			        <option value="feedback">Feedback on the site</option>
+			        <option value="problem">Problem with the site</option>
+			        <option value="other">Other</option>
+			    </select>
+			</div>
+
+		    <div class="form-group">
+		    	<label for="message">Message</label>
+		    	<textarea name="message" class="form-control" id="message" cols="30" rows="10" required></textarea>
+			</div>
+		    
+		    <div class="g-recaptcha" data-sitekey="6Lf08QATAAAAAJK7tQ7Vkg_4AZnVxUqjEq-dOaaX"></div>
+		    
+		    <button type="submit" class="btn btn-primary">Send</button>
+		</form>
+
+		<hr>
+		
+		
+		<a href="mailto:mybuildingdoesntrecycle@gmail.com" target="_blank" class="btn btn-primary btn-lg btn-block hidden-lg hidden-md"><i class="fa fa-envelope-o"></i> Send us an email</a>
 		</div>
-	    
-	    <div class="form-group">
-		    <label for="email">Your Email</label>
-		    <input type="email" class="form-control" id="email" name="email" required />
-	    </div>
-
-	    <div class="form-group">
-		    <label for="subject">Choose a Subject</label>
-		    <select name="subject" class="form-control" id="subject" required>
-		        <option value="press">Press Inquiry</option>
-		        <option value="feedback">Feedback on the site</option>
-		        <option value="problem">Problem with the site</option>
-		        <option value="other">Other</option>
-		    </select>
-		</div>
-
-	    <div class="form-group">
-	    	<label for="message">Message</label>
-	    	<textarea name="message" class="form-control" id="message" cols="30" rows="10" required></textarea>
-		</div>
-	    
-	    <div class="g-recaptcha" data-sitekey="6Lf08QATAAAAAJK7tQ7Vkg_4AZnVxUqjEq-dOaaX"></div>
-	    
-	    <button type="submit" class="btn btn-primary">Send</button>
-	</form>
-
-	<hr>
-	
-	
-	<a href="mailto:mybuildingdoesntrecycle@gmail.com" target="_blank" class="btn btn-primary btn-lg btn-block hidden-lg hidden-md"><i class="fa fa-envelope-o"></i> Send us an email</a>
 	</div>
 </div>
 
-<% include _colophon %>
+<div class="container">
+	<% include _colophon %>
+</div>
 <% include _footer %>
