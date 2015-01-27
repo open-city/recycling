@@ -237,3 +237,11 @@ span.footnote-superscript {
 #mc_embed_signup #mce-error-response {
   color: #a00;
 }
+
+body.index .next-steps #mc_embed_signup {
+  padding: 0 0 1em;
+}
+
+body.index .next-steps #mc_embed_signup div.response {
+  margin-top: 0;
+}
