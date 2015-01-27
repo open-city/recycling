@@ -6,7 +6,7 @@ var app = require('../../server')
   ;
 
 describe("Integration Tests - Index Route", function(){
-  
+
   describe('GET /', function(){
     it("Responds with a 200", function (done) {
       request.get('http://localhost:3000/', function (err, res, body) {
@@ -15,7 +15,7 @@ describe("Integration Tests - Index Route", function(){
         done();
       });
     });
-    
+
     it("Renders the address form", function (done) {
       request.get('http://localhost:3000/', function (err, res, body) {
         expect(err).to.equal(null);
@@ -24,17 +24,19 @@ describe("Integration Tests - Index Route", function(){
         done();
       });
     });
-    
+
     it("Highlights the proper nav icon", function (done) {
       request.get('http:localhost:3000/', function (err, res, body) {
-        
+        $ = cheerio.load(body);
+        console.log(body);
+        console.log($('.active').text());
         done();
       });
     });
-    
+
     it("Renders the map", function (done) {done();})
   });
-  
+
   describe('GET /about', function(){});
   describe('GET /get-involved', function(){});
   describe('GET /contact', function(){});
