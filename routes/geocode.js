@@ -60,7 +60,6 @@ var filter_results = function(rslts) {
   var filtered = [];
   rslts.forEach(function(address){
     address = parseGoogleAddress(address);
-    console.log(address);
     if (address.street_number 
     &&  address.route
     &&  address.city === 'Chicago'
