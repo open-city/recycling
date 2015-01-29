@@ -7,7 +7,8 @@
     self.locations = {};
     self.pending = [];
     self.clusterGroup = new L.MarkerClusterGroup({
-      disableClusteringAtZoom: 16
+      disableClusteringAtZoom: 16,
+      maxClusterRadius: 40
     });
     map.addLayer(self.clusterGroup)
 
