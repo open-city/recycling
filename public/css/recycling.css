@@ -164,6 +164,15 @@ li.next-steps > div.inner {
   color: #333;
 }
 
+.social-links .share-button {
+  float: left;
+  margin: 5px;
+}
+
+.social-links .twitter-share-wrapper {
+  margin-top: 5px;
+}
+
 #colophon {
   color: #777;
   font-size: small;
