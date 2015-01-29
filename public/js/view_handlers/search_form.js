@@ -13,8 +13,9 @@
       var address = $form.find('#inputAddress').val();
       
       if ( address === "") {
-        WIMR.dialog.showTemplate('search_form');
+        WIMR.dialog.loading('clear');
         $('#addressField').addClass('has-error');
+        $("#status").wimrStatus("Address is required", 'warning')
         
       } else {
         var url = "/geocode.json?address=" + address;
@@ -31,13 +32,14 @@
               var address = response[0]
                 , latitude = address.geometry.location.lat
                 , longitude = address.geometry.location.lng
-                , viewVars = { formattedAddress: WIMR.shortAddress(address) }
+                , viewVars = { formattedAddress: address.number_and_route }
                 ;
               /**
                * Have lat/long, querying our database for existing reports
                **/
               $.get('/locations.json?latitude=' + latitude + '&longitude=' + longitude)
                 .done(function(response){
+                  WIMR.dialog.loading('clear');
                   if(response.locations && response.locations.length >= 1){
                     WIMR.dialog.renderExistingResult(response.locations[0], viewVars);
                   } else {
@@ -55,7 +57,7 @@
               viewVars.possibleAddresses = response || [];
               viewVars.buildingsFoundMessage = response.length + " buildings found" ;
               viewVars.possibleAddresses.forEach(function(obj){
-                obj.short_address = WIMR.shortAddress(obj);
+                obj.short_address = obj.number_and_route;
               })
               WIMR.dialog.showTemplate('search_results', viewVars);
             }
@@ -64,7 +66,7 @@
           .fail(function (response){
             WIMR.dialog.loading('clear');
             $('#addressField').addClass('has-error');
-            $('#status').wimrStatus("Sorry, either the address was incorrect or doesn't exist.", 'warning');
+            $('#status').wimrStatus("Sorry, either the address was incorrect or doesn't exist in Chicago.", 'warning');
           });
     
       }

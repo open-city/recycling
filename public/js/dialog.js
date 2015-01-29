@@ -24,6 +24,7 @@
       },
       
       showTemplate: function(tplName, data) {
+        WIMR.dialog.loading('clear');
         var path = "/templates/" + tplName + ".ejs" ;
         data = data || {};
         var html = new EJS({url: path}).render(data);
@@ -81,9 +82,9 @@
       
       loading: function(arg) {
         if (arg === 'clear') {
-          $element.wimrLoading('clear');
+          $wrapper.wimrLoading('clear');
         } else {
-          $element.wimrLoading();
+          $wrapper.wimrLoading();
         }
       },
 

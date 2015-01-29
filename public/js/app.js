@@ -17,7 +17,6 @@
 
     }
     
-    $('form#email_form').submit(WIMR.emailFormHandler);
     $('form#contact-form').submit(WIMR.contactFormHandler);
     $('#fb-share').on('click', WIMR.fbShareHandler);
     $('#tw-share').on('click', WIMR.twShareHandler);
@@ -38,17 +37,6 @@
  * generic helpers
  * *****************/
 
-/**
- * formats a short address from the
- * full address returned by the google
- * maps api
- */
-WIMR.shortAddress = function(gAddr) {
-  var addr = gAddr.address_components[0].short_name;
-  addr += " ";
-  addr += gAddr.address_components[1].short_name;
-  return addr;
-}
 
 WIMR.reflow = function() {
   if (!WIMR.map) return;
@@ -67,51 +55,6 @@ WIMR.reflow = function() {
     }
     
     WIMR.map.invalidateSize();
-  });
-}
-
-WIMR.emailFormHandler = function(e){
-  
-  e.preventDefault();
-  
-  var $form = $(this);
-  var action = $(this).attr('action');
-  var email = $(this).find('#email_address').val();
-  var $respText = $(this).find('.response');
-
-  
-  if (!email) {
-    $respText.html("Please provide your email address");
-    return;
-  }
-  
-  $form.wimrLoading();
-  $.post(action, {email: email}, function(resp){
-    $form.wimrLoading('clear');
-    var clearForm = false;
-    switch (resp.status) {
-      case 'success':
-        var response = "<strong>Thanks!</strong> " ;
-        response += "We've added " + resp.contact.email + " to our mailing list.";
-        clearForm = true;
-        break;
-      
-      case 'duplicate':
-        var response = "<strong>Thanks!</strong> " ;
-        response += "We already have " + email + " on our mailing list.";
-        clearForm = true;
-        break;
-      
-      default:
-        var response = "<strong>Oh no! An error occurred!</strong> ";
-        response += "<br>" + resp.message;
-        break;
-    }
-
-    $respText.html(response);
-    if (clearForm) {
-      $('#email_address').val('');
-    }
   });
 }
 

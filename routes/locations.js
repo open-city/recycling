@@ -54,10 +54,18 @@ exports.index = function(req, res){
     // else look up location info in Mongo and and cache it in memcached.
     } else {
       Location.find(query).populate('reports').exec(function(err, locations){
-        var locId = locations.length === 1 ? locations[0]._id : 'all';
-        var locationKey = 'locations.' + locId;
-        cache.set(geoKey, locationKey, null, 3600);
-        cache.set(locationKey, JSON.stringify(locations), null, 3600);
+        var locId = null;
+        if (locations.length === 1) {
+          locId = locations[0]._id;
+        } else if (locations.length) {
+          locId = 'all';
+        } 
+
+        if (locId) {
+          var locationKey = 'locations.' + locId;
+          cache.set(geoKey, locationKey, null, 3600);
+          cache.set(locationKey, JSON.stringify(locations), null, 3600);
+        }
         res.json({'locations': locations});
         return;
       })      
