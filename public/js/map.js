@@ -159,9 +159,9 @@
       return self.locations[id]
     };
 
-    L.tileLayer('http://{s}.tile.osm.org/v3/{id}/{z}/{x}/{y}.png', {
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      attribution: 'Imagery © <a href="http://mapbox.com">Mapbox</a>'
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     
     map.wimrRefreshLocations();
