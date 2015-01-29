@@ -1,0 +1,64 @@
+<a href='#' class='start-over close-dialog fa fa-close'></a>
+
+<h2>Submit a Report</h2>
+<form role="form" id="getOnMapForm">
+
+  <input type='hidden' name='latitude' value='<%= latitude %>' />
+  <input type='hidden' name='longitude' value='<%= longitude %>' />
+
+  <% if (reportCount > 0) { %>
+    
+    <p>
+      <span class='reported-address'><%= formattedAddress %></span>
+      <strong>does not recycle!</strong>
+    </p>
+    <p class="form-group report-count">
+      <%= reportCount %>
+      
+      <% if (reportCount > 1) { %>
+        people
+      <% } else { %>
+        person
+      <% } %>
+      
+      <% if (reportCount > 1) { %>
+        report
+      <% } else { %>
+        reports
+      <% } %>
+      
+      NO recycling
+    </p>
+  <% } else { %>
+    
+    <p>
+      No reports for
+      <span class='reported-address'>
+        <%= formattedAddress %>
+      </span>
+    </p>
+    <div class="form-group">
+      <span>Be the first to report NO recycling in your building</span>
+    </div>
+  <% } %>
+
+  <div class='form-group'>
+    <label class='control-label'>Comment (optional)</label>
+    <textarea class='form-control' name='comment' id='comment'></textarea>
+  </div>
+
+  <p>
+    <input name='submit' type="submit" value="Add Your Report" class="btn btn-primary btn-block" >
+  </p>
+
+  <% if (comments.length) { %>
+    <h4>Resident Comments</h4>
+    <% for (var i=0; i<comments.length; i++) { %>
+      <% var comment = comments[i]; %>
+      <small><%= comment.date %></small>
+      <blockquote class='comment'>"<%= comment.text %>"</blockquote>
+    <% } %>
+  <% } %>
+
+
+</form>

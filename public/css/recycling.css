@@ -1,0 +1,247 @@
+p {
+	margin: 1em 0;
+}
+
+.no-break {
+	white-space: nowrap;
+}
+
+.quiet {
+	color: #666;
+	font-size: .9em;
+}
+
+#mapWrap {
+  padding: 0;
+}
+
+#centerContent {
+	text-align: center;
+}
+
+.btn #centerContent {
+	text-align: center;
+}
+
+#status {
+  padding: 1em .5em;
+}
+
+#status.bg-warning {
+  background-color: #FE7;
+  color: #552;
+}
+
+.navbar-style {
+  background-color: #258;
+  border-radius: 0px;
+  width: 100%;
+  padding: 20px 0 20px 0;
+  margin: 0;
+  border-style: none;
+}
+
+.navbar-type {
+  font-family: 'Teko', sans-serif;
+  font-size: 2.5em;
+  letter-spacing:2px;
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: 405px) {
+	.navbar-type {
+		font-size: 1.3em;
+	}
+}
+@media only screen and (max-width: 463px) and (min-width: 406px){
+	.navbar-type {
+		font-size: 1.5em;
+	}
+}
+
+.navbar-default .navbar-nav > li > a {
+	border-radius: 3px;
+	color: #def;
+}
+
+.navbar-default .navbar-brand {
+	color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	color: #eee;
+}
+
+.navbar-default .navbar-nav > li > a.active {
+	background-color: #5ac;
+	color: #fff;
+}
+
+.btn-style{
+  border-radius: 0px;
+  float: right;
+  border-color: white;
+  border-width: 3px;
+  background-color: #292929;
+}
+
+.btn-default {
+	background-color: #f1f8ff;
+	border: 1px solid #cde;
+	color: #258;
+}
+
+.btn-default:hover,
+.btn-default:active {
+	background-color: #def;
+	border-color: #abc;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+a.close-dialog {
+	float: right;
+	font-size: large;
+}
+
+#viewWrapper {
+	margin-top: 0;
+}
+
+.blue-highlight {
+  color: #8cf;
+}
+
+.info-message {
+  margin-top: 1em;
+  text-align: center;
+}
+
+#getOnMapForm .reported-address {
+	display: block;
+	font-size: large;
+	font-weight: bold;
+}
+
+#email_form {
+	clear: both;
+}
+
+
+#static_page_main {
+	padding: 2em;
+	font-size: 1em;
+}
+
+#static_page_sidebar {
+	padding-top: 2em;
+}
+
+#static_page_sidebar > .block {
+	margin-top: 2em;
+}
+
+#static_page_sidebar > .block:first-child {
+  margin-top: 1em;
+}
+
+#static_page_sidebar h4 {
+  line-height: normal;
+}
+
+
+#next-steps { margin-top: 2em; padding-left:30px; list-style:none; }
+li.next-steps { color: #8cf; margin-bottom:1em; }
+li.next-steps:before {    
+    font-family: 'FontAwesome';
+    content: '\f1b8';
+    margin:0 5px 0 -22px;
+}
+li.next-steps > div.inner {
+  display: inline;
+  color: #333;
+}
+
+#colophon {
+  color: #777;
+  font-size: small;
+  margin-top: 2em;
+}
+
+#contact-form {
+	padding-bottom: 0.5em;
+}
+
+.clear {
+  clear: both;
+}
+
+span.footnote-superscript {
+  font-size: .83em;
+  vertical-align: super;
+}
+
+.footnotes {
+  margin-top: 3em;
+}
+
+.footnotes ol {
+  padding-left: 1.5em;
+}
+
+
+/* MailChimp Signup Form overrides
+============================================= */
+
+#mc_embed_signup {
+  font-size: medium;
+  padding: 1em;
+}
+
+#mc_embed_signup h4 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#mc_embed_signup .mc-field-group label {
+  font-size: small;
+}
+
+#mc_embed_signup .mc-field-group input {
+  border-radius: 3px;
+  padding: 4px 0;
+}
+
+#mc_embed_signup div#mce-responses {
+  float: none;
+  top: -1.4em;
+  padding: 0em;
+  overflow: hidden;
+  width: auto;
+  margin: 0;
+  clear: both;
+}
+
+#mc_embed_signup div.response {
+  margin: 1em 0;
+  padding: 0;
+  font-weight: normal;
+  float: none;
+  top: -1.5em;
+  z-index: 1;
+  width: auto;
+}
+
+#mc_embed_signup #mce-error-response {
+  color: #a00;
+}
+
+body.index .next-steps #mc_embed_signup {
+  padding: 0 0 1em;
+}
+
+body.index .next-steps #mc_embed_signup div.response {
+  margin-top: 0;
+}
