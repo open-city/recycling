@@ -1,9 +1,15 @@
 (function($, WIMR){
   WIMR.createMap = function(id) {
-    var map = L.map(id).setView([41.881, -87.629], 11);
+    var map = L.map(id, {
+      maxZoom: 16
+    }).setView([41.881, -87.629], 11);
     var self = this;
     self.locations = {};
     self.pending = [];
+    self.clusterGroup = new L.MarkerClusterGroup({
+      disableClusteringAtZoom: 16
+    });
+    map.addLayer(self.clusterGroup)
 
     var defaultIcon = L.icon({
       iconUrl: '/js/images/marker-icon.png',
@@ -85,7 +91,8 @@
         var lng = loc.geoPoint[0]
     
         var marker = L.marker([lat,lng]);
-        marker.addTo(map).bindPopup(txt);
+        self.clusterGroup.addLayer(marker);
+        marker.bindPopup(txt);
         marker.update();
         
         marker._id = loc._id;
@@ -142,7 +149,7 @@
     
     map.clearPendingLocations = function() {
       self.pending.forEach(function(mkr){
-        map.removeLayer(mkr);
+        self.clusterGroup.removeLayer(mkr);
       });
       self.pending = [] ;
     };
