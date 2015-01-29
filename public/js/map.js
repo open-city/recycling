@@ -1,7 +1,7 @@
 (function($, WIMR){
   WIMR.createMap = function(id) {
     var map = L.map(id, {
-      maxZoom: 16
+      maxZoom: 20
     }).setView([41.881, -87.629], 11);
     var self = this;
     self.locations = {};
