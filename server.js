@@ -7,7 +7,6 @@ var express = require('express')
   , morgan = require('morgan')
   , routes = require('./routes')
   , reports = require('./routes/reports')
-  , geocode = require('./routes/geocode')
   , locations = require('./routes/locations')
   ;
   
@@ -45,7 +44,6 @@ app.use(require('./routes/index.js'));
 app.get('/reports/:id.json', reports.show);
 app.get('/reports.json', reports.index);
 app.post('/reports.json', reports.create);
-app.get('/geocode.json', geocode.query);
 app.get('/locations.json', locations.index);
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -18,7 +18,8 @@
         $("#status").wimrStatus("Address is required", 'warning')
         
       } else {
-        var url = "/geocode.json?address=" + address;
+        var addressParam = formatAddressRequest(address);
+        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + addressParam;
       
       
         /**
@@ -26,10 +27,11 @@
          * Maps API for getting lat/longs of an address
          */
         $.get(url)
-          .done(function (response){
+          .done(function (gResponse){
+            var filteredResponse = filterGoogleResponse(gResponse.results);
             // Google returns a single result
-            if (response.length == 1){
-              var address = response[0]
+            if (filteredResponse.length == 1){
+              var address = filteredResponse[0]
                 , latitude = address.geometry.location.lat
                 , longitude = address.geometry.location.lng
                 , viewVars = { formattedAddress: address.number_and_route }
@@ -64,14 +66,35 @@
 
           })
           .fail(function (response){
-            WIMR.dialog.loading('clear');
+            var status = "Sorry, either the address was incorrect or doesn't exist in Chicago.";
             $('#addressField').addClass('has-error');
-            $('#status').wimrStatus("Sorry, either the address was incorrect or doesn't exist in Chicago.", 'warning');
+            $('#status').wimrStatus(status, 'warning');
           });
     
       }
     });
 
   });
+
+
+  function formatAddressRequest(inputAddress) {
+    var city = 'Chicago';
+    var state = 'IL';
+    return encodeURIComponent([inputAddress,city,state].join(','));
+  }
+
+  function filterGoogleResponse(rslts) {
+    var filtered = [];
+    rslts.forEach(function(address){
+      address = WIMR.parseGoogleAddress(address);
+      if (address.street_number 
+      &&  address.route
+      &&  address.city === 'Chicago'
+      &&  address.state === 'Illinois') {
+        filtered.push(address);
+      }
+    });
+    return filtered;
+  }
 
 })(jQuery, WIMR);
