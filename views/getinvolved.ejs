@@ -1,4 +1,5 @@
 <% include _header %>
+<div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -16,6 +17,7 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+
 <div class="container page-static">
   <div class="row">
     <div id='static_page_main' class="col-sm-8">
@@ -66,8 +68,8 @@
         <h3>Share this site with your friends</h3>
         <div class="social-links">
 	        <div class="fb-share-button share-button" data-href="http://mybuildingdoesntrecycle.com" data-layout="button_count"></div>
-          <div class="twitter-share-wrapper share-button">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mybuildingdoesntrecycle.com" data-text="Hey Chicago! Does your building provide adequate recycling?">Tweet</a>
+          <div class="twitter-share-wrapper share-button btn btn-default">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mybuildingdoesntrecycle.com" data-text="Hey Chicago! Does your building provide adequate recycling?"><i class="fa fa-twitter"></i> Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
           </div>
           <div class="clear"></div>

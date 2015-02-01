@@ -17,7 +17,8 @@ router.use(function(req, res, next){
     getinvolved: '',
     about: '',
     contact: ''
-  }
+  },
+  res.locals.ogurl = '';
   res.locals.currentYear = new Date().getFullYear();
   next();
 });
@@ -31,19 +32,22 @@ router.get('/', function(req, res){
 router.get('/about', function(req, res) {
   res.locals.navActive.about = 'active';
   res.locals.bodyClass = 'about';
-  res.render('about');
+  res.locals.ogurl = 'about';
+  res.render('about', {ogurl: 'about'});
 });
 
 router.get('/get-involved', function(req, res) {
   res.locals.navActive.getinvolved = 'active';
   res.locals.bodyClass = 'getinvolved';
-  res.render('getinvolved');
+  res.locals.ogurl = 'get-involved';
+  res.render('getinvolved', {ogurl: 'get-involved'});
 });
 
 router.get('/contact', function(req, res) {
   res.locals.navActive.contact = 'active';
   res.locals.bodyClass = 'contact';
-  res.render('contact');
+  res.locals.ogurl = 'contact';
+  res.render('contact', {ogurl: 'contact'});
 });
 
 router.post('/contact', function (req, res, next) {
