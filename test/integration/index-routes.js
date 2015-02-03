@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test';
+process.env.PORT = 3001;
 var app = require('../../server')
   , expect = require('chai').expect
   , request = require('request')
