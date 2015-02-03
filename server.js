@@ -35,7 +35,8 @@ switch (app.get('env')) {
     case 'development':
         app.use(morgan('dev'));
         break;
-    
+    case 'test':
+      app.set('port', 3001);
     default:
         app.use(morgan('combined'));
         break;

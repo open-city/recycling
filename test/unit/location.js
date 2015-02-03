@@ -1,5 +1,4 @@
 process.env.NODE_ENV = 'test';
-process.env.PORT = 3001;
 require('../../models/Location');
 
 var app = require('../../server')
