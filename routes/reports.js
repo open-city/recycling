@@ -11,7 +11,7 @@ exports.index = function(req, res){
   if(location){
     query = {'location': location };
   }
-  Report.find(query, function(reports){
+  Report.find(query, function(err, reports){
     res.json({'reports': reports});
   })
 };
