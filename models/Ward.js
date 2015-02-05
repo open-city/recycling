@@ -21,7 +21,12 @@ var WardSchema = new Schema({
     type: "Mixed",
     required: true,
     index: '2dsphere'
-  }
+  },
+
+  locations: [{
+    type: [Schema.ObjectId],
+    ref: 'Location'
+  }]
 });
 
 module.exports = mongoose.model('Ward', WardSchema);

@@ -13,7 +13,10 @@ describe('Unit Tests - Location', function(){
     var location = new Location({
       address: "222 Merchandise Mart Plaza, Chicago, IL",
       reports: [],
-      geoPoint: [0.0, 0.0]
+      geoJsonPoint: {
+        'type': 'Point',
+        coordinates: [0.0, 0.0]
+      }
     });
     location.save(function(err, location){
       expect(err).to.equal(null);
@@ -26,7 +29,10 @@ describe('Unit Tests - Location', function(){
     var location = new Location({
       address: null,
       reports: [],
-      geoPoint: [0.0, 0.0]
+      geoJsonPoint: {
+        'type': 'Point',
+        coordinates: [0.0, 0.0]
+      }
     });
     location.save(function(err, location){
       expect(err).to.exist;
@@ -38,7 +44,10 @@ describe('Unit Tests - Location', function(){
     var location = new Location({
       address: "",
       reports: [],
-      geoPoint: [0.0, 0.0]
+      geoJsonPoint: {
+        'type': 'Point',
+        coordinates: [0.0, 0.0]
+      }
     });
     location.save(function(err, location){
       expect(err).to.exist;

@@ -24,7 +24,7 @@ exports.create = function(req, res){
     , comment = req.body.comment || ''
     ;
 
-  Location.findOne({ geoPoint: [lng,lat] }, function(err, location){
+  Location.findOne({ "geoJsonPoint.coordinates": [lng,lat] }, function(err, location){
     if (err) {
       console.error('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + err)
     }
@@ -88,7 +88,10 @@ exports.create = function(req, res){
           newLocation = new Location({
             'address': address,
             'zip': zip,
-            'geoPoint': [lng, lat],
+            'geoJsonPoint': {
+              'type': 'Point',
+              'coordinates': [lng, lat]
+            },
             'reports': [report._id]
           });
           newLocation.save(function(err, location){

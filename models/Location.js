@@ -15,8 +15,8 @@ var LocationSchema = new Schema({
     ref: 'Report'
   }],
   
-  geoPoint: {
-    type: [Number],
+  geoJsonPoint: {
+    type: 'Mixed',
     required: true,
     index: '2dsphere'
   }

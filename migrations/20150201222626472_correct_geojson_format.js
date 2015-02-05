@@ -21,7 +21,10 @@ module.exports = {
             coordinates: doc.geoPoint
           }
 
-          db.collection('locations').update({_id: doc._id}, {$set: {"geoJsonPoint": geoJsonPoint}}, function(err){
+          db.collection('locations').update(
+            {_id: doc._id}, 
+            {$set: {"geoJsonPoint": geoJsonPoint}, $unset: {"geoPoint": 1}}, 
+          function(err){
             docs.nextObject(processDoc);
           })
         }
@@ -33,7 +36,25 @@ module.exports = {
 
   down: function(next) {
     MongoClient.connect(db_path, function(err, db){
-      db.collection('locations').update({}, {$unset: {geoJsonPoint: 1}}, {multi:true}, next);
+      db.collection('locations').find({}, function(err, docs){
+        var processDoc = function(err, doc) {
+          if (doc === null) {
+            next();
+            return;
+          }
+
+          var geoPoint = doc.geoJsonPoint.coordinates;
+
+          db.collection('locations').update(
+            {_id: doc._id}, 
+            {$set: {"geoPoint": geoPoint}, $unset: {"geoJsonPoint": 1}}, 
+          function(err){
+            docs.nextObject(processDoc);
+          })
+        }
+
+        docs.nextObject(processDoc);
+      })
     });
   },
 

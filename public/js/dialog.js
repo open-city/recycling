@@ -59,8 +59,8 @@
           }
         });
         
-        viewVars.latitude = loc.geoPoint[1];
-        viewVars.longitude = loc.geoPoint[0];
+        viewVars.latitude = loc.latitude;
+        viewVars.longitude = loc.longitude;
         self.publicMethods.showTemplate('submit_report', viewVars);
       },
       
