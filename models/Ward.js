@@ -17,6 +17,12 @@ var WardSchema = new Schema({
     index: '2dsphere'
   },
 
+  alderman: {
+    name: String,
+    phone: String,
+    email: String
+  },
+
   geometry: {
     type: "Mixed",
     required: true,
@@ -24,7 +30,7 @@ var WardSchema = new Schema({
   },
 
   locations: [{
-    type: [Schema.ObjectId],
+    type: Schema.ObjectId,
     ref: 'Location'
   }]
 });

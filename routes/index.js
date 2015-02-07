@@ -2,6 +2,7 @@ var express = require('express')
   , fs = require('fs')
   , mongoose = require('mongoose')
   , Report = require('../models/Report')
+  , Ward = require('../models/Ward')
   , router = express.Router()
   , request = require('request')
   , validator = require('validator')
@@ -42,6 +43,19 @@ router.get('/get-involved', function(req, res) {
   res.locals.ogurl = 'get-involved';
   res.render('getinvolved', {ogurl: 'get-involved'});
 });
+
+router.get('/wards', function(req, res){
+  res.locals.navActive.wards = 'active';
+  res.locals.bodyClass = 'wards';
+  Ward.find().sort({number:'asc'}).exec(function(err, wards){
+    if (err) {
+      res.send(500);
+      return;
+    }
+    
+    res.render('wards', {wards: wards});
+  })
+})
 
 router.get('/contact', function(req, res) {
   res.locals.navActive.contact = 'active';
