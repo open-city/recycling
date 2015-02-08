@@ -44,19 +44,6 @@ router.get('/get-involved', function(req, res) {
   res.render('getinvolved', {ogurl: 'get-involved'});
 });
 
-router.get('/wards', function(req, res){
-  res.locals.navActive.wards = 'active';
-  res.locals.bodyClass = 'wards';
-  Ward.find().sort({number:'asc'}).exec(function(err, wards){
-    if (err) {
-      res.send(500);
-      return;
-    }
-    
-    res.render('wards', {wards: wards});
-  })
-})
-
 router.get('/contact', function(req, res) {
   res.locals.navActive.contact = 'active';
   res.locals.bodyClass = 'contact';
