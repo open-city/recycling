@@ -23,6 +23,7 @@ router.get('/wards', function(req, res){
 
     function(cached, callback) {
       if (cached) {
+        console.log('cached');
         callback(null, cached);
         return;
       }

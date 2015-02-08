@@ -60,7 +60,9 @@ exports.create = function(req, res){
           cache.delete(cacheIdx, function(err, success){
             // have to wait and do the second in a callback
             // or memcachier complains about concurrent connections
-            cache.delete('locations.all');
+            cache.delete('locations.all', function(err, success){
+              cache.delete('wards.all');
+            });
           }); 
 
           res.json({
@@ -114,7 +116,10 @@ exports.create = function(req, res){
           return res.json({'error': 'Failed to store report: ' + err});
           
         } else {
-          cache.delete('locations.all');
+          cache.delete('locations.all', function(){
+            cache.delete('wards.all')
+          });
+          
           res.json({
             'report': rslt.report,
             'location': rslt.location
