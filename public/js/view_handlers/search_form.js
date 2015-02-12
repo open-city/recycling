@@ -56,8 +56,8 @@
             // google returns multiple results or no results at all
             } else {
               var viewVars = {};
-              viewVars.possibleAddresses = response || [];
-              viewVars.buildingsFoundMessage = response.length + " buildings found" ;
+              viewVars.possibleAddresses = filteredResponse || [];
+              viewVars.buildingsFoundMessage = filteredResponse.length + " buildings found" ;
               viewVars.possibleAddresses.forEach(function(obj){
                 obj.short_address = obj.number_and_route;
               })
