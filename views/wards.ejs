@@ -1,0 +1,44 @@
+<% include _header %>
+<div class="container">
+  <div class="row">
+    <div id='static_page_main' class='col-sm-8'>
+      <h2>Reports by Ward</h2>
+
+      <div class="table-responsive">
+        <table class='table' id='reports_by_ward'>
+          <thead>
+            <tr>
+              <th class='ward'>Ward</th>
+              <th class='alderman'>Alderman</th>
+              <th class='phone'>Phone</th>
+              <th class='reports'></th>
+            </tr>
+          </thead>
+        <% for (var i=0; i<wards.length; i++) { %>
+          <% var ward = wards[i] %>
+          <tr>
+            <th class='ward'>Ward <%= ward.number %></th>
+            <td class='alderman'>
+              <a href='mailto:<%= ward.alderman.email %>' target='_blank'>
+              <%= ward.alderman.name %>
+              </a>
+            </td>
+            <td class='phone'><%= ward.alderman.phone %></td>
+            <td class='reports'><%= ward.reportCount %> Reports</td>
+          </tr>
+        <% } %>
+        </table>
+      </div><!-- .table-responsive -->
+    </div>
+
+    <div id="static_page_sidebar" class="col-sm-4">
+      <% include _sidebar_blocks/press %>
+      <% include _sidebar_blocks/mc_signup_form %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <% include _colophon %>
+</div>
+<% include _footer %>

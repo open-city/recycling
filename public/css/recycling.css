@@ -201,6 +201,14 @@ span.footnote-superscript {
 }
 
 
+/* Reports by Ward 
+=========================== */
+table#reports_by_ward td.reports {
+  text-align: right;
+}
+
+
+
 /* MailChimp Signup Form overrides
 ============================================= */
 

@@ -23,8 +23,10 @@ exports.create = function(req, res){
     , zip = req.body.zip
     , comment = req.body.comment || ''
     ;
+      
+  console.log(lat, ', ', lng);
 
-  Location.findOne({ geoPoint: [lng,lat] }, function(err, location){
+  Location.findOne({ "geoJsonPoint.coordinates": [lng,lat] }, function(err, location){
     if (err) {
       console.error('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + err)
     }
@@ -43,14 +45,15 @@ exports.create = function(req, res){
           });
         },
         function(report, cb){
-          location.reports.push(report._id);
+          location.reports.addToSet(report._id);
           location.save(function(err, location){
             cb(err, {'location': location, 'report': report});
           })
         }
       ], function(err, rslt){
         if (err) {
-          res.json({'error': 'Failed to store report: ' + err});
+          console.error(err);
+          res.json({'error': 'Failed to store report'});
 
         } else {
           // invalidating cache for this location 
@@ -60,7 +63,9 @@ exports.create = function(req, res){
           cache.delete(cacheIdx, function(err, success){
             // have to wait and do the second in a callback
             // or memcachier complains about concurrent connections
-            cache.delete('locations.all');
+            cache.delete('locations.all', function(err, success){
+              cache.delete('wards.all');
+            });
           }); 
 
           res.json({
@@ -88,7 +93,10 @@ exports.create = function(req, res){
           newLocation = new Location({
             'address': address,
             'zip': zip,
-            'geoPoint': [lng, lat],
+            'geoJsonPoint': {
+              'type': 'Point',
+              'coordinates': [lng, lat]
+            },
             'reports': [report._id]
           });
           newLocation.save(function(err, location){
@@ -108,10 +116,14 @@ exports.create = function(req, res){
             Report.findOneAndRemove({_id: newReport._id}).exec();
           }
           
-          return res.json({'error': 'Failed to store report: ' + err});
+          console.error(err);
+          return res.json({'error': 'Failed to store report'});
           
         } else {
-          cache.delete('locations.all');
+          cache.delete('locations.all', function(){
+            cache.delete('wards.all')
+          });
+          
           res.json({
             'report': rslt.report,
             'location': rslt.location
