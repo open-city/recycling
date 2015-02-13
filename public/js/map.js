@@ -38,7 +38,7 @@
         var locs = {};
         for (var i = 0; i < response.locations.length; i++){
           var current_loc = response.locations[i]
-          if(current_loc.geoPoint){
+          if(current_loc.geoJsonPoint){
             map.addOrUpdateLocation(current_loc);
             locs[current_loc._id] = true;
           }
@@ -69,8 +69,8 @@
     
     map.zoomToPin = function(loc) {
       var mkr = self.locations[loc._id];
-      var lat = loc.geoPoint[1];
-      var lng = loc.geoPoint[0];
+      var lat = mkr.latitude;
+      var lng = mkr.longitude;
       
       map.setView([lat,lng], 16);
       
@@ -82,14 +82,13 @@
     }
     
     map.addOrUpdateLocation = function(loc) {
-  
       var txt = loc.address + "<br>";
       txt += loc.reports.length;
       txt += loc.reports.length === 1 ? " report" : " reports";
   
       if (!self.locations[loc._id]) {
-        var lat = loc.geoPoint[1];
-        var lng = loc.geoPoint[0]
+        var lat = loc.geoJsonPoint.coordinates[1];
+        var lng = loc.geoJsonPoint.coordinates[0]
     
         var marker = L.marker([lat,lng]);
         self.clusterGroup.addLayer(marker);
@@ -97,9 +96,11 @@
         marker.update();
         
         marker._id = loc._id;
-        marker.geoPoint = loc.geoPoint;
+        marker.latitude = lat;
+        marker.longitude = lng;
         marker.address = loc.address
         marker.reports = loc.reports;
+        marker.geoJsonPoint = loc.geoJsonPoint
         self.locations[loc._id] = marker;
       } else {
         var marker = self.locations[loc._id];
