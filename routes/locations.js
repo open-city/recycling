@@ -11,7 +11,7 @@ exports.index = function(req, res){
   
   var geoKey = "geoPoints.all";
   if(latitude && longitude){
-    query = {'geoJsonPoint.coordinates': [longitude, latitude]};
+    query = {'geoPoint': [longitude, latitude]};
     geoKey = Location.geoHash(longitude, latitude);
   }
 

@@ -13,10 +13,7 @@ describe('Unit Tests - Location', function(){
     var location = new Location({
       address: "222 Merchandise Mart Plaza, Chicago, IL",
       reports: [],
-      geoJsonPoint: {
-        'type': 'Point',
-        coordinates: [0.0, 0.0]
-      }
+      geoPoint: [0.0, 0.0]
     });
     location.save(function(err, location){
       expect(err).to.equal(null);
@@ -29,10 +26,7 @@ describe('Unit Tests - Location', function(){
     var location = new Location({
       address: null,
       reports: [],
-      geoJsonPoint: {
-        'type': 'Point',
-        coordinates: [0.0, 0.0]
-      }
+      geoPoint: [0.0, 0.0]
     });
     location.save(function(err, location){
       expect(err).to.exist;
@@ -44,10 +38,7 @@ describe('Unit Tests - Location', function(){
     var location = new Location({
       address: "",
       reports: [],
-      geoJsonPoint: {
-        'type': 'Point',
-        coordinates: [0.0, 0.0]
-      }
+      geoPoint: [0.0, 0.0]
     });
     location.save(function(err, location){
       expect(err).to.exist;
@@ -56,5 +47,4 @@ describe('Unit Tests - Location', function(){
     });
   });
 
-  it("should add _id to corresponding ward's locations array");
 });

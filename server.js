@@ -16,7 +16,6 @@ var config = require('./config/config')[env];
 
 var dbCnx = process.env.MONGOLAB_URI || config.db;
 var db = mongoose.connect(dbCnx);
-var port = process.env.PORT || config.port || 3000;
 
 // memjs reads appropriate env variables by default.
 // zero configuration necessary
@@ -25,7 +24,7 @@ app.set('view engine','ejs');
 app.engine('html', hbs.__express);
 app.use(express.static('public'));
 
-app.set('port', port)
+app.set('port', process.env.PORT || 3000)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -46,9 +45,8 @@ app.get('/reports/:id.json', reports.show);
 app.get('/reports.json', reports.index);
 app.post('/reports.json', reports.create);
 app.get('/locations.json', locations.index);
-app.use(require('./routes/wards.js'));
 
-http.createServer(app).listen(port, function(){
+http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'))
 })
 
