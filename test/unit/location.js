@@ -56,4 +56,5 @@ describe('Unit Tests - Location', function(){
     });
   });
 
+  it("should add _id to corresponding ward's locations array");
 });

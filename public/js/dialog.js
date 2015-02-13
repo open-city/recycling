@@ -59,8 +59,8 @@
           }
         });
         
-        viewVars.latitude = loc.latitude;
-        viewVars.longitude = loc.longitude;
+        viewVars.latitude  = loc.geoJsonPoint.coordinates[1];
+        viewVars.longitude = loc.geoJsonPoint.coordinates[0];
         self.publicMethods.showTemplate('submit_report', viewVars);
       },
       

@@ -1,5 +1,6 @@
 var crypto = require('crypto')
   , mongoose = require('mongoose')
+  , Ward = require('./Ward')
   , Schema = mongoose.Schema
   ;
 
@@ -12,7 +13,8 @@ var LocationSchema = new Schema({
   
   reports: [{
     type: Schema.ObjectId,
-    ref: 'Report'
+    ref: 'Report',
+    index: true
   }],
   
   geoJsonPoint: {
@@ -21,6 +23,17 @@ var LocationSchema = new Schema({
     index: '2dsphere'
   }
 });
+
+LocationSchema.post('save', function(loc){
+  var pt = loc.geoJsonPoint;
+  Ward.findOne({geometry: { $geoIntersects: { $geometry: pt }}}, function(err, ward){
+    if (err) return console.error(err);
+    if (ward) {
+      ward.locations.addToSet(loc._id);
+      ward.save();
+    }
+  });
+})
 
 LocationSchema.path('address').validate(function (address) {
   return !(address == "")

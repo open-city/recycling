@@ -27,7 +27,7 @@ module.exports = {
               }
               db.collection('wards').update(
                 {_id: ward._id},
-                { $push: { locations: doc._id }}, 
+                { $addToSet: { locations: doc._id }}, 
                 function(err){
                   if (err) console.error(err);
 

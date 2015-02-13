@@ -69,8 +69,8 @@
     
     map.zoomToPin = function(loc) {
       var mkr = self.locations[loc._id];
-      var lat = loc.latitude;
-      var lng = loc.longitude;
+      var lat = mkr.latitude;
+      var lng = mkr.longitude;
       
       map.setView([lat,lng], 16);
       
@@ -100,6 +100,7 @@
         marker.longitude = lng;
         marker.address = loc.address
         marker.reports = loc.reports;
+        marker.geoJsonPoint = loc.geoJsonPoint
         self.locations[loc._id] = marker;
       } else {
         var marker = self.locations[loc._id];
