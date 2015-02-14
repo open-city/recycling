@@ -9,28 +9,31 @@ module.exports = {
 
   up: function(next) {
     MongoClient.connect(db_path, function(err, db){
-      db.collection('locations').find({}, function(err, docs){
-        var processDoc = function(err, doc) {
-          if (doc === null) {
-            next();
-            return;
-          }
+      var counter = 0;
+      var cursor = db.collection('locations').find()
 
+      cursor.toArray(function(err, docs){
+        docs.forEach(function(doc, idx){
           var geoJsonPoint = {
             type: 'Point',
-            coordinates: doc.geoPoint
+            coordinates: [
+              doc.geoPoint[0],
+              doc.geoPoint[1]
+            ]
           }
 
           db.collection('locations').update(
             {_id: doc._id}, 
             {$set: {"geoJsonPoint": geoJsonPoint}, $unset: {"geoPoint": 1}}, 
           function(err){
-            docs.nextObject(processDoc);
+            if (idx >= docs.length - 1) {
+              console.log(idx + " locations processed");
+              next();
+            }
           })
-        }
-
-        docs.nextObject(processDoc);
+        })
       })
+
     });
   },
 
