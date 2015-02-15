@@ -8,7 +8,7 @@ var express = require('express')
   , routes = require('./routes')
   , reports = require('./routes/reports')
   , locations = require('./routes/locations')
-  , fauxAuth = require('middleware/staging-auth')
+  , fauxAuth = require('./middleware/staging-auth')
   ;
   
 var app = express();
