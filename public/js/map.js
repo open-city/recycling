@@ -87,8 +87,8 @@
       txt += loc.reports.length === 1 ? " report" : " reports";
   
       if (!self.locations[loc._id]) {
-        var lat = loc.geoJsonPoint.coordinates[1];
-        var lng = loc.geoJsonPoint.coordinates[0]
+        var lat = loc.latitude;
+        var lng = loc.longitude
     
         var marker = L.marker([lat,lng]);
         self.clusterGroup.addLayer(marker);
@@ -100,7 +100,6 @@
         marker.longitude = lng;
         marker.address = loc.address
         marker.reports = loc.reports;
-        marker.geoJsonPoint = loc.geoJsonPoint
         self.locations[loc._id] = marker;
       } else {
         var marker = self.locations[loc._id];

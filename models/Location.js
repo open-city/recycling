@@ -22,7 +22,28 @@ var LocationSchema = new Schema({
     required: true,
     index: '2dsphere'
   }
+}, {
+    toJSON:   { virtuals: true },
+    toObject: { virtuals: true }
 });
+
+LocationSchema.virtual('latitude').get(function(){
+  return this.geoJsonPoint.coordinates[1];
+}) 
+
+LocationSchema.virtual('latitude').set(function(lat){
+  this.geoJsonPoint.coordinates[1] = lat;
+}) 
+
+LocationSchema.virtual('longitude').get(function(){
+  return this.geoJsonPoint.coordinates[0];
+}) 
+
+LocationSchema.virtual('longitude').set(function(lat){
+  this.geoJsonPoint.coordinates[0] = lat;
+}) 
+
+
 
 LocationSchema.post('save', function(loc){
   var pt = loc.geoJsonPoint;

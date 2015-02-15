@@ -56,5 +56,69 @@ describe('Unit Tests - Location', function(){
     });
   });
 
+  describe('latitude virtual property', function(){
+
+    it("should return latitude from geoJsonPoint.coordinates", function(done){
+      var location = new Location({
+        address: "123 Address St",
+        reports: [],
+        geoJsonPoint:{
+          'type': 'Point',
+          coordinates: [-87, 49]
+        }
+      });
+
+      expect(location.latitude).to.equal(49);
+      done();
+    })
+
+    it("should set latitude to geoJsonPoint.coordinates", function(done){
+      var location = new Location({
+        address: "123 Address St",
+        reports: [],
+        geoJsonPoint:{
+          'type': 'Point',
+          coordinates: [-87, 49]
+        }
+      });
+
+      location.latitude = 50;
+      expect(location.geoJsonPoint.coordinates[1]).to.equal(50);
+      done();
+    })
+  })
+
+
+  describe('longitude virtual property', function(){
+    it("should return longitude from geoJsonPoint.coordinates", function(done){
+      var location = new Location({
+        address: "123 Address St",
+        reports: [],
+        geoJsonPoint:{
+          'type': 'Point',
+          coordinates: [-87, 49]
+        }
+      });
+
+      expect(location.longitude).to.equal(-87);
+      done();
+    })
+
+    it("should set longitude to geoJsonPoint.coordinates", function(done){
+      var location = new Location({
+        address: "123 Address St",
+        reports: [],
+        geoJsonPoint:{
+          'type': 'Point',
+          coordinates: [-87, 49]
+        }
+      });
+
+      location.longitude = -88
+      expect(location.geoJsonPoint.coordinates[0]).to.equal(-88);
+      done();
+    })
+  });
+
   it("should add _id to corresponding ward's locations array");
 });
