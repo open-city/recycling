@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": "true",
   "scripts": {
-    "postinstall": "grunt migrate:all",
+    "postinstall": "script/postinstall.sh",
     "test": "mocha test/unit/report.js test/unit/location.js"
   },
   "dependencies": {
