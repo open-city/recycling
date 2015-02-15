@@ -10,4 +10,5 @@ cache.flush(function(err, rslt){
   console.log("Cache flushed")
   console.log(rslt);
 
+  process.exit();
 });

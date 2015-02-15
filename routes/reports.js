@@ -24,8 +24,6 @@ exports.create = function(req, res){
     , comment = req.body.comment || ''
     ;
       
-  console.log(lat, ', ', lng);
-
   Location.findOne({ "geoJsonPoint.coordinates": [lng,lat] }, function(err, location){
     if (err) {
       console.error('Errored out while finding location with latitude: ' + lat + ' longitude: ' + lng + ": " + err)
@@ -56,18 +54,6 @@ exports.create = function(req, res){
           res.json({'error': 'Failed to store report'});
 
         } else {
-          // invalidating cache for this location 
-          // and locations.all so they'll be regenerated
-          // next time they are requested
-          var cacheIdx = 'locations.' + rslt.location._id;
-          cache.delete(cacheIdx, function(err, success){
-            // have to wait and do the second in a callback
-            // or memcachier complains about concurrent connections
-            cache.delete('locations.all', function(err, success){
-              cache.delete('wards.all');
-            });
-          }); 
-
           res.json({
             'report': rslt.report,
             'location': rslt.location
@@ -120,10 +106,7 @@ exports.create = function(req, res){
           return res.json({'error': 'Failed to store report'});
           
         } else {
-          cache.delete('locations.all', function(){
-            cache.delete('wards.all')
-          });
-          
+
           res.json({
             'report': rslt.report,
             'location': rslt.location

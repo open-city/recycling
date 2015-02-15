@@ -94,7 +94,6 @@
       },
 
       hashChange: function(e) {
-        console.log('hashChange')
         var hash = window.location.hash;
         var a = hash.split('/');
         a.shift();

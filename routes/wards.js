@@ -23,7 +23,6 @@ router.get('/wards', function(req, res){
 
     function(cached, callback) {
       if (cached) {
-        console.log('cached');
         callback(null, cached);
         return;
       }
@@ -69,7 +68,6 @@ router.get('/wards/:id', function(req, res){
 
     function(cached, callback) {
       if (cached) {
-        console.log('cached');
         callback(null, cached);
         return;
       }
@@ -92,7 +90,6 @@ router.get('/wards/:id', function(req, res){
       console.error(err);
       res.status(500).end();
     }
-    console.log(ward)
     res.render('wards/show', {ward:ward});
 
   })
@@ -110,11 +107,13 @@ function sortAddresses(a, b) {
   if (addressA.street > addressB.street)
     return 1;
 
+
   if (addressA.direction < addressB.direction)
     return -1;
 
   if (addressA.direction > addressB.direction)
     return 1;
+
 
   if (addressA.number < addressB.number)
     return -1;

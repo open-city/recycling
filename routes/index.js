@@ -58,7 +58,6 @@ router.post('/contact', function (req, res, next) {
   request.get(url, function (err, googResponse, body) {
     if (err) { console.error(error); }
     var response = JSON.parse(body);
-    console.log(response);
     if (response['success'] == true) {
       next();
     } else {

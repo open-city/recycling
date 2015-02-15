@@ -13,6 +13,7 @@
         <dt>Alderman <%= ward.alderman.name %></dt>
         <dd>Phone: <%= ward.alderman.phone %></dd>
         <dd>Email: <a href='mailto:<%= ward.alderman.email %>'><%= ward.alderman.email %></a></dd>
+        <dd>Total Reports: <%= ward.reportCount %></dd>
       </dl>
 
 
@@ -41,6 +42,10 @@
               <%= location.reports.length > 1 ? 'reports' : 'report' %>
             </div>
           </div>
+        <% } %>
+
+        <% if (ward.locations.length == 0) { %>
+        <p>No reports yet in this ward.</p>
         <% } %>
       </div>
     </div>

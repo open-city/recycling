@@ -1,4 +1,6 @@
-var crypto = require('crypto')
+var async = require('async')
+  , cache = require('memjs').Client.create()
+  , crypto = require('crypto')
   , mongoose = require('mongoose')
   , Ward = require('./Ward')
   , Schema = mongoose.Schema
@@ -51,9 +53,16 @@ LocationSchema.post('save', function(loc){
     if (err) return console.error(err);
     if (ward) {
       ward.locations.addToSet(loc._id);
-      ward.save();
+      ward.save(); // triggers flush of appropriate ward cache entry
     }
   });
+
+  cacheIdx = 'locations.' + loc._id.toString();
+  async.series([
+    function(cb){ cache.delete('locations.all', cb); },
+    function(cb){ cache.delete(cacheIdx, cb); },
+  ])
+
 })
 
 LocationSchema.path('address').validate(function (address) {

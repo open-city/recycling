@@ -49,7 +49,7 @@
                   }
                 })
                 .fail(function(response){
-                  console.log("Errored while looking for an existing location");
+                  console.error("Errored while looking for an existing location");
                   WIMR.dialog.loading('clear');
               })
               
