@@ -80,6 +80,8 @@ router.get('/wards/:id', function(req, res){
           res.status(500).end();
         }
 
+        ward.locations.sort(sortAddresses);
+
         cache.set(cacheIdx, JSON.stringify(ward), null, 3600);
         callback(null, ward);
       })
@@ -95,5 +97,42 @@ router.get('/wards/:id', function(req, res){
 
   })
 })
+
+
+
+function sortAddresses(a, b) {
+  addressA = parseAddress(a);
+  addressB = parseAddress(b);
+  
+  if (addressA.street < addressB.street)
+    return -1;
+
+  if (addressA.street > addressB.street)
+    return 1;
+
+  if (addressA.direction < addressB.direction)
+    return -1;
+
+  if (addressA.direction > addressB.direction)
+    return 1;
+
+  if (addressA.number < addressB.number)
+    return -1;
+
+  if (addressA.number > addressB.number)
+    return 1;
+
+  return 0;
+}
+
+function parseAddress(loc) {
+  var address = loc.address.trim();
+  var parts = address.split(' ', 3);
+  return {
+    number: parseInt(parts[0],10),
+    direction: parts[1],
+    street: parts[2]
+  }
+}
 
 module.exports = router;
