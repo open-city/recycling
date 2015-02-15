@@ -8,6 +8,7 @@ var express = require('express')
   , routes = require('./routes')
   , reports = require('./routes/reports')
   , locations = require('./routes/locations')
+  , fauxAuth = require('middleware/staging-auth')
   ;
   
 var app = express();
@@ -34,6 +35,10 @@ app.use(bodyParser.urlencoded({
 switch (app.get('env')) {
     case 'development':
         app.use(morgan('dev'));
+        break;
+
+    case 'staging':
+        app.use(fauxAuth);
         break;
     
     default:
