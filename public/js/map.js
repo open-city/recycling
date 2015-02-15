@@ -46,6 +46,7 @@
   
         map.clearPendingLocations();
   
+        $(window).trigger('locationsLoaded')
         if (callback) {
           callback();
         }

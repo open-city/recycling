@@ -22,8 +22,12 @@
         callbacks[tplName] = callbacks[tplName] || [];
         callbacks[tplName].push(callback)
       },
+
+      getTemplateCallbacks: function(tplName) {
+        return callbacks[tplName] || [];
+      },
       
-      showTemplate: function(tplName, data) {
+      showTemplate: function(tplName, data, callback) {
         WIMR.dialog.loading('clear');
         var path = "/templates/" + tplName + ".ejs" ;
         data = data || {};
@@ -32,12 +36,13 @@
         $('html, body').scrollTo(0, 0);
         $wrapper.scrollTo(0, 0);
         
-        if (callbacks[tplName]) {
-          $.each(callbacks[tplName], function(idx, cb){
-            cb($element);
-          });
-          WIMR.reflow();
-        }
+        var tplCallbacks = self.publicMethods.getTemplateCallbacks(tplName);
+        if (callback) tplCallbacks.push(callback);
+
+        $.each(tplCallbacks, function(idx, cb){
+          cb($element);
+        });
+        WIMR.reflow();
       },
       
       /**
@@ -59,8 +64,8 @@
           }
         });
         
-        viewVars.latitude  = loc.geoJsonPoint.coordinates[1];
-        viewVars.longitude = loc.geoJsonPoint.coordinates[0];
+        viewVars.latitude  = loc.latitude;
+        viewVars.longitude = loc.longitude;
         self.publicMethods.showTemplate('submit_report', viewVars);
       },
       
@@ -89,6 +94,7 @@
       },
 
       hashChange: function(e) {
+        console.log('hashChange')
         var hash = window.location.hash;
         var a = hash.split('/');
         a.shift();

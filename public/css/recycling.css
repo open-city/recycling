@@ -208,6 +208,25 @@ table#reports_by_ward td.reports {
 }
 
 
+/* Single ward page
+=============================*/
+
+.wards.single .alderman-info {
+  font-size: large;
+}
+
+.wards.single .location-list {
+  font-size: large;
+}
+
+.wards.single .location.row {
+  padding: .3em 0;
+}
+
+.wards.single .location.row:nth-child(odd) {
+  background-color: #eee;
+}
+
 
 /* MailChimp Signup Form overrides
 ============================================= */

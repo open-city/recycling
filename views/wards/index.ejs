@@ -1,4 +1,4 @@
-<% include _header %>
+<% include ../_header %>
 <div class="container">
   <div class="row">
     <div id='static_page_main' class='col-sm-8'>
@@ -17,11 +17,13 @@
         <% for (var i=0; i<wards.length; i++) { %>
           <% var ward = wards[i] %>
           <tr>
-            <th class='ward'>Ward <%= ward.number %></th>
-            <td class='alderman'>
-              <a href='mailto:<%= ward.alderman.email %>' target='_blank'>
-              <%= ward.alderman.name %>
+            <th class='ward'>
+              <a href='/wards/<%= ward.number %>'>
+              Ward <%= ward.number %>
               </a>
+            </th>
+            <td class='alderman'>
+              <%= ward.alderman.name %>
             </td>
             <td class='phone'><%= ward.alderman.phone %></td>
             <td class='reports'><%= ward.reportCount %> Reports</td>
@@ -32,13 +34,13 @@
     </div>
 
     <div id="static_page_sidebar" class="col-sm-4">
-      <% include _sidebar_blocks/press %>
-      <% include _sidebar_blocks/mc_signup_form %>
+      <% include ../_sidebar_blocks/press %>
+      <% include ../_sidebar_blocks/mc_signup_form %>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <% include _colophon %>
+  <% include ../_colophon %>
 </div>
-<% include _footer %>
+<% include ../_footer %>

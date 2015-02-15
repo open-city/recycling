@@ -1,0 +1,58 @@
+<% include ../_header %>
+<div class="container">
+  <div class="row">
+    <div id='static_page_main' class='col-sm-8'>
+      
+      <p>
+        <a class='btn btn-default' href="/wards">&larr; Back to Wards</a>
+      </p>
+      
+      <h2>Reports for Ward <%= ward.number %></h2>
+      
+      <dl class='alderman-info'>
+        <dt>Alderman <%= ward.alderman.name %></dt>
+        <dd>Phone: <%= ward.alderman.phone %></dd>
+        <dd>Email: <a href='mailto:<%= ward.alderman.email %>'><%= ward.alderman.email %></a></dd>
+      </dl>
+
+
+      <hr>
+
+      <div class="location-list">
+        <div class="row">
+          <h3 class='col-sm-8'>Reported Locations</h3>
+          <p class='col-sm-4 pull-right'>
+            <a class='btn btn-primary small' href='/'>Add Your Report</a>
+          </p>
+        </div>
+
+        <div class="clear"></div>
+
+        <% for (var i=0; i<ward.locations.length; i++) { %>
+          <% var location = ward.locations[i] %>
+          <div class="location row">
+            <div class="col-sm-8">
+              <a href='/#/reports/<%= location._id %>'>
+              <%= location.address.trim() %>
+              </a>
+            </div>
+            <div class="col-sm-4">
+              <%= location.reports.length %>
+              <%= location.reports.length > 1 ? 'reports' : 'report' %>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <div id="static_page_sidebar" class="col-sm-4">
+      <% include ../_sidebar_blocks/press %>
+      <% include ../_sidebar_blocks/mc_signup_form %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <% include ../_colophon %>
+</div>
+<% include ../_footer %>

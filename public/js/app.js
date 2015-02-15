@@ -6,7 +6,11 @@
       // WIMR is simply an application namespace,
       // defined in /views/_footer.ejs
       WIMR.map = WIMR.createMap('map');
-      WIMR.dialog.showTemplate('search_form');
+      WIMR.dialog.showTemplate('search_form', {}, function(){
+        $(window).one('locationsLoaded', function(){
+          WIMR.dialog.hashChange();
+        })
+      });
       
       $('body').on('click', '.start-over', function(e){
         e.preventDefault();
@@ -15,20 +19,21 @@
         window.location.hash = "";
       });
 
+      $(window).on('resize', function(){
+        clearTimeout(WIMR.resizeTimer);
+        WIMR.resizeTimer = setTimeout(function(){
+          WIMR.reflow();
+        }, 250);
+      })
+      
+      $(window).on('hashchange', WIMR.dialog.hashChange);
+    
     }
     
     $('form#contact-form').submit(WIMR.contactFormHandler);
     $('#fb-share').on('click', WIMR.fbShareHandler);
     $('#tw-share').on('click', WIMR.twShareHandler);
     
-    $(window).on('resize', function(){
-      clearTimeout(WIMR.resizeTimer);
-      WIMR.resizeTimer = setTimeout(function(){
-        WIMR.reflow();
-      }, 250);
-    })
-    
-    $(window).on('hashchange', WIMR.dialog.hashChange);
   })
 })(jQuery);
 
