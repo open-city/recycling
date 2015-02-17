@@ -7,7 +7,7 @@ var crypto = require('crypto')
 var LocationSchema = new Schema({
   address: {
     type: String,
-    required: true
+    required: 'Must provide an address'
   },
   
   reports: [{
@@ -22,9 +22,11 @@ var LocationSchema = new Schema({
   }
 });
 
-LocationSchema.path('address').validate(function (address) {
-  return !(address == "")
-}, 'Must provide an address')
+// LocationSchema.path('address').validate(function (address) {
+//   // also: var check = /\s*/;
+//   // !address.match(check)
+//   return !(address == "")
+// }, 'Must provide an address')
 
 // translates the long/lat into a memcached key
 LocationSchema.statics.geoHash = function(lon, lat) {

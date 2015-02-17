@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       mongo: process.env.MONGOLAB_URI || 'mongodb://localhost/recycling_' + process.env.NODE_ENV,
       ext: 'js'
     },
-    
+
     mochaTest: {
       test: {
         options: {
@@ -26,6 +26,6 @@ module.exports = function(grunt) {
       }
     }
   });
-    
+
   grunt.registerTask('test',['mochaTest']);
 };
