@@ -2,6 +2,13 @@ p {
 	margin: 1em 0;
 }
 
+#counts {
+  color: #777;
+  font-size: small;
+  margin-top: 2em;
+  z-index: 2;
+}
+
 .no-break {
 	white-space: nowrap;
 }

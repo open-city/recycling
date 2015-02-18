@@ -31,10 +31,11 @@ router.use('/', function (req, res, next) {
       res.locals.locationsCount = value.toString();
       next();
     } else {
-      var c = Location.count();
-      cache.set('locationsCount', c, function(err, success) {}, 36000);
-      res.locals.locationsCount = c;
-      next();
+      Location.count(function(err, count){
+        cache.set('locationsCount', count, null, 36000);
+        res.locals.locationsCount = count;
+        next();
+      });
     }
   });
   cache.get('reportsCount', function(err, value, reportsCountKey) {
@@ -42,9 +43,11 @@ router.use('/', function (req, res, next) {
       res.locals.reportsCount = value.toString();
       next();
     } else {
-      var c = Report.count();
-      cache.set('reportsCount', c, function(err, success){}, 36000);
-      next();
+      Report.count(function(err, count){
+        cache.set('reportsCount', count, null, 36000);
+        res.locals.reportsCount = count;
+        next();
+      });
     }
   });
 });
