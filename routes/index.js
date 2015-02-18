@@ -25,33 +25,6 @@ router.use(function(req, res, next){
   next();
 });
 
-router.use('/', function (req, res, next) {
-  cache.get('locationsCount', function(err, value, locationsCountKey){
-    if (value) {
-      res.locals.locationsCount = value.toString();
-      next();
-    } else {
-      Location.count(function(err, count){
-        cache.set('locationsCount', count, null, 36000);
-        res.locals.locationsCount = count;
-        next();
-      });
-    }
-  });
-  cache.get('reportsCount', function(err, value, reportsCountKey) {
-    if (value) {
-      res.locals.reportsCount = value.toString();
-      next();
-    } else {
-      Report.count(function(err, count){
-        cache.set('reportsCount', count, null, 36000);
-        res.locals.reportsCount = count;
-        next();
-      });
-    }
-  });
-});
-
 router.get('/', function(req, res){
   res.locals.navActive.home = 'active';
   res.locals.bodyClass = 'index';

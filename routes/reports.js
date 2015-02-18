@@ -128,3 +128,7 @@ exports.show = function(req, res){
     res.json({'report': report})
   })
 }
+
+exports.count = function(req, res){
+  res.json({'reportCount':Report.count()});
+};

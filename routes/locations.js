@@ -72,3 +72,7 @@ exports.index = function(req, res){
     }
   })
 };
+
+exports.count = function(req, res) {
+  res.json({'locationCount': Location.count()});
+};
