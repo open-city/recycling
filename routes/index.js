@@ -1,7 +1,9 @@
 var express = require('express')
   , fs = require('fs')
   , mongoose = require('mongoose')
+  , cache = require('memjs').Client.create()
   , Report = require('../models/Report')
+  , Location = require('../models/Location')
   , router = express.Router()
   , request = require('request')
   , validator = require('validator')
@@ -21,6 +23,30 @@ router.use(function(req, res, next){
   res.locals.ogurl = '';
   res.locals.currentYear = new Date().getFullYear();
   next();
+});
+
+router.use('/', function (req, res, next) {
+  cache.get('locationsCount', function(err, value, locationsCountKey){
+    if (value) {
+      res.locals.locationsCount = value.toString();
+      next();
+    } else {
+      var c = Location.count();
+      cache.set('locationsCount', c, function(err, success) {}, 36000);
+      res.locals.locationsCount = c;
+      next();
+    }
+  });
+  cache.get('reportsCount', function(err, value, reportsCountKey) {
+    if (value) {
+      res.locals.reportsCount = value.toString();
+      next();
+    } else {
+      var c = Report.count();
+      cache.set('reportsCount', c, function(err, success){}, 36000);
+      next();
+    }
+  });
 });
 
 router.get('/', function(req, res){
