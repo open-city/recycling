@@ -1,6 +1,6 @@
 (function($){
   $(document).ready(function(){
-
+    
     if ($('#map').length) {
   
       // WIMR is simply an application namespace,
@@ -16,6 +16,8 @@
       });
 
     }
+    
+    WIMR.getCounts();
     
     $('form#contact-form').submit(WIMR.contactFormHandler);
     $('#fb-share').on('click', WIMR.fbShareHandler);
@@ -131,3 +133,16 @@ WIMR.parseGoogleAddress = function(addr) {
   return ret;
 }
 
+WIMR.getCounts = function() {
+  $.getJSON('/locations/count.json')
+    .done(function(data){
+      $('#counts').removeClass('hidden')
+      $('#locationCount').text(data.locationCount);
+    })
+    .fail(function(){});
+  $.getJSON('/reports/count.json')
+    .done(function(data){
+      $('#reportCount').text(data.reportCount);
+    })
+    .fail(function(){});
+};
