@@ -74,5 +74,14 @@ exports.index = function(req, res){
 };
 
 exports.count = function(req, res) {
-  res.json({'locationCount': Location.count()});
+  cache.get('locations.count', function(err, value, locationsCountKey){
+    if (value) {
+      res.json({'locationCount': value.toString()});
+    } else {
+      Location.count(function(err, count){
+        cache.set('locations.count', count, null, 36000);
+        res.json({'locationCount': count});
+      });
+    }
+  });
 };
