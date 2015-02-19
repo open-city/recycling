@@ -4,9 +4,8 @@ p {
 
 #counts {
   color: #777;
-  font-size: small;
-  margin-top: 2em;
-  z-index: 2;
+  margin-top: 0.8em;
+  margin-left: 3.5em;
 }
 
 .no-break {
@@ -20,6 +19,7 @@ p {
 
 #mapWrap {
   padding: 0;
+  position: relative;
 }
 
 #centerContent {
