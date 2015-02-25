@@ -130,14 +130,7 @@ exports.show = function(req, res){
 }
 
 exports.count = function(req, res){
-  cache.get('reports.count', function(err, value, reportsCountKey) {
-  if (value) {
-    res.json({'reportCount': value.toString()});
-  } else {
-    Report.count(function(err, count){
-      cache.set('reports.count', count, null, 36000);
-      res.json({'reportCount':Report.count()});
-    });
-  }
+  Report.find().count(function(err, count){
+    res.json({'reportCount': count});
   });
 };
