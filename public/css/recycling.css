@@ -3,9 +3,16 @@ p {
 }
 
 #counts {
+  background-color: #fff;
+  background-color: rgba(255,255,255,0.75);
   color: #777;
-  margin-top: 0.8em;
-  margin-left: 3.5em;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+#counts p {
+  margin: .3em;
+  padding: 0;
 }
 
 .no-break {

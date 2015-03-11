@@ -137,12 +137,22 @@ WIMR.getCounts = function() {
   $.getJSON('/locations/count.json')
     .done(function(data){
       $('#counts').removeClass('hidden')
-      $('#locationCount').text(data.locationCount);
+      $('#locationCount').text(data.locationCount.commafy());
     })
     .fail(function(){});
   $.getJSON('/reports/count.json')
     .done(function(data){
-      $('#reportCount').text(data.reportCount);
+      $('#reportCount').text(data.reportCount.commafy());
     })
     .fail(function(){});
 };
+
+String.prototype.commafy = function() {
+  return this.replace(/(^|[^\w.])(\d{4,})/g, function($0, $1, $2) {
+    return $1 + $2.replace(/\d(?=(?:\d\d\d)+(?!\d))/g, "$&,");
+  });
+}
+
+Number.prototype.commafy = function() {
+  return this.toString().commafy();
+}
