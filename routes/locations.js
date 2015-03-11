@@ -74,7 +74,11 @@ exports.index = function(req, res){
 };
 
 exports.count = function(req, res) {
-  Location.find().count(function(err, count){
+  Location.count(function(err, count){
+    if (err) {
+      console.error(err);
+      return res.status(500).send();
+    }
     res.json({'locationCount': count});
   });
 };

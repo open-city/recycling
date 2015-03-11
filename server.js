@@ -41,10 +41,10 @@ switch (app.get('env')) {
 }
 
 app.use(require('./routes/index.js'));
+app.get('/reports/count.json', reports.count);
 app.get('/reports/:id.json', reports.show);
 app.get('/reports.json', reports.index);
 app.post('/reports.json', reports.create);
-app.get('/reports/count.json', reports.count);
 app.get('/locations.json', locations.index);
 app.get('/locations/count.json', locations.count);
 

@@ -130,7 +130,13 @@ exports.show = function(req, res){
 }
 
 exports.count = function(req, res){
-  Report.find().count(function(err, count){
+
+  Report.count(function(err, count){
+    if (err) {
+      console.error(err);
+      return res.status(500).send();
+    }
+
     res.json({'reportCount': count});
   });
 };
