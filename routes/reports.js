@@ -123,3 +123,15 @@ exports.show = function(req, res){
     res.json({'report': report})
   })
 }
+
+exports.count = function(req, res){
+
+  Report.count(function(err, count){
+    if (err) {
+      console.error(err);
+      return res.status(500).send();
+    }
+
+    res.json({'reportCount': count});
+  });
+};
