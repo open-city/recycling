@@ -46,6 +46,12 @@ router.get('/get-involved', function(req, res) {
   res.render('getinvolved', {ogurl: 'get-involved'});
 });
 
+router.get("/contact-your-alderman", function(req, res){
+  res.locals.navActive.getinvolved = 'active';
+  res.locals.bodyClass = 'getinvolved contact-your-alderman'
+  res.render("contact-your-alderman")
+})
+
 router.get('/contact', function(req, res) {
   res.locals.navActive.contact = 'active';
   res.locals.bodyClass = 'contact';

@@ -6,7 +6,8 @@ var express = require('express')
   , Ward = require('../models/Ward')
   ;
 
-router.get('/wards', function(req, res){
+router.get('/wards.:format?', function(req, res){
+  var format = req.param('format') || 'html'
   res.locals.navActive.wards = 'active';
   res.locals.bodyClass = 'wards';
 
@@ -44,13 +45,22 @@ router.get('/wards', function(req, res){
       res.status(500).end();
     }
 
-    res.render('wards/index', {wards:wards})
+    switch (format) {
+      case "json":
+        res.json({wards: wards});
+        break;
+
+      default:
+        res.render('wards/index', {wards:wards})
+        break;
+    }
   })
 })
 
 
 
-router.get('/wards/:id', function(req, res){
+router.get('/wards/:id.:format?', function(req, res){
+  var format = req.param('format') || 'html'
   res.locals.navActive.wards = 'active';
   res.locals.bodyClass = 'wards single';
   var wardId = req.params.id;
@@ -88,13 +98,53 @@ router.get('/wards/:id', function(req, res){
 
     if (err) {
       console.error(err);
-      res.status(500).end();
+      return res.status(500).end();
     }
-    res.render('wards/show', {ward:ward});
+
+    switch (format) {
+      case "json":
+        return res.json({ward:ward})
+        break;
+
+      default:
+        return res.render('wards/show', {ward:ward});
+        break;
+    }
 
   })
 })
 
+
+router.get("/wards/bypoint/:lat/:lng.:format?", function(req, res){
+  
+  var format = req.param('format') || 'html'
+  var lat = parseFloat(req.param('lat'))
+  var lng = parseFloat(req.param('lng'))
+  var point = {
+    type: "Point",
+    coordinates: [ lng, lat ]
+  }
+
+  Ward.findOne({geometry:{$geoIntersects: {$geometry: point}}}).populate('locations').exec(function(err, ward){
+    if (err) {
+      console.error(err);
+      return res.status(500).end();
+    }
+
+    if (!ward)
+      return res.status(404).end();
+
+    switch (format) {
+      case "json":
+        return res.json({ward:ward});
+        break;
+
+      default:
+        return res.render('wards/show', {ward:ward});
+        break;
+    }
+  })
+})
 
 
 function sortAddresses(a, b) {
