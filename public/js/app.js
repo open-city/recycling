@@ -6,8 +6,11 @@
       // WIMR is simply an application namespace,
       // defined in /views/_footer.ejs
       WIMR.map = WIMR.createMap('map');
+      $("#mapSpinner .show").spin("show");
+
       WIMR.dialog.showTemplate('search_form', {}, function(){
         $(window).one('locationsLoaded', function(){
+          $("#mapSpinner").hide();
           WIMR.dialog.hashChange();
         })
       });
