@@ -1,0 +1,32 @@
+{
+  "name": "spin",
+  "version": "1.1.6",
+  "main": [ "./javascripts/jquery.spin.js","./stylesheets/jquery.spin.css" ],
+  "ignore": 
+  [
+    "README*",
+    "LICENSE*",
+    "**/*.sass",
+    "**/*.coffee",
+    "**/sample.*",
+    "**/rainbow.js",
+    "**/rainbow.css",
+    "**/jquery.js",
+    "**/jquery.css",
+    "samples",
+    "spec",
+    "bourbon",
+    "neat",
+    "packages",
+    "images",
+    "Cakefile*",
+    "Rakefile*",
+    "Gemfile*",
+    ".git*",
+    ".travis*",
+    "*bower.json",
+    "*jquery.json",
+    "index*"
+  ],
+  "dependencies": { "jquery": "latest" }
+}
