@@ -5,6 +5,7 @@ var express = require('express')
   , http = require('http')
   , mongoose = require('mongoose')
   , morgan = require('morgan')
+  , compress = require('compression');
   , routes = require('./routes')
   , reports = require('./routes/reports')
   , locations = require('./routes/locations')
@@ -24,6 +25,7 @@ var port = process.env.PORT || config.port || 3000;
 
 app.set('view engine','ejs');
 app.engine('html', hbs.__express);
+app.use(compress());
 app.use(express.static('public'));
 
 app.set('port', port)
