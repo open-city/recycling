@@ -1,10 +1,13 @@
 <% include _header %>
   <div class="container-fluid">
-  	<div class="row">
+    <div class="row">
         <div id='mapWrap' class="col-sm-7 col-md-8">
           <div id="map" style="height: 600px">
             <div id="counts" class="hidden leaflet-top leaflet-right">
               <p><span id="reportCount"></span> reports for <span id="locationCount"></span> locations</p>
+            </div>
+            <div id="mapSpinner"> 
+              <div class='spin' data-spin ></div>
             </div>
           </div>
         </div>

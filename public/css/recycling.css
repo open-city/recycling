@@ -29,6 +29,22 @@ p {
   position: relative;
 }
 
+#mapSpinner {
+  background-color: rgba(0,0,0,0.5);
+  height: 100%;
+  position: relative;
+  text-align: center;
+  z-index: 10000;
+}
+
+#mapSpinner .spin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -64px;
+  margin-top: -64px;
+}
+
 #centerContent {
 	text-align: center;
 }
