@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+var json2csv = require('json2csv');
+var mongoose = require('mongoose');
+var _ = require('lodash');
+
+var env = process.env.NODE_ENV || 'development';
+var config = require('../config/config')[env];
+
+var dbCnx = process.env.MONGOLAB_URI || config.db;
+var db = mongoose.connect(dbCnx);
+
+var Location = require('../models/Location');
+
+var rows = [];
+Location.find({}).populate('reports').exec(function(err, locations){
+  _.each(locations, function(location){
+    _.each(location.reports, function(report){
+      var row = {
+        address: location.address.trim(),
+        comment: report.comment.trim(),
+        date: report.date
+      };
+      rows.push(row);
+    });
+  });
+
+  json2csv({data: rows, fields: ['address', 'date', 'comment']}, function(err, csv){
+    process.stdout.write(csv);
+    mongoose.connection.close();
+  });
+});
+

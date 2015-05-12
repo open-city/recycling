@@ -2,6 +2,7 @@ var async = require('async')
   , cache = require('memjs').Client.create()
   , crypto = require('crypto')
   , mongoose = require('mongoose')
+  , Report = require('./Report')
   , Ward = require('./Ward')
   , Schema = mongoose.Schema
   ;
