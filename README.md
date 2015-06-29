@@ -18,6 +18,7 @@ Getting Started
 For more detailed instructions see the [wiki](https://github.com/open-city/recycling/wiki)
 * install dependencies
   `npm install`
+* Run `mongod` and `memcached` on default ports
 * run the app
   `node server.js`
 * Then visit [http://localhost:3000](http://localhost:3000) in your browser.
@@ -25,3 +26,4 @@ For more detailed instructions see the [wiki](https://github.com/open-city/recyc
 Tests
 -----
 Run the tests with ```npm test```
+
