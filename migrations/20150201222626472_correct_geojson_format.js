@@ -1,6 +1,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var MongoClient = require('mongodb').MongoClient
   , db_path = (process.env.NODE_ENV === 'production') ? process.env.MONGOLAB_URI : "mongodb://localhost/recycling_" + process.env.NODE_ENV
+  , _ = require('lodash')
   ;
 
 
@@ -11,8 +12,11 @@ module.exports = {
     MongoClient.connect(db_path, function(err, db){
       var counter = 0;
       var cursor = db.collection('locations').find()
-
       cursor.toArray(function(err, docs){
+        console.log(docs);
+        if (_.isEmpty(docs)) {
+          next();
+        }
         docs.forEach(function(doc, idx){
           var geoJsonPoint = {
             type: 'Point',
@@ -23,9 +27,9 @@ module.exports = {
           }
 
           db.collection('locations').update(
-            {_id: doc._id}, 
-            {$set: {"geoJsonPoint": geoJsonPoint}, $unset: {"geoPoint": 1}}, 
-          function(err){
+            {_id: doc._id},
+            {$set: {"geoJsonPoint": geoJsonPoint}, $unset: {"geoPoint": 1}},
+          function (err) {
             if (idx >= docs.length - 1) {
               console.log(idx + " locations processed");
               next();
@@ -49,8 +53,8 @@ module.exports = {
           var geoPoint = doc.geoJsonPoint.coordinates;
 
           db.collection('locations').update(
-            {_id: doc._id}, 
-            {$set: {"geoPoint": geoPoint}, $unset: {"geoJsonPoint": 1}}, 
+            {_id: doc._id},
+            {$set: {"geoPoint": geoPoint}, $unset: {"geoJsonPoint": 1}},
           function(err){
             docs.nextObject(processDoc);
           })
