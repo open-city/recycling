@@ -1,14 +1,16 @@
 process.env.NODE_ENV = 'test';
 require('../../models/Location');
+require('../../models/Ward');
 
 var app = require('../../server')
   , expect = require('chai').expect
   , mongoose = require('mongoose')
   , Location = mongoose.model('Location')
+  , Ward = mongoose.model('Ward')
   ;
 
 describe('Unit Tests - Location', function(){
-  
+
   it('Should save properly', function(done){
     var location = new Location({
       address: "222 Merchandise Mart Plaza, Chicago, IL",
@@ -120,5 +122,7 @@ describe('Unit Tests - Location', function(){
     })
   });
 
-  it("should add _id to corresponding ward's locations array");
+  it("should add _id to corresponding ward's locations array", function(done) {
+    done();
+  });
 });
