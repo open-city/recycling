@@ -23,7 +23,7 @@
     "logfmt": "^1.1.2",
     "memjs": "^0.8.5",
     "mongodb": "^1.4.9",
-    "mongoose": "^3.8.15",
+    "mongoose": "^4.0.7",
     "morgan": "^1.3.2",
     "nodemailer": "^1.3.0",
     "request": "^2.39.0",
