@@ -8,9 +8,12 @@ module.exports = {
   requiresDowntime: false, // true or false
 
   up: function(next) {
-    MongoClient.connect(db_path, function(err, db){
-      db.collection('locations').find({}, function(err, docs){
+    MongoClient.connect(db_path, function(err, db) {
+      db.collection('locations').find({}, function(err, docs) {
         docs.count(function(err, docsLength){
+          if (docsLength === 0) {
+            next();
+          }
           var counter = 0;
           docs.nextObject(processDoc)
 
@@ -35,7 +38,7 @@ module.exports = {
                   if (counter >= docsLength) {
                     next();
                   } else {
-                    docs.nextObject(processDoc)
+                    docs.nextObject(processDoc);
                   }
                 }
               )

@@ -18,10 +18,10 @@ module.exports = {
 
       counter = 0;
       wards.forEach(function(ward){
-        
+
         console.log("Added email " + ward.email + " to ward " + ward.number);
         db.collection('wards').update(
-          {number:ward.number}, 
+          {number:ward.number},
           {$set: {'alderman.email': ward.email}},
           function(err, rslt){
             if (err) console.error(err);
