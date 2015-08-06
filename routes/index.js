@@ -19,6 +19,7 @@ router.use(function(req, res, next){
     home: '',
     getinvolved: '',
     about: '',
+    press: '',
     contact: ''
   },
   res.locals.ogurl = '';
@@ -101,6 +102,12 @@ router.post('/contact', function (req, res, next) {
   });
 });
 
+router.get('/press', function (req, res) {
+  res.locals.navActive.press = 'active';
+  res.locals.bodyClass = 'press';
+  res.locals.ogurl = 'press';
+  res.render('press', {ogurl: 'press'});
+});
 
 // Loader.io verification page.  Do not delete.
 router.get('/loaderio-f6c2b68c741ca5d56479042a794cf7da', function(req, res){
