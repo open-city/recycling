@@ -11,7 +11,7 @@
         var viewVars = {
           formattedAddress: $a.text()
         }
-        
+
         WIMR.dialog.loading();
         $.get(theHref)
         .done(function(response){
