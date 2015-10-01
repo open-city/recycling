@@ -1,4 +1,6 @@
 var express = require('express')
+  , cluster = require('cluster')
+  , numCpus = require('os').cpus().length
   , bodyParser = require('body-parser')
   , fs = require('fs')
   , hbs = require('hbs')
@@ -11,7 +13,7 @@ var express = require('express')
   , locations = require('./routes/locations')
   , fauxAuth = require('./middleware/staging-auth')
   ;
-  
+
 var app = express();
 var env = app.get('env');
 var config = require('./config/config')[env];
@@ -42,7 +44,7 @@ switch (app.get('env')) {
     case 'staging':
         app.use(fauxAuth);
         break;
-    
+
     default:
         app.use(morgan('combined'));
         break;
@@ -57,7 +59,17 @@ app.get('/locations.json', locations.index);
 app.get('/locations/count.json', locations.count);
 app.use(require('./routes/wards.js'));
 
-http.createServer(app).listen(port, function(){
-  console.log('Express server listening on port ' + app.get('port'))
-})
+if (cluster.isMaster) {
+  for (var i = 0; i < numCpus; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', function(worker, code, signal) {
+    console.log('Worker ' + worker.process.pid + ' died with code ' + code + ' and signal ' + signal);
+  });
+} else {
+  http.createServer(app).listen(port, function() {
+    console.log('Worker running app on port ' + port);
+  });
+}
 
