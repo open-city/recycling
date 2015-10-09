@@ -15,7 +15,7 @@
       if ( address === "") {
         WIMR.dialog.loading('clear');
         $('#addressField').addClass('has-error');
-        $("#status").wimrStatus("Address is required", 'warning')
+        $("#status").wimrStatus("Address is required", 'warning');
 
       } else {
         var addressParam = formatAddressRequest(address);
@@ -82,7 +82,9 @@
   }
 
   function filterGoogleResponse(results) {
-    return results.filter(function(address) {
+    return results.map(function(address) {
+      return WIMR.parseGoogleAddress(address);
+    }).filter(function(address) {
       return address.street_number
         &&  address.route
         &&  address.city === 'Chicago'
