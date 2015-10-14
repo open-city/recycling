@@ -8,6 +8,7 @@ var express = require('express')
   , mongoose = require('mongoose')
   , morgan = require('morgan')
   , compress = require('compression')
+  , logger = require('logfmt')
   , routes = require('./routes')
   , reports = require('./routes/reports')
   , locations = require('./routes/locations')
@@ -65,11 +66,12 @@ if (cluster.isMaster) {
   }
 
   cluster.on('exit', function(worker, code, signal) {
-    console.log('Worker ' + worker.process.pid + ' died with code ' + code + ' and signal ' + signal);
+    logger.log({worker: worker.process.pid, msg: 'died', code: code, signal: signal});
   });
+
 } else {
   http.createServer(app).listen(port, function() {
-    console.log('Worker running app on port ' + port);
+    logger.log({status: 'info', msg: 'server listening', port: port});
   });
 }
 
