@@ -61,7 +61,7 @@ app.get('/locations/count.json', locations.count);
 app.use(require('./routes/wards.js'));
 
 if (cluster.isMaster) {
-  for (var i = 0; i < numCpus - 1; i++) {
+  for (var i = 0; i < 2; i++) {
     cluster.fork();
   }
 
