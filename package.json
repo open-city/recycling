@@ -20,6 +20,7 @@
     "grunt-mocha-test": "^0.12.7",
     "grunt-mongo-migrations": "^0.6.1",
     "hbs": "^2.7.0",
+    "json2csv": "^2.12.0",
     "lodash": "^3.10.1",
     "logfmt": "^1.2.0",
     "memjs": "^0.8.6",
@@ -36,7 +37,6 @@
   },
   "devDependencies": {
     "chai": "^3.3.0",
-    "json2csv": "^2.12.0",
     "mocha": "^2.3.3"
   }
 }
