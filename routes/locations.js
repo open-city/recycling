@@ -44,7 +44,7 @@ exports.index = function(req, res){
   // final callback
   ], function(err, cached){
     if (err) console.error(err);
-    
+
     // if all has gone well, return cached location info
     if (!err && cached) {
       cached = JSON.parse(cached.toString());
@@ -59,16 +59,16 @@ exports.index = function(req, res){
           locId = locations[0]._id;
         } else if (locations.length) {
           locId = 'all';
-        } 
+        }
 
         if (locId) {
           var locationKey = 'locations.' + locId;
-          cache.set(geoKey, locationKey, null, 3600);
-          cache.set(locationKey, JSON.stringify(locations), null, 3600);
+          cache.set(geoKey, locationKey, null, 5400);
+          cache.set(locationKey, JSON.stringify(locations), null, 5400);
         }
         res.json({'locations': locations});
         return;
-      })      
+      })
     }
   })
 };
