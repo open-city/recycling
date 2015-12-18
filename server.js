@@ -15,13 +15,14 @@ var express = require('express')
   , fauxAuth = require('./middleware/staging-auth')
   ;
 
-var app = express();
-var env = app.get('env');
-var config = require('./config/config')[env];
+var app = express()
+  , env = app.get('env')
+  , config = require('./config/config')[env]
 
-var dbCnx = process.env.MONGOLAB_URI || config.db;
-var db = mongoose.connect(dbCnx);
-var port = process.env.PORT || config.port || 3000;
+  , dbCnx = process.env.MONGOLAB_URI || config.db
+  , db = mongoose.connect(dbCnx)
+  , port = process.env.PORT || config.port || 3000
+  ;
 
 // memjs reads appropriate env variables by default.
 // zero configuration necessary
@@ -61,7 +62,7 @@ app.get('/locations/count.json', locations.count);
 app.use(require('./routes/wards.js'));
 
 if (cluster.isMaster) {
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 4; i++) {
     cluster.fork();
   }
 
