@@ -13,6 +13,7 @@ var express = require('express')
   , reports = require('./routes/reports')
   , locations = require('./routes/locations')
   , fauxAuth = require('./middleware/staging-auth')
+  , concurrency = process.env.WEB_CONCURRENCY
   ;
 
 var app = express()
@@ -61,8 +62,9 @@ app.get('/locations.json', locations.index);
 app.get('/locations/count.json', locations.count);
 app.use(require('./routes/wards.js'));
 
+
 if (cluster.isMaster) {
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < concurrency; i++) {
     cluster.fork();
   }
 
