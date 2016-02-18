@@ -27,7 +27,6 @@ var app = express()
 
 // memjs reads appropriate env variables by default.
 // zero configuration necessary
-
 app.set('view engine','ejs');
 app.engine('html', hbs.__express);
 app.use(compress());
@@ -77,4 +76,3 @@ if (cluster.isMaster) {
     logger.log({status: 'info', msg: 'server listening', port: port});
   });
 }
-
