@@ -1,8 +1,56 @@
 (function($){
+  function SortableTable(tableEl) {
+    this.currentSort = {};
+    this.table = $(tableEl);
+    this.sortSelector = $(tableEl + ' thead th a');
+    this.tableBody = $(tableEl + ' tbody');
+    this.tableRows = $(tableEl + ' tbody tr');
+    $(this.sortSelector).on('click', function(event) {
+      var sortField = $(event.target).data('sort');
+      this.sortSelector = 'td.' + sortField;
+      var rows = this.tableRows.clone(true);
+      var frag = document.createDocumentFragment();
+      var sortFunc = this.whichSort(sortField) ? this.sortDsc : this.sortAsc;
+      var sorted = rows.sort(sortFunc);
+      $(frag).append(sorted);
+      $(this.tableBody).html(frag);
+      this.currentSort = {
+        field: sortField,
+        desc: this.whichSort(sortField)
+      };
+    }.bind(this));
+    this.sortDsc = function (a, b) {
+      console.log(this.sortSelector);
+      var current = +$(a).find(this.sortSelector).text();
+      var next = +$(b).find(this.sortSelector).text();
+      if (current < next) {
+        return 1;
+      } else {
+        return -1;
+      }
+    }.bind(this);
+    this.sortAsc = function (a, b) {
+      if (+$(a).find(this.sortSelector).text() < +$(b).find(this.sortSelector).text()) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }.bind(this);
+  }
+
+  SortableTable.prototype.whichSort = function (selected) {
+    if (this.currentSort.field === undefined) {
+      return true;
+    } else if (this.currentSort.field !== selected) {
+      return true;
+    }
+    return false;
+  };
+
   $(document).ready(function(){
-    
+
     if ($('#map').length) {
-  
+
       // WIMR is simply an application namespace,
       // defined in /views/_footer.ejs
       WIMR.map = WIMR.createMap('map');
@@ -14,7 +62,7 @@
           WIMR.dialog.hashChange();
         })
       });
-      
+
       $('body').on('click', '.start-over', function(e){
         e.preventDefault();
         WIMR.map.wimrReset();
@@ -28,17 +76,19 @@
           WIMR.reflow();
         }, 250);
       })
-      
+
       $(window).on('hashchange', WIMR.dialog.hashChange);
-    
+
     }
-    
+
     WIMR.getCounts();
-    
+
     $('form#contact-form').submit(WIMR.contactFormHandler);
     $('#fb-share').on('click', WIMR.fbShareHandler);
     $('#tw-share').on('click', WIMR.twShareHandler);
-    
+    if ($('#reports_by_ward').length) {
+      var ts = new SortableTable('#reports_by_ward');
+    }
   })
 
 
@@ -62,7 +112,7 @@
         $("#map").height(200);
         $("#viewWrapper").height('auto');
       }
-      
+
       WIMR.map.invalidateSize();
     });
   }
@@ -90,9 +140,9 @@
           g_recaptcha_response: grecaptcha.getResponse()
         }
       ;
-    
+
     $form.wimrLoading();
-    
+
     $.post(action, data, function (res) {
       $form.wimrLoading('clear');
       var clearForm = false;
@@ -100,7 +150,7 @@
         var response = "<strong>Thanks!</strong> Your message has been sent!";
         $resMsg.html(response);
         $resMsg.addClass('bg-success');
-        clearForm = true;      
+        clearForm = true;
       } else {
         var response = "<strong>Oh no! An error occurred!</strong> ";
         response += "<br>" + res.message;
@@ -117,7 +167,7 @@
   };
 
   /**
-   * Parses the returned address from the Google Maps api 
+   * Parses the returned address from the Google Maps api
    * into an object with properties 'street_number', 'route',
    * 'city', 'state', 'zip'
    */
@@ -128,7 +178,7 @@
       'administrative_area_level_2': 'county',
       'locality': 'city',
       'postal_code': 'zip',
-      'postal_code_suffix': 'zip_plus_four'   
+      'postal_code_suffix': 'zip_plus_four'
     }
     addr.address_components.forEach(function(part){
       var googleProp = part.types[0];

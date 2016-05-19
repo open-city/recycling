@@ -184,7 +184,7 @@ a.close-dialog {
 
 #next-steps { margin-top: 2em; padding-left:30px; list-style:none; }
 li.next-steps { color: #8cf; margin-bottom:1em; }
-li.next-steps:before {    
+li.next-steps:before {
     font-family: 'FontAwesome';
     content: '\f1b8';
     margin:0 5px 0 -22px;
@@ -231,12 +231,15 @@ span.footnote-superscript {
 }
 
 
-/* Reports by Ward 
+/* Reports by Ward
 =========================== */
 table#reports_by_ward td.reports {
-  text-align: right;
+  text-align: center;
 }
 
+table#reports_by_ward td.addresses {
+  text-align: center;
+}
 
 /* Single ward page
 =============================*/

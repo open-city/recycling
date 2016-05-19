@@ -34,7 +34,7 @@ router.get('/wards', function(req, res){
         }
 
         cache.set('wards.all', JSON.stringify(wards), null, 3600);
-        callback(null, wards);
+        return callback(null, wards);
       })
     }
   ], function(err, wards){
