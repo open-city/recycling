@@ -43,13 +43,22 @@ WardSchema.set('toObject', { virtuals: true})
 WardSchema.set('toJSON', { virtuals: true})
 
 WardSchema.virtual('reportCount').get(function(){
-  if (!this.locations) return 0;
+  if (!this.locations) {
+    return 0;
+  }
 
   return this.locations.reduce(function(prev, cur){
     var toAdd = cur.reports ? cur.reports.length : 1;
     return prev + toAdd;
   }, 0);
-})
+});
+
+WardSchema.virtual('locationCount').get(function() {
+  if (!this.locations) {
+    return 0;
+  }
+  return this.locations.length;
+});
 
 
 WardSchema.post('save', function(ward){

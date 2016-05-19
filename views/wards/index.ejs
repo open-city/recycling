@@ -11,28 +11,38 @@
               <th class='ward'>Ward</th>
               <th class='alderman'>Alderman</th>
               <th class='phone'>Phone</th>
-              <th class='reports'></th>
+              <th class='addresses'><a href="#" data-sort="addresses"><i class="fa fa-sort sortable"></i> Addresses</a></th>
+              <th class='reports'><a href="#" data-sort="reports"><i class="fa fa-sort sortable"></i> Reports</a></th>
             </tr>
           </thead>
+          <tbody>
         <% for (var i=0; i<wards.length; i++) { %>
           <% var ward = wards[i] %>
           <tr>
             <th class='ward'>
-              <a href='/wards/<%= ward.number %>'>
-              Ward <%= ward.number %>
-              </a>
+              <%= ward.number %>
             </th>
             <td class='alderman'>
               <%= ward.alderman.name %>
             </td>
             <td class='phone'><%= ward.alderman.phone %></td>
-            <td class='reports'><%= ward.reportCount %> Reports</td>
+            <td class='addresses'><%= ward.locationCount %></td>
+            <td class='reports'><%= ward.reportCount %></td>
+            <td class='details'>
+              <a href='/wards/<%= ward.number %>'>
+                View details
+              </a>
+            </td>
           </tr>
         <% } %>
+        </tbody>
         </table>
       </div><!-- .table-responsive -->
     </div>
 
+    <div class="col-sm-4">
+      <!-- Map wrapper -->
+    </div>
     <div id="static_page_sidebar" class="col-sm-4">
       <% include ../_sidebar_blocks/press %>
       <% include ../_sidebar_blocks/mc_signup_form %>
