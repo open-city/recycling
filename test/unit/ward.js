@@ -13,16 +13,13 @@ describe('Unit Tests - Ward', function(){
 
   describe('reportCount virtual property', function(){
     before(function(done) {
-      cp.exec('grunt migrate:all', function(err, stdout, stderr) {
-        if (err) {
-          throw err;
-        }
-        Report.create({}, function(err, doc) {
-          if (err) {
-            throw err;
-          }
-          done();
-        });
+      const migrate = cp.spawn('grunt', ['migrate:all'])
+      migrate.on('error', (err) => {
+        console.log(err);
+        throw err;
+      });
+      migrate.on('close', () => {
+        done();
       });
     });
     it('should return sum of reports for all locations in ward');
