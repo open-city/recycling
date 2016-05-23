@@ -43,6 +43,10 @@
       return true;
     } else if (this.currentSort.field !== selected) {
       return true;
+    } else if (this.currentSort.field === selected && this.currentSort.desc === true) {
+      return false;
+    } else if (this.currentSort.field === selected && this.currentSort.desc === false) {
+      return true;
     }
     return false;
   };
@@ -89,7 +93,7 @@
     if ($('#reports_by_ward').length) {
       var ts = new SortableTable('#reports_by_ward');
     }
-  })
+  });
 
 
 /*******************

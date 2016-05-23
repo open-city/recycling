@@ -51,6 +51,7 @@
     </div>
 
     <div id="static_page_sidebar" class="col-sm-4">
+      <div id="ward-map"></div>
       <% include ../_sidebar_blocks/press %>
       <% include ../_sidebar_blocks/mc_signup_form %>
     </div>
@@ -61,3 +62,16 @@
   <% include ../_colophon %>
 </div>
 <% include ../_footer %>
+
+<script type="text/javascript">
+    if ($('#ward-map').length) {
+      var map = L.map('ward-map', {
+        maxZoom: 20
+      }).setView([41.881, -87.629], 11);
+      L.tileLayer('http://api.tiles.mapbox.com/v4/smartchicagocollaborative.l45jl5j8/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic21hcnRjaGljYWdvY29sbGFib3JhdGl2ZSIsImEiOiJ5MzB1MHFNIn0.190SObdn-P8VvOWu7AQvVA', {
+        maxZoom: 18,
+        attribution: 'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'
+      }).addTo(map);
+      L.geoJson(<%- JSON.stringify(ward.geometry) %>).addTo(map);
+    }
+</script>

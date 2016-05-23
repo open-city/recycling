@@ -241,6 +241,9 @@ table#reports_by_ward td.addresses {
   text-align: center;
 }
 
+#wards-map {
+  height: 400px;
+}
 /* Single ward page
 =============================*/
 
@@ -260,7 +263,9 @@ table#reports_by_ward td.addresses {
   background-color: #eee;
 }
 
-
+#ward-map {
+  height: 400px;
+}
 /* MailChimp Signup Form overrides
 ============================================= */
 
