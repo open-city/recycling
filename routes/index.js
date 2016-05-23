@@ -55,7 +55,7 @@ router.get('/contact', function(req, res) {
 });
 
 router.post('/contact', function (req, res, next) {
-  
+
   var captcha = req.body['g_recaptcha_response'];
   var url = 'https://www.google.com/recaptcha/api/siteverify?secret='+process.env['CAPTCHA_SECRET']+'+&response='+captcha;
   request.get(url, function (err, googResponse, body) {
@@ -70,27 +70,27 @@ router.post('/contact', function (req, res, next) {
 
 
 }, function (req, res, next) {
-  
+
   var form = req.body;
-  
+
   if (!validator.isEmail(form['email'])) {
     res.json({'status': '422', 'message':'Email address invalid'});
   }
 
   form['email'] = validator.normalizeEmail(form['email']);
   form['message'] = validator.escape(form['message']);
-  
+
   next();
 
 }, function (req, res, next) {
-  
+
   var mailOptions = {
     from: req.body['email'],
     to: transporter.transporter.options.auth.user,
     subject: req.body['subject'],
     text: req.body['message']
   };
-  
+
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);

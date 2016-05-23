@@ -43,8 +43,10 @@ router.get('/wards', function(req, res){
       console.error(err);
       res.status(500).end();
     }
-
-    res.render('wards/index', {wards:wards})
+    geometries = wards.map((ward) => {
+      return ward.geometry;
+    });
+    res.render('wards/index', {wards:wards, geometries: geometries})
   })
 })
 
