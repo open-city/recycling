@@ -2,9 +2,7 @@
 
 module.exports = function (grunt) {
   process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-  // show elapsed time at the end
   require('time-grunt')(grunt);
-  // load all grunt tasks
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
@@ -14,6 +12,14 @@ module.exports = function (grunt) {
       template: grunt.file.read( __dirname + "/migrations/_template.js"),
       mongo: process.env.MONGOLAB_URI || 'mongodb://localhost/recycling_' + process.env.NODE_ENV,
       ext: 'js'
+    },
+    jshint: {
+      files: ['public/js/*.js'],
+      options: {
+        globals: {
+          jQuery: true
+        }
+      }
     },
     develop: {
       server: {
@@ -64,7 +70,7 @@ module.exports = function (grunt) {
   files = grunt.file.expand(files);
 
   grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('default', ['check', 'develop', 'watch']);
+  grunt.registerTask('default', ['check', 'jshint', 'develop', 'watch']);
 
   grunt.registerTask('check', 'See what\'s up in the local environment', function () {
     if (!process.env.PORT) {

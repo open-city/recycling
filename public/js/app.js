@@ -64,7 +64,7 @@
         $(window).one('locationsLoaded', function(){
           $("#mapSpinner").hide();
           WIMR.dialog.hashChange();
-        })
+        });
       });
 
       $('body').on('click', '.start-over', function(e){
@@ -79,7 +79,7 @@
         WIMR.resizeTimer = setTimeout(function(){
           WIMR.reflow();
         }, 250);
-      })
+      });
 
       $(window).on('hashchange', WIMR.dialog.hashChange);
 
@@ -106,8 +106,8 @@
     setTimeout(function(){
       var contentWidth = $("#viewContent").outerWidth();
       var windowWidth  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-      if (contentWidth < (windowWidth * .75)) {
-        var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+      if (contentWidth < (windowWidth * 0.75)) {
+        var winH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var navH = $("#main_nav").outerHeight(true);
         var contentHeight = winH - navH;
         $('#map').height(contentHeight);
@@ -119,7 +119,7 @@
 
       WIMR.map.invalidateSize();
     });
-  }
+  };
 
   WIMR.formatDate = function(date) {
     date = new Date(date);
@@ -128,36 +128,36 @@
     var m = months[ date.getMonth() ];
     var y = date.getFullYear();
     return m + " " + d + ", " + y;
-  }
+  };
 
   WIMR.contactFormHandler = function (e) {
 
     e.preventDefault();
-    var $form = $(this)
-      , action = $(this).attr('action')
-      , $resMsg = $(document).find('#response')
-      , data = {
+    var $form = $(this),
+        action = $(this).attr('action'),
+        $resMsg = $(document).find('#response'),
+        data = {
           name: $form.find('#name').val(),
           email: $form.find('#email').val(),
           subject: $form.find('#subject').val(),
           message: $form.find('#message').val(),
           g_recaptcha_response: grecaptcha.getResponse()
-        }
-      ;
+        };
 
     $form.wimrLoading();
 
     $.post(action, data, function (res) {
       $form.wimrLoading('clear');
       var clearForm = false;
-      if (res.status == "200") {
-        var response = "<strong>Thanks!</strong> Your message has been sent!";
+      var response = '';
+      if (res.status == '200') {
+        response = '<strong>Thanks!</strong> Your message has been sent!';
         $resMsg.html(response);
         $resMsg.addClass('bg-success');
         clearForm = true;
       } else {
-        var response = "<strong>Oh no! An error occurred!</strong> ";
-        response += "<br>" + res.message;
+        response = '<strong>Oh no! An error occurred!</strong> ';
+        response += '<br>' + res.message;
         $resMsg.html(response);
         $resMsg.addClass('bg-danger');
       }
@@ -183,16 +183,16 @@
       'locality': 'city',
       'postal_code': 'zip',
       'postal_code_suffix': 'zip_plus_four'
-    }
+    };
     addr.address_components.forEach(function(part){
       var googleProp = part.types[0];
       var prop = propMap[googleProp] || googleProp;
       ret[prop] = part.long_name;
-    })
+    });
     ret.number_and_route = ret.street_number + ' ' + ret.route;
     ret.geometry = addr.geometry;
     return ret;
-  }
+  };
 
 })(jQuery);
 
@@ -201,12 +201,12 @@ window.onerror = function() {
     WIMR.dialog.loading('clear');
   }
   return false; // allow default handlers to run
-}
+};
 
 WIMR.getCounts = function() {
   $.getJSON('/locations/count.json')
     .done(function(data){
-      $('#counts').removeClass('hidden')
+      $('#counts').removeClass('hidden');
       $('#locationCount').text(data.locationCount.commafy());
     })
     .fail(function(){});
@@ -221,8 +221,8 @@ String.prototype.commafy = function() {
   return this.replace(/(^|[^\w.])(\d{4,})/g, function($0, $1, $2) {
     return $1 + $2.replace(/\d(?=(?:\d\d\d)+(?!\d))/g, "$&,");
   });
-}
+};
 
 Number.prototype.commafy = function() {
   return this.toString().commafy();
-}
+};

@@ -1,16 +1,21 @@
 <% include ../_header %>
 <div class="container">
   <div class="row">
-    <div id='static_page_main' class='col-sm-8'>
+    <div id='static_page_main' class='col-sm-7'>
+      <h1>Wards</h1>
+      <p>
+      The city of Chicago is divided into 50 wards. Each ward is represented by an elected alderman.
+      These 50 aldermen make up the city council, which is the legislative body of the city of Chicago.
+      City Council meets monthly and is presided over by Rahm Emanuel, the Mayor of Chicago.
+      </p>
       <h2>Reports by Ward</h2>
-
+      <p>The following table shows the total number of resident reports for each ward, as well as how many unique building addresses are reported.</p>
       <div class="table-responsive">
         <table class='table' id='reports_by_ward'>
           <thead>
             <tr>
               <th class='ward'>Ward</th>
               <th class='alderman'>Alderman</th>
-              <th class='phone'>Phone</th>
               <th class='addresses'><a href="#" data-sort="addresses"><i class="fa fa-sort sortable"></i> Addresses</a></th>
               <th class='reports'><a href="#" data-sort="reports"><i class="fa fa-sort sortable"></i> Reports</a></th>
             </tr>
@@ -25,7 +30,6 @@
             <td class='alderman'>
               <%= ward.alderman.name %>
             </td>
-            <td class='phone'><%= ward.alderman.phone %></td>
             <td class='addresses'><%= ward.locationCount %></td>
             <td class='reports'><%= ward.reportCount %></td>
             <td class='details'>
@@ -39,10 +43,8 @@
         </table>
       </div><!-- .table-responsive -->
     </div>
-    <div id="static_page_sidebar" class="col-sm-4">
+    <div id="static_page_sidebar" class="col-sm-5">
       <div id="wards-map"></div>
-      <% include ../_sidebar_blocks/press %>
-      <% include ../_sidebar_blocks/mc_signup_form %>
     </div>
   </div>
 </div>

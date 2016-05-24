@@ -16,7 +16,6 @@ router.use(function(req, res, next){
   var tplFiles = fs.readdirSync('./public/js/view_handlers');
   res.locals.tplFiles = tplFiles;
   res.locals.navActive = {
-    home: '',
     getinvolved: '',
     about: '',
     press: '',
@@ -28,7 +27,6 @@ router.use(function(req, res, next){
 });
 
 router.get('/', function(req, res){
-  res.locals.navActive.home = 'active';
   res.locals.bodyClass = 'index';
   res.render('index');
 });

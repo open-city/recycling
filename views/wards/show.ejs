@@ -2,13 +2,13 @@
 <div class="container">
   <div class="row">
     <div id='static_page_main' class='col-sm-8'>
-      
+
       <p>
         <a class='btn btn-default' href="/wards">&larr; Back to Wards</a>
       </p>
-      
+
       <h2>Reports for Ward <%= ward.number %></h2>
-      
+
       <dl class='alderman-info'>
         <dt>Alderman <%= ward.alderman.name %></dt>
         <dd>Phone: <%= ward.alderman.phone %></dd>
@@ -22,9 +22,6 @@
       <div class="location-list">
         <div class="row">
           <h3 class='col-sm-8'>Reported Locations</h3>
-          <p class='col-sm-4 pull-right'>
-            <a class='btn btn-primary small' href='/'>Add Your Report</a>
-          </p>
         </div>
 
         <div class="clear"></div>
@@ -52,8 +49,6 @@
 
     <div id="static_page_sidebar" class="col-sm-4">
       <div id="ward-map"></div>
-      <% include ../_sidebar_blocks/press %>
-      <% include ../_sidebar_blocks/mc_signup_form %>
     </div>
   </div>
 </div>
