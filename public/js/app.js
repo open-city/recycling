@@ -6,6 +6,7 @@
     this.tableBody = $(tableEl + ' tbody');
     this.tableRows = $(tableEl + ' tbody tr');
     $(this.sortSelector).on('click', function(event) {
+      event.preventDefault();
       var sortField = $(event.target).data('sort');
       this.sortSelector = 'td.' + sortField;
       var rows = this.tableRows.clone(true);
