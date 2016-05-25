@@ -29,44 +29,49 @@ module.exports = {
 
   up: function(next) {
     MongoClient.connect(db_path, function(err, db){
-      db.collection('wards').insert(wards, next);
-      db.collection('locations').find({}, function(err, docs) {
-        docs.count(function(err, docsLength){
-          if (docsLength === 0) {
-            next();
-          }
-          var counter = 0;
-          docs.nextObject(processDoc)
-
-          function processDoc(err, doc) {
-            if (doc === null) return;
-            counter++;
-            db.collection('wards').findOne({
-              geometry: { $geoIntersects: { $geometry: doc.geoJsonPoint }}
-            }, function(err, ward){
-              if (!ward) {
-                console.log('no ward found for location ' + doc.address.trim())
-                docs.nextObject(processDoc)
-                return
+      // Sorry to whomever reads this. Deadlines...
+      // This is mostly a ripoff of other migrations.
+      db.collection('wards').drop(function(err, reply) {
+        db.collection('wards').insertMany(wards, function(err, reply) {
+          db.collection('locations').find({}, function(err, docs) {
+            docs.count(function(err, docsLength){
+              if (docsLength === 0) {
+                return next();
               }
-              db.collection('wards').update(
-                {_id: ward._id},
-                { $addToSet: { locations: doc._id }}, 
-                function(err){
-                  if (err) console.error(err);
+              var counter = 0;
+              docs.nextObject(processDoc)
 
-                  console.log( counter + " of " + docsLength);
-                  if (counter >= docsLength) {
-                    next();
-                  } else {
-                    docs.nextObject(processDoc);
+              function processDoc(err, doc) {
+                if (doc === null) return;
+                counter++;
+                db.collection('wards').findOne({
+                  geometry: { $geoIntersects: { $geometry: doc.geoJsonPoint }}
+                }, function(err, ward){
+                  if (!ward) {
+                    console.log('no ward found for location ' + doc.address.trim())
+                    docs.nextObject(processDoc)
+                    return
                   }
-                }
-              )
+                  db.collection('wards').update(
+                    {_id: ward._id},
+                    { $addToSet: { locations: doc._id }},
+                    function(err){
+                      if (err) console.error(err);
+
+                      console.log( counter + " of " + docsLength);
+                      if (counter >= docsLength) {
+                        next();
+                      } else {
+                        docs.nextObject(processDoc);
+                      }
+                    }
+                  )
+                })
+              }
             })
-          }
-        })
-      })
+          })
+        });
+      });
     });
   },
 
