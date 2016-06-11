@@ -156,7 +156,7 @@ function slugify(str) {
 }
 
 function pluckNumber(str) {
-  return str.match(/\d+/)[0];
+  return +str.match(/\d+/)[0];
 }
 
 function main(args) {
