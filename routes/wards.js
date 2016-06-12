@@ -43,10 +43,18 @@ router.get('/wards', function(req, res){
       console.error(err);
       res.status(500).end();
     }
-    geometries = wards.map((ward) => {
-      return ward.geometry;
+    features = wards.map((ward) => {
+      return {
+        type: 'Feature',
+        geometry: ward.geometry,
+        properties: {
+          ward_number: ward.number,
+          reports: ward.reportCount,
+          locations: ward.locationCount
+        }
+      };
     });
-    res.render('wards/index', {wards:wards, geometries: geometries})
+    res.render('wards/index', {wards:wards, features: features})
   })
 })
 
@@ -79,9 +87,8 @@ router.get('/wards/:id', function(req, res){
           console.error(err);
           res.status(500).end();
         }
-
         ward.locations.sort(sortAddresses);
-
+        ward.centroid.coordinates = ward.centroid.coordinates.reverse();
         cache.set(cacheIdx, JSON.stringify(ward), null, 3600);
         callback(null, ward);
       })
