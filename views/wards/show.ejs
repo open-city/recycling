@@ -62,11 +62,16 @@
     if ($('#ward-map').length) {
       var map = L.map('ward-map', {
         maxZoom: 20
-      }).setView([41.881, -87.629], 11);
+      }).setView(<%- JSON.stringify(ward.centroid.coordinates); %>, 12);
       L.tileLayer('http://api.tiles.mapbox.com/v4/smartchicagocollaborative.l45jl5j8/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic21hcnRjaGljYWdvY29sbGFib3JhdGl2ZSIsImEiOiJ5MzB1MHFNIn0.190SObdn-P8VvOWu7AQvVA', {
         maxZoom: 18,
         attribution: 'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'
       }).addTo(map);
-      L.geoJson(<%- JSON.stringify(ward.geometry) %>).addTo(map);
+      L.geoJson(<%- JSON.stringify(ward.geometry); %>, {
+        style: {
+          color: '#258',
+          weight: 3
+        }
+      }).addTo(map);
     }
 </script>

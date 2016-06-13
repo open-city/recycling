@@ -45,6 +45,7 @@
     </div>
     <div id="static_page_sidebar" class="col-sm-6">
       <div id="wards-map"></div>
+      <h3 class="pull-right">Chicago's 50 Wards</h3>
     </div>
   </div>
 </div>
@@ -62,7 +63,7 @@
       maxZoom: 18,
       attribution: 'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'
     }).addTo(map);
-    L.geoJson(<%- JSON.stringify(geometries); %>, {
+    L.geoJson(<%- JSON.stringify(features); %>, {
       style: {
         color: '#258',
         weight: 1
