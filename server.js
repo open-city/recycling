@@ -62,7 +62,7 @@ app.get('/locations/count.json', locations.count);
 app.use(require('./routes/wards.js'));
 
 
-if (cluster.isMaster) {
+if (env != 'development' && cluster.isMaster) {
   for (var i = 0; i < concurrency; i++) {
     cluster.fork();
   }
