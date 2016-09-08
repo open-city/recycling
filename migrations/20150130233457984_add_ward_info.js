@@ -11,11 +11,11 @@ files.forEach(function(file){
   var path = './data/wards/' + file;
   var raw = require(path);
   ward = {
-    number: parseInt(raw.external_id,10),
-    geometry: raw.simple_shape,
+    number: parseInt(raw.number,10),
+    geometry: raw.geometry,
     alderman: {
-      name: ucwords(raw.metadata.ALDERMAN),
-      phone: raw.metadata.WARD_PHONE
+      name: raw.alderman.name,
+      phone: raw.alderman.voice
     },
     centroid: raw.centroid
   }

@@ -15,9 +15,9 @@ files.forEach(function(file){
     number: parseInt(raw.external_id,10),
     geometry: raw.simple_shape,
     alderman: {
-      name: ucwords(raw.metadata.ALDERMAN),
-      phone: raw.metadata.WARD_PHONE,
-      email: emails[raw.external_id]
+      name: raw.alderman.name,
+      phone: raw.alderman.voice,
+      email: raw.alderman.email
     },
     centroid: raw.centroid
   }
