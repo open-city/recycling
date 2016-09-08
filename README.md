@@ -16,11 +16,8 @@ Requirements
 Getting Started
 ---------------
 For more detailed instructions see the [wiki](https://github.com/open-city/recycling/wiki)
-
 * install dependencies
   `npm install`
-* Run the schema migrations
-  `npm migrate:all`
 * Run `mongod` and `memcached` on default ports
 * run the app
   `node server.js`
