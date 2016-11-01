@@ -66,7 +66,7 @@ module.exports = function (grunt) {
   });
 
   grunt.config.requires('watch.js.files');
-  let files = grunt.config('watch.js.files');
+  var files = grunt.config('watch.js.files');
   files = grunt.file.expand(files);
 
   grunt.registerTask('test', ['mochaTest']);

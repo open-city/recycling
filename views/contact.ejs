@@ -8,39 +8,29 @@
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-2">
 		
-		<h1>Contact Us</h1>
+		<!-- <h1>Contact Us</h1> -->
 		
-		<form class="hidden-sm hidden-xs" action="/contact" method="post" id="contact-form">
-		    
-		    <div class="form-group">
-		    	<label for="name">Name</label>
-		    	<input type="text" class="form-control" id="name" name="name" required />
-			</div>
-		    
-		    <div class="form-group">
-			    <label for="email">Your Email</label>
-			    <input type="email" class="form-control" id="email" name="email" required />
-		    </div>
+		<div id="wufoo-m1w64lqs143rf7x">
+Fill out my <a href="https://eesp.wufoo.com/forms/m1w64lqs143rf7x">online form</a>.
+</div>
+<div id="wuf-adv" style="font-family:inherit;font-size: small;color:#a7a7a7;text-align:center;display:block;">There are tons of <a href="http://www.wufoo.com/features/">Wufoo features</a> to help make your forms awesome.</div>
+<script type="text/javascript">var m1w64lqs143rf7x;(function(d, t) {
+var s = d.createElement(t), options = {
+'userName':'eesp',
+'formHash':'m1w64lqs143rf7x',
+'autoResize':true,
+'height':'577',
+'async':true,
+'host':'wufoo.com',
+'header':'show',
+'ssl':true};
+s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+s.onload = s.onreadystatechange = function() {
+var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+try { m1w64lqs143rf7x = new WufooForm();m1w64lqs143rf7x.initialize(options);m1w64lqs143rf7x.display(); } catch (e) {}};
+var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');</script>
 
-		    <div class="form-group">
-			    <label for="subject">Choose a Subject</label>
-			    <select name="subject" class="form-control" id="subject" required>
-			        <option value="press">Press Inquiry</option>
-			        <option value="feedback">Feedback on the site</option>
-			        <option value="problem">Problem with the site</option>
-			        <option value="other">Other</option>
-			    </select>
-			</div>
-
-		    <div class="form-group">
-		    	<label for="message">Message</label>
-		    	<textarea name="message" class="form-control" id="message" cols="30" rows="10" required></textarea>
-			</div>
-		    
-		    <div class="g-recaptcha" data-sitekey="6Lf08QATAAAAAJK7tQ7Vkg_4AZnVxUqjEq-dOaaX"></div>
-		    
-		    <button type="submit" class="btn btn-primary">Send</button>
-		</form>
 
 		<hr>
 		
