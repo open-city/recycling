@@ -3,7 +3,7 @@ My Building Doesn't Recycle
 
 Crowdsourcing data about which residential buildings do not have recycling in Chicago
 
-The app can currently be found at http://recycling.herokuapp.com
+The app can currently be found at http://mybuildingdoesntrecycle.com
 
 Requirements
 ------------
