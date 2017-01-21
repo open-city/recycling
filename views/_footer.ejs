@@ -1,21 +1,21 @@
     </div>
 
     <script> var WIMR = {}; // application namespace</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src='/lib/spin/javascripts/jquery.spin.js'></script>
     <script src="/lib/jquery.scrollTo/jquery.scrollTo.min.js"></script>
-    <script src="/lib/leaflet/dist/leaflet.js"></script>
-    <script src="/lib/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.2/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/leaflet.markercluster.js"></script>
     <script src="/lib/ejs_production.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/jquery/jquery.loading.js"></script>
     <script src="/js/jquery/jquery.status.js"></script>
     <script src="/js/map.js"></script>
     <script src="/js/dialog.js"></script>
-<% for (var i=0; i<tplFiles.length; i++) { %>
-    <% var tplFile = tplFiles[i] %>
+    <% for (var i=0; i<tplFiles.length; i++) { %>
+      <% var tplFile = tplFiles[i] %>
     <script src='/js/view_handlers/<%= tplFile %>'></script>
-<% } %>
+    <% } %>
     <script src="/js/app.js"></script>
     <!-- Google Analytics -->
     <script>
@@ -23,10 +23,8 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-59045619-1', 'auto');
       ga('send', 'pageview');
-
     </script>
   </body>
 </html>
