@@ -13,15 +13,14 @@
  */
 
 
-var auth = require('basic-auth');
+const auth = require('basic-auth');
 
 module.exports = function(req, res, next) {
-  var creds = auth(req);
+  let creds = auth(req);
   if (!creds || creds.name !== 'recycling' || creds.pass !== 'recycling') {
     res.writeHead(401, {"WWW-Authenticate": 'Basic realm="Recycling Staging Site"'});
     res.end();
   } else {
     next();
   }
-
-}
+};

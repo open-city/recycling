@@ -62,7 +62,6 @@ WardSchema.virtual('locationCount').get(function() {
 
 
 WardSchema.post('save', function(ward){
-
   var cacheIdx = 'wards.' + ward.number;
   async.series([
     function(cb) { cache.delete('wards.all', cb); },

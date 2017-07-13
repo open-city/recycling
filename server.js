@@ -57,6 +57,7 @@ app.post('/reports.json', reports.create);
 app.get('/locations.json', locations.index);
 app.get('/locations/count.json', locations.count);
 app.use(require('./routes/wards.js'));
+require('./routes/admin.js')(app);
 
 
 if (env != 'development' && cluster.isMaster) {
