@@ -32,6 +32,8 @@
          */
         $.get(url)
           .done(function (gResponse){
+            WIMR.debug = [];
+            WIMR.debug.push(gResponse);
             var filteredResponse = filterGoogleResponse(gResponse.results);
             // Google returns a single result
             if (filteredResponse.length == 1){
