@@ -43,7 +43,9 @@ var whitelist = [
   'https://mbdr-staging.herokuapp.com',
   'http://mybuildingdoesntrecycle.com',
   'https://mybuildingdoesntrecycle.com',
-  'https://maps.googleapis.com'
+  'https://maps.googleapis.com',
+  'https://ajax.googleapis.com',
+  'https://maxcdn.bootstrapcdn.com',
 ]
 
 var corsOptions = {
