@@ -13,6 +13,7 @@
     "body-parser": "^1.14.1",
     "coffee-script": "~1.6.2",
     "compression": "^1.6.0",
+    "cors": "^2.8.5",
     "ejs": "^2.4.1",
     "express": "^4.13.3",
     "grunt": "^0.4.5",

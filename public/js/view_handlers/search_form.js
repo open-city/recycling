@@ -24,7 +24,7 @@
           address: addressParam
         }
 
-        var url = "http://maps.googleapis.com/maps/api/geocode/json?" + $.param(params);
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?" + $.param(params);
 
         /**
          * GET /geocode.json, which is a proxy to the Google

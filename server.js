@@ -9,6 +9,7 @@ var express = require('express')
   , morgan = require('morgan')
   , compress = require('compression')
   , logger = require('logfmt')
+  , cors = require('cors')
   , routes = require('./routes')
   , reports = require('./routes/reports')
   , locations = require('./routes/locations')
@@ -37,6 +38,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+var whitelist = [
+  'https://mbdr-staging.herokuapp.com',
+  'http://mybuildingdoesntrecycle.com',
+  'https://mybuildingdoesntrecycle.com',
+  'https://maps.googleapis.com'
+]
+
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 
 switch (app.get('env')) {
     case 'development':
