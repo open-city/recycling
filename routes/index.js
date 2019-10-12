@@ -23,6 +23,7 @@ router.use(function(req, res, next){
   },
   res.locals.ogurl = '';
   res.locals.currentYear = new Date().getFullYear();
+  res.locals.googleMapsAPIKey = process.env.GOOGLE_MAPS_API_KEY;
   next();
 });
 

@@ -19,7 +19,12 @@
 
       } else {
         var addressParam = formatAddressRequest(address);
-        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + addressParam;
+        var params = {
+          key: WIMR.googleMapsAPIKey,
+          address: addressParam
+        }
+
+        var url = "http://maps.googleapis.com/maps/api/geocode/json?" + $.param(params);
 
         /**
          * GET /geocode.json, which is a proxy to the Google
