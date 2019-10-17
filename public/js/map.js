@@ -161,9 +161,9 @@
       return self.locations[id];
     };
 
-    L.tileLayer('http://api.tiles.mapbox.com/v4/smartchicagocollaborative.l45jl5j8/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic21hcnRjaGljYWdvY29sbGFib3JhdGl2ZSIsImEiOiJ5MzB1MHFNIn0.190SObdn-P8VvOWu7AQvVA', {
+    L.tileLayer('https://api.tiles.mapbox.com/v4/smartchicagocollaborative.l45jl5j8/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic21hcnRjaGljYWdvY29sbGFib3JhdGl2ZSIsImEiOiJ5MzB1MHFNIn0.190SObdn-P8VvOWu7AQvVA', {
       maxZoom: 18,
-      attribution: 'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'
+      attribution: 'Imagery &copy; <a href="https://mapbox.com">Mapbox</a>'
     }).addTo(map);
 
     map.wimrRefreshLocations();
