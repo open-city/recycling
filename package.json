@@ -22,7 +22,7 @@
     "hbs": "^2.7.0",
     "json2csv": "^2.12.0",
     "load-grunt-tasks": "^3.5.0",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.19",
     "logfmt": "^1.2.0",
     "memjs": "^0.8.6",
     "mongodb": "^2.0.45",
