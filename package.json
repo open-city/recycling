@@ -23,7 +23,7 @@
     "lodash": "^3.10.1",
     "logfmt": "^1.2.0",
     "memjs": "^0.8.6",
-    "mongodb": "^2.0.45",
+    "mongodb": "^3.6.1",
     "mongoose": "^4.1.11",
     "morgan": "^1.6.1",
     "nodemailer": "^1.8.0",
