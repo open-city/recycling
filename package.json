@@ -24,7 +24,7 @@
     "logfmt": "^1.2.0",
     "memjs": "^0.8.6",
     "mongodb": "^2.0.45",
-    "mongoose": "^4.1.11",
+    "mongoose": "^5.7.7",
     "morgan": "^1.6.1",
     "nodemailer": "^1.8.0",
     "request": "^2.72.0",
