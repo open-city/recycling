@@ -108,8 +108,8 @@ router.get('/press', function (req, res) {
 });
 
 // Loader.io verification page.  Do not delete.
-router.get('/loaderio-f6c2b68c741ca5d56479042a794cf7da', function(req, res){
+router.get('/loaderio-f6c2b68c741ca5d56479042a794cf7da', function(req, res) {
   res.send('loaderio-f6c2b68c741ca5d56479042a794cf7da')
-})
+});
 
 module.exports = router;

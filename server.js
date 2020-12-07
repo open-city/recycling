@@ -1,9 +1,8 @@
-var express = require('express')
+const express = require('express')
   , cluster = require('cluster')
   , numCpus = require('os').cpus().length
   , bodyParser = require('body-parser')
   , fs = require('fs')
-  , hbs = require('hbs')
   , http = require('http')
   , mongoose = require('mongoose')
   , morgan = require('morgan')
@@ -16,7 +15,7 @@ var express = require('express')
   , concurrency = process.env.WEB_CONCURRENCY
   ;
 
-var app = express()
+const app = express()
   , env = app.get('env')
   , config = require('./config/config')[env]
 
@@ -28,7 +27,7 @@ var app = express()
 // memjs reads appropriate env variables by default.
 // zero configuration necessary
 app.set('view engine','ejs');
-app.engine('html', hbs.__express);
+app.engine('html', require('ejs').renderFile);
 app.use(compress());
 app.use(express.static('public'));
 
@@ -39,17 +38,15 @@ app.use(bodyParser.urlencoded({
 }));
 
 switch (app.get('env')) {
-    case 'development':
-        app.use(morgan('dev'));
-        break;
-
-    case 'staging':
-        app.use(fauxAuth);
-        break;
-
-    default:
-        app.use(morgan('combined'));
-        break;
+  case 'development':
+    app.use(morgan('dev'));
+    break;
+  case 'staging':
+    app.use(fauxAuth);
+    break;
+  default:
+    app.use(morgan('combined'));
+    break;
 }
 
 app.use(require('./routes/index.js'));
@@ -60,6 +57,7 @@ app.post('/reports.json', reports.create);
 app.get('/locations.json', locations.index);
 app.get('/locations/count.json', locations.count);
 app.use(require('./routes/wards.js'));
+require('./routes/admin.js')(app);
 
 
 if (env != 'development' && cluster.isMaster) {
