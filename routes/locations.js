@@ -53,7 +53,8 @@ exports.index = function(req, res){
 
     // else look up location info in Mongo and and cache it in memcached.
     } else {
-      Location.find(query).populate('reports').exec(function(err, locations){
+      Location.find(query).populate('reports').then(
+        locations => {
         var locId = null;
         if (locations.length === 1) {
           locId = locations[0]._id;
@@ -68,17 +69,16 @@ exports.index = function(req, res){
         }
         res.json({'locations': locations});
         return;
-      })
+      });
     }
   })
 };
 
 exports.count = function(req, res) {
-  Location.count(function(err, count){
-    if (err) {
+  Location.countDocuments().then(
+    count => res.json({'locationCount': count}),
+    err => {
       console.error(err);
       return res.status(500).send();
-    }
-    res.json({'locationCount': count});
-  });
+    });
 };

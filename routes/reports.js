@@ -125,13 +125,11 @@ exports.show = function(req, res){
 }
 
 exports.count = function(req, res){
-
-  Report.count(function(err, count){
-    if (err) {
+  Report.countDocuments().then(
+    count => res.json({'reportCount': count}),
+    err => {
       console.error(err);
       return res.status(500).send();
     }
-
-    res.json({'reportCount': count});
-  });
+  );
 };

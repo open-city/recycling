@@ -27,15 +27,16 @@ router.get('/wards', function(req, res){
         return;
       }
 
-      Ward.find().populate('locations').sort({number:'asc'}).exec(function(err, wards){
-        if (err) {
+      Ward.find().populate('locations').sort({number:'asc'}).then(
+        wards => {
+          cache.set('wards.all', JSON.stringify(wards), null, 3600);
+          return callback(null, wards);
+        },
+        err => {
           console.error(err);
           res.status(500).end();
         }
-
-        cache.set('wards.all', JSON.stringify(wards), null, 3600);
-        return callback(null, wards);
-      })
+      );
     }
   ], function(err, wards){
 

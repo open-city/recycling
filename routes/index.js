@@ -6,7 +6,7 @@ var express = require('express')
   , Ward = require('../models/Ward')
   , Location = require('../models/Location')
   , router = express.Router()
-  , request = require('request')
+  , http = require('http')
   , validator = require('validator')
   , transporter = require('../lib/transporter')
   ;
@@ -52,20 +52,32 @@ router.get('/contact', function(req, res) {
   res.render('contact', {ogurl: 'contact'});
 });
 
-router.post('/contact', function (req, res, next) {
-
+router.post('/contact', function (req, resp, next) {
   var captcha = req.body['g_recaptcha_response'];
   var url = 'https://www.google.com/recaptcha/api/siteverify?secret='+process.env['CAPTCHA_SECRET']+'+&response='+captcha;
-  request.get(url, function (err, googResponse, body) {
-    if (err) { console.error(error); }
-    var response = JSON.parse(body);
-    if (response['success'] == true) {
-      next();
-    } else {
-      res.json({status: '422', message: 'Please verify you are a human.'});
-    }
+
+  const googleReq = http.request(options, (res) => {
+    let output = '';
+
+    res.on('data', (chunk) => {
+      output += chunk;
+    });
+
+    res.on('end', () => {
+      var response = JSON.parse(output);
+      if (response['success'] == true) {
+        next();
+      } else {
+        resp.json({status: '422', message: 'Please verify you are a human.'});
+      }
+    });
   });
 
+  googleReq.on('error', (err) => {
+    console.error(err);
+  });
+
+  googleReq.end();
 
 }, function (req, res, next) {
 

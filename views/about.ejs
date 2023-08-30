@@ -1,4 +1,4 @@
-<% include _header %>
+<%- include ("_header") %>
 <div class="container">
   <div class="row">
     <div id='static_page_main' class='col-sm-8'>
@@ -25,13 +25,13 @@
     </div>
 
     <div id="static_page_sidebar" class="col-sm-4">
-      <% include _sidebar_blocks/press %>
-      <% include _sidebar_blocks/mc_signup_form %>
+      <%- include ("_sidebar_blocks/press") %>
+      <%- include ("_sidebar_blocks/mc_signup_form") %>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <% include _colophon %>
+  <%- include ("_colophon") %>
 </div>
-<% include _footer %>
+<%- include ("_footer") %>

@@ -1,4 +1,4 @@
-<% include _header %>
+<%- include ("_header") %>
 <div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
@@ -82,13 +82,13 @@
     </div>
 
     <div id='static_page_sidebar' class="col-sm-4">
-      <% include _sidebar_blocks/learn_more %>
-      <% include _sidebar_blocks/mc_signup_form %>
+      <%- include ("_sidebar_blocks/learn_more") %>
+      <%- include ("_sidebar_blocks/mc_signup_form") %>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <% include _colophon %>
+  <%- include ("_colophon") %>
 </div>
-<% include _footer %>
+<%- include ("_footer") %>
