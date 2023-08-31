@@ -1,6 +1,8 @@
 (function($, WIMR){
 
   WIMR.dialog.registerTemplateCallback('search_form', function($el) {
+    var path = "/welcomemessage.md"
+    $.get(path).done(d => $("#welcomemessage").html(marked.parse(d))).fail(err => console.log(err));
 
     var $form = $el.find('form');
 

@@ -30,6 +30,7 @@ app.set('view engine','ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(compress());
 app.use(express.static('public'));
+app.use(express.static('config/public'));
 
 app.set('port', port)
 app.use(bodyParser.json());
