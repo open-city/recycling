@@ -1,14 +1,9 @@
 var express = require('express')
   , fs = require('fs')
-  , mongoose = require('mongoose')
-  , cache = require('memjs').Client.create()
-  , Report = require('../models/Report')
-  , Ward = require('../models/Ward')
-  , Location = require('../models/Location')
   , router = express.Router()
-  , http = require('http')
-  , validator = require('validator')
-  , transporter = require('../lib/transporter')
+  , env = process.env.NODE_ENV || 'dev'
+  , config = require('../config/config')[env];
+
   ;
 
 
@@ -19,10 +14,10 @@ router.use(function(req, res, next){
     getinvolved: '',
     about: '',
     press: '',
-    contact: ''
   },
   res.locals.ogurl = '';
   res.locals.currentYear = new Date().getFullYear();
+  res.locals.config = config;
   next();
 });
 
@@ -43,73 +38,6 @@ router.get('/get-involved', function(req, res) {
   res.locals.bodyClass = 'getinvolved';
   res.locals.ogurl = 'get-involved';
   res.render('getinvolved', {ogurl: 'get-involved'});
-});
-
-router.get('/contact', function(req, res) {
-  res.locals.navActive.contact = 'active';
-  res.locals.bodyClass = 'contact';
-  res.locals.ogurl = 'contact';
-  res.render('contact', {ogurl: 'contact'});
-});
-
-router.post('/contact', function (req, resp, next) {
-  var captcha = req.body['g_recaptcha_response'];
-  var url = 'https://www.google.com/recaptcha/api/siteverify?secret='+process.env['CAPTCHA_SECRET']+'+&response='+captcha;
-
-  const googleReq = http.request(options, (res) => {
-    let output = '';
-
-    res.on('data', (chunk) => {
-      output += chunk;
-    });
-
-    res.on('end', () => {
-      var response = JSON.parse(output);
-      if (response['success'] == true) {
-        next();
-      } else {
-        resp.json({status: '422', message: 'Please verify you are a human.'});
-      }
-    });
-  });
-
-  googleReq.on('error', (err) => {
-    console.error(err);
-  });
-
-  googleReq.end();
-
-}, function (req, res, next) {
-
-  var form = req.body;
-
-  if (!validator.isEmail(form['email'])) {
-    res.json({'status': '422', 'message':'Email address invalid'});
-  }
-
-  form['email'] = validator.normalizeEmail(form['email']);
-  form['message'] = validator.escape(form['message']);
-
-  next();
-
-}, function (req, res, next) {
-
-  var mailOptions = {
-    from: req.body['email'],
-    to: transporter.transporter.options.auth.user,
-    subject: req.body['subject'],
-    text: req.body['message']
-  };
-
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) {
-      console.log(error);
-      res.json({'status': '500', 'message':'Server error'});
-    } else {
-      console.log('Message sent: ' + info.response);
-      res.json({'status': '200'});
-    }
-  });
 });
 
 router.get('/press', function (req, res) {

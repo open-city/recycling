@@ -88,7 +88,6 @@
 
     WIMR.getCounts();
 
-    $('form#contact-form').submit(WIMR.contactFormHandler);
     $('#fb-share').on('click', WIMR.fbShareHandler);
     $('#tw-share').on('click', WIMR.twShareHandler);
     if ($('#reports_by_ward').length) {
@@ -129,46 +128,6 @@
     var m = months[ date.getMonth() ];
     var y = date.getFullYear();
     return m + " " + d + ", " + y;
-  };
-
-  WIMR.contactFormHandler = function (e) {
-
-    e.preventDefault();
-    var $form = $(this),
-        action = $(this).attr('action'),
-        $resMsg = $(document).find('#response'),
-        data = {
-          name: $form.find('#name').val(),
-          email: $form.find('#email').val(),
-          subject: $form.find('#subject').val(),
-          message: $form.find('#message').val(),
-          g_recaptcha_response: grecaptcha.getResponse()
-        };
-
-    $form.wimrLoading();
-
-    $.post(action, data, function (res) {
-      $form.wimrLoading('clear');
-      var clearForm = false;
-      var response = '';
-      if (res.status == '200') {
-        response = '<strong>Thanks!</strong> Your message has been sent!';
-        $resMsg.html(response);
-        $resMsg.addClass('bg-success');
-        clearForm = true;
-      } else {
-        response = '<strong>Oh no! An error occurred!</strong> ';
-        response += '<br>' + res.message;
-        $resMsg.html(response);
-        $resMsg.addClass('bg-danger');
-      }
-      if (clearForm) {
-        $('#name').val('');
-        $('#email').val('');
-        $('#message').val('');
-      }
-    });
-
   };
 
 })(jQuery);

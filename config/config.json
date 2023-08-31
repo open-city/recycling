@@ -1,19 +1,11 @@
 {
   "development": {
     "db": "mongodb://localhost/recycling_development",
-    "port": 3000,
-    "EMAIL": "noone@nobody.com",
-    "EMAIL_HOST": "localhost",
-    "EMAIL_PORT": 25,
-    "EMAIL_PASSWORD": ""
+    "port": 3000
   },
 
   "test": {
     "db": "mongodb://localhost/recycling_test",
-    "port": 3001,
-    "EMAIL": "noone@nobody.com",
-    "EMAIL_HOST": "localhost",
-    "EMAIL_PORT": 25,
-    "EMAIL_PASSWORD": ""
+    "port": 3001
   }
 }
