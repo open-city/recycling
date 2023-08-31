@@ -1,11 +1,8 @@
 var express = require('express')
   , fs = require('fs')
   , router = express.Router()
-  , env = process.env.NODE_ENV || 'dev'
-  , config = require('../config/config')[env];
-
-  ;
-
+  , env = process.env.NODE_ENV || 'development'
+  , config = require('../config/config.json')[env];
 
 router.use(function(req, res, next){
   var tplFiles = fs.readdirSync('./public/js/view_handlers');
@@ -38,13 +35,6 @@ router.get('/get-involved', function(req, res) {
   res.locals.bodyClass = 'getinvolved';
   res.locals.ogurl = 'get-involved';
   res.render('getinvolved', {ogurl: 'get-involved'});
-});
-
-router.get('/press', function (req, res) {
-  res.locals.navActive.press = 'active';
-  res.locals.bodyClass = 'press';
-  res.locals.ogurl = 'press';
-  res.render('press', {ogurl: 'press'});
 });
 
 // Loader.io verification page.  Do not delete.

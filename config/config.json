@@ -1,11 +1,13 @@
 {
   "development": {
     "db": "mongodb://localhost/recycling_development",
-    "port": 3000
+    "port": 3000,
+    "cityname": "Chicago"
   },
 
   "test": {
     "db": "mongodb://localhost/recycling_test",
-    "port": 3001
+    "port": 3001,
+    "cityname": "Chicago"
   }
 }

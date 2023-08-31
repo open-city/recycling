@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Teko' rel='stylesheet' type='text/css'>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Crowdsourcing data about which residential buildings do not have recycling in Chicago">
+    <meta name="description" content="Crowdsourcing data about which residential buildings do not have recycling in <%= config.cityname %>>">
     <title>My Building Doesn&#039;t Recycle!</title>
     <link rel="icon" href="/favicon.ico" />
 
@@ -20,7 +19,7 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <meta property="og:url" content="http://mybuildingdoesntrecycle.com/<%= ogurl %>" /> 
     <meta property="og:title" content="My Building Doesn't Recycle!" />
-    <meta property="og:description" content="Chicago residents can report on their access to recycling. Buildings in Chicago with more than 5 units are required to have recycling bins, does yours?" /> 
+    <meta property="og:description" content="<%= config.cityname %> residents can report on their access to recycling." /> 
     <meta property="fb:app_id" content="755978994498142" />
   </head>
   <body class='<%= bodyClass %>'>

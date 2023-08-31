@@ -14,6 +14,7 @@
       }
       
       var viewVars = {};
+      viewVars.clientConfig = WIMR.clientConfig;
       WIMR.dialog.loading();
       $.post('/reports.json', data)
       .done(function(response){

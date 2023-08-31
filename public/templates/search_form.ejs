@@ -1,11 +1,11 @@
 <form role="form" id="searchForm">
-  <h3 class='blue-highlight'>Hey Chicagoans!</h3>
+  <h3 class='blue-highlight'>Hey <%= clientConfig.cityresidentname %>!</h3>
   <h2 id="searchFormLabel">No recycling in your building?</h2>
   <h3>Tell us about it!</h3>
   <!-- This is parsed as a markdown static file and rendered here in the templateCallback -->
   <p id="welcomemessage"></p>
   <div class="form-group" id="addressField">
-    <label for="address">Enter your Chicago street address:</label>
+    <label for="address">Enter your <%= clientConfig.cityname %> street address:</label>
     <input name="address" type="text" class="form-control" id="inputAddress" placeholder="Address" />
     <p  class="text-right" style="margin: 0;"><small>&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</small></p>
   </div>

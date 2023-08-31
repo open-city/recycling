@@ -53,25 +53,28 @@
   };
 
   $(document).ready(function(){
-
+    WIMR.clientConfig = null
     if ($('#map').length) {
+      $(window).one('locationsLoaded', function(){
+        $("#mapSpinner").hide();
+        WIMR.dialog.hashChange();
+      });
 
       // WIMR is simply an application namespace,
       // defined in /views/_footer.ejs
       WIMR.map = WIMR.createMap('map');
       $("#mapSpinner .show").spin("show");
 
-      WIMR.dialog.showTemplate('search_form', {}, function(){
-        $(window).one('locationsLoaded', function(){
-          $("#mapSpinner").hide();
-          WIMR.dialog.hashChange();
-        });
+      $.getJSON("/clientconfig.json")
+        .done(cc => WIMR.clientConfig = cc)
+        .always(() => {
+          WIMR.dialog.showTemplate('search_form', {clientConfig: WIMR.clientConfig});
       });
 
       $('body').on('click', '.start-over', function(e){
         e.preventDefault();
         WIMR.map.wimrReset();
-        WIMR.dialog.showTemplate('search_form');
+        WIMR.dialog.showTemplate('search_form', {clientConfig: WIMR.clientConfig});
         window.location.hash = "";
       });
 
