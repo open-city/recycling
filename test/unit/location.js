@@ -18,11 +18,10 @@ describe('Unit Tests - Location', function(){
         coordinates: [0.0, 0.0]
       }
     });
-    location.save(function(err, location){
-      expect(err).to.equal(null);
+    location.save().then(location => {
       expect(location._id.toString()).to.match(/[\w\d]{24}/);
       done();
-    });
+    }, null);
   });
 
   it("should require an address", function(done){
@@ -34,7 +33,7 @@ describe('Unit Tests - Location', function(){
         coordinates: [0.0, 0.0]
       }
     });
-    location.save(function(err, location){
+    location.save().then(null, err => {
       expect(err).to.exist;
       done();
     });
@@ -49,7 +48,7 @@ describe('Unit Tests - Location', function(){
         coordinates: [0.0, 0.0]
       }
     });
-    location.save(function(err, location){
+    location.save().then(null, err => {
       expect(err).to.exist;
       // err.message.to.equal('Must provide an address');
       done();
