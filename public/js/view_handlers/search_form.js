@@ -19,7 +19,7 @@
 
       } else {
         var addressParam = formatAddressRequest(address);
-        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + addressParam;
+        var url = "https://nominatim.openstreetmap.org/search?format=jsonv2&dedupe=1&accept-language=en&countrycodes=us&q=" + addressParam;
 
         /**
          * GET /geocode.json, which is a proxy to the Google
@@ -27,13 +27,13 @@
          */
         $.get(url)
           .done(function (gResponse){
-            var filteredResponse = filterGoogleResponse(gResponse.results);
-            // Google returns a single result
+            var filteredResponse = filterGeocodeResponse(gResponse);
+            // Geocode API returns a single result
             if (filteredResponse.length == 1){
               var address = filteredResponse[0]
-                , latitude = address.geometry.location.lat
-                , longitude = address.geometry.location.lng
-                , viewVars = { formattedAddress: address.number_and_route }
+                , latitude = address.lat
+                , longitude = address.lon
+                , viewVars = { formattedAddress: address.display_name }
                 ;
               /**
                * Have lat/long, querying our database for existing reports
@@ -81,15 +81,8 @@
     return encodeURIComponent([inputAddress,city,state].join(','));
   }
 
-  function filterGoogleResponse(results) {
-    return results.map(function(address) {
-      return WIMR.parseGoogleAddress(address);
-    }).filter(function(address) {
-      return address.street_number
-        &&  address.route
-        &&  address.city === 'Chicago'
-        &&  address.state === 'Illinois';
-    });
+  function filterGeocodeResponse(results) {
+    return results.filter(result => result.addresstype == 'building')
   }
 
 })(jQuery, WIMR);
