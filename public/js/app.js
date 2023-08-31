@@ -93,9 +93,6 @@
 
     $('#fb-share').on('click', WIMR.fbShareHandler);
     $('#tw-share').on('click', WIMR.twShareHandler);
-    if ($('#reports_by_ward').length) {
-      var ts = new SortableTable('#reports_by_ward');
-    }
   });
 
 

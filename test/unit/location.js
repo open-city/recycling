@@ -1,12 +1,10 @@
 process.env.NODE_ENV = 'test';
 require('../../models/Location');
-require('../../models/Ward');
 
 var app = require('../../server')
   , expect = require('chai').expect
   , mongoose = require('mongoose')
   , Location = mongoose.model('Location')
-  , Ward = mongoose.model('Ward')
   ;
 
 describe('Unit Tests - Location', function(){
@@ -120,9 +118,5 @@ describe('Unit Tests - Location', function(){
       expect(location.geoJsonPoint.coordinates[0]).to.equal(-88);
       done();
     })
-  });
-
-  it("should add _id to corresponding ward's locations array", function(done) {
-    done();
   });
 });

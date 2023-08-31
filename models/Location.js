@@ -3,7 +3,6 @@ var async = require('async')
   , crypto = require('crypto')
   , mongoose = require('mongoose')
   , Report = require('./Report')
-  , Ward = require('./Ward')
   , Schema = mongoose.Schema
   ;
 
@@ -50,15 +49,6 @@ LocationSchema.virtual('longitude').set(function(lat){
 
 LocationSchema.post('save', function(loc){
   var pt = loc.geoJsonPoint;
-  Ward.findOne({geometry: { $geoIntersects: { $geometry: pt }}}).then(
-    ward => {
-      if (ward) {
-        ward.locations.addToSet(loc._id);
-        ward.save().then(_, err => console.error(err));
-      }
-    },
-    err => console.error(err)
-  );
 
   cacheIdx = 'locations.' + loc._id.toString();
   async.series([
