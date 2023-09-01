@@ -5,26 +5,22 @@ Crowdsourcing data about which residential buildings do not have recycling in a 
 
 The app can currently be found at http://mybuildingdoesntrecycle.com
 
-Requirements
+Dependencies
 ------------
 
 * [Node.js](http://nodejs.org/)
 * [MongoDB](http://docs.mongodb.org/manual/)
 * [Memcached](http://memcached.org/)
 
-
 Getting Started
 ---------------
-For more detailed instructions see the [wiki](https://github.com/open-city/recycling/wiki)
+To start developing, first install Docker and [Docker Compose](https://docs.docker.com/compose/install/). Then run:
 
-* install dependencies
-  `npm install`
-* Run the schema migrations
-  `npm migrate:all`
-* Run `mongod` and `memcached` on default ports
-* run the app
-  `node server.js`
-* Then visit [http://localhost:3000](http://localhost:3000) in your browser.
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+The `docker-compose.dev.yml` file maps the repository to the docker container, so any client-side changes will be reflected immediately. Any changes to the node server itself will require a restart of the recycling container, which can be done with `docker compose -f docker-compose.dev.yml restart recycling`.
 
 Tests
 -----
