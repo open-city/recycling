@@ -2,7 +2,7 @@
   WIMR.createMap = function(id) {
     var map = L.map(id, {
       maxZoom: 20
-    }).setView([41.881, -87.629], 11);
+    }).setView(WIMR.clientConfig.citycentercoordinates, 11);
     var self = this;
     self.locations = {};
     self.pending = [];
@@ -118,7 +118,7 @@
 
     map.wimrReset = function(done) {
 
-      map.setView([41.881, -87.629], 11);
+      map.setView(WIMR.clientConfig.citycentercoordinates, 11);
       map.wimrRefreshLocations(function(){
         for (var loc in self.locations) {
           var mkr = self.locations[loc];

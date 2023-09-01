@@ -59,14 +59,16 @@
         $("#mapSpinner").hide();
         WIMR.dialog.hashChange();
       });
-
-      // WIMR is simply an application namespace,
-      // defined in /views/_footer.ejs
-      WIMR.map = WIMR.createMap('map');
       $("#mapSpinner .show").spin("show");
 
       $.getJSON("/clientconfig.json")
-        .done(cc => WIMR.clientConfig = cc)
+        .done(cc => {
+          WIMR.clientConfig = cc;
+
+          // WIMR is simply an application namespace,
+          // defined in /views/_footer.ejs
+          WIMR.map = WIMR.createMap('map');
+        })
         .always(() => {
           WIMR.dialog.showTemplate('search_form', {clientConfig: WIMR.clientConfig});
       });
