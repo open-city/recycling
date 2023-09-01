@@ -1,8 +1,7 @@
 var express = require('express')
   , fs = require('fs')
   , router = express.Router()
-  , env = process.env.NODE_ENV || 'development'
-  , config = require('../config/config.json')[env];
+  , config = require('../config/public/config.json');
 
 router.use(function(req, res, next){
   var tplFiles = fs.readdirSync('./public/js/view_handlers');

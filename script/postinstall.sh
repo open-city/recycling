@@ -1,1 +1,0 @@
-node script/flushcache.js

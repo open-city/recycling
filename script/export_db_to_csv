@@ -4,10 +4,7 @@ var json2csv = require('json2csv');
 var mongoose = require('mongoose');
 var _ = require('lodash');
 
-var env = process.env.NODE_ENV || 'development';
-var config = require('../config/config')[env];
-
-var dbCnx = process.env.MONGOLAB_URI || config.db;
+var dbCnx = process.env.MONGO_URI;
 var db = mongoose.connect(dbCnx);
 
 var Location = require('../models/Location');

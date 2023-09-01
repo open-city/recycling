@@ -67,7 +67,7 @@
 
           })
           .fail(function (response){
-            var status = "Sorry, either the address was incorrect or doesn't exist in " + WIMR.clientConfig.cityname + ".";
+            var status = "Sorry, either the address was incorrect or doesn't exist in " + WIMR.config.cityname + ".";
             $('#addressField').addClass('has-error');
             $('#status').wimrStatus(status, 'warning');
           });
@@ -78,8 +78,8 @@
   });
 
   function formatAddressRequest(inputAddress) {
-    var city = WIMR.clientConfig.cityname;
-    var state = WIMR.clientConfig.stateabbrev;
+    var city = WIMR.config.cityname;
+    var state = WIMR.config.stateabbrev;
     return encodeURIComponent([inputAddress,city,state].join(','));
   }
 

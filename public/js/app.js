@@ -53,7 +53,7 @@
   };
 
   $(document).ready(function(){
-    WIMR.clientConfig = null
+    WIMR.config = null
     if ($('#map').length) {
       $(window).one('locationsLoaded', function(){
         $("#mapSpinner").hide();
@@ -61,22 +61,22 @@
       });
       $("#mapSpinner .show").spin("show");
 
-      $.getJSON("/clientconfig.json")
+      $.getJSON("/config.json")
         .done(cc => {
-          WIMR.clientConfig = cc;
+          WIMR.config = cc;
 
           // WIMR is simply an application namespace,
           // defined in /views/_footer.ejs
           WIMR.map = WIMR.createMap('map');
         })
         .always(() => {
-          WIMR.dialog.showTemplate('search_form', {clientConfig: WIMR.clientConfig});
+          WIMR.dialog.showTemplate('search_form', {config: WIMR.config});
       });
 
       $('body').on('click', '.start-over', function(e){
         e.preventDefault();
         WIMR.map.wimrReset();
-        WIMR.dialog.showTemplate('search_form', {clientConfig: WIMR.clientConfig});
+        WIMR.dialog.showTemplate('search_form', {config: WIMR.config});
         window.location.hash = "";
       });
 
