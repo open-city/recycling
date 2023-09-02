@@ -12,8 +12,12 @@ Dependencies
 * [MongoDB](http://docs.mongodb.org/manual/)
 * [Memcached](http://memcached.org/)
 
-Getting Started
----------------
+Running Your Own Instance
+--------------------------------
+If you'd like to run your own instance for your city, you can fork this repository and change the [configs](./config/) to make sense for your city. You can then push up a new branch, and trigger a GitHub Actions build for the branch. Then, if you also modify the [docker-compose.yml](./docker-compose.yml) file to point to your branch name, you can start the instance by simply running `docker compose up` once you've copied the compose file down. See the [denver](https://github.com/samc1213/recycling/tree/denver) branch for an example.
+
+Getting Started With Development
+--------------------------------
 To start developing, first install Docker and [Docker Compose](https://docs.docker.com/compose/install/). Then run:
 
 ```bash
