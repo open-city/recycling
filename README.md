@@ -22,6 +22,8 @@ docker compose -f docker-compose.dev.yml up --build
 
 The `docker-compose.dev.yml` file maps the repository to the docker container, so any client-side changes will be reflected immediately. Any changes to the node server itself will require a restart of the recycling container, which can be done with `docker compose -f docker-compose.dev.yml restart recycling`.
 
+To clean all the data from the mongoDB database, you can run `docker compose -f docker-compose.dev.yml down -v`
+
 Tests
 -----
 Run the tests with ```npm test```
