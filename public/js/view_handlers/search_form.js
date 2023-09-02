@@ -84,7 +84,7 @@
   }
 
   function filterGeocodeResponse(results) {
-    return results.filter(result => result.addresstype == 'building')
+    return results.filter(result => result.addresstype == 'building' || result.addresstype == 'place')
   }
 
 })(jQuery, WIMR);

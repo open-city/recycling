@@ -4,15 +4,15 @@
 <ul>
   <% for (var i=0; i<possibleAddresses.length; i++) { %>
   <% var addr = possibleAddresses[i] %>
-  <% var lat = addr.geometry.location.lat; %>
-  <% var lng = addr.geometry.location.lng; %>
+  <% var lat = addr.lat; %>
+  <% var lng = addr.lon; %>
   <li class='search-result'>
     <a class="clickable"
        href='/locations.json?latitude=<%= lat %>&longitude=<%= lng %>'
        data-latitude='<%= lat %>'
        data-longitude='<%= lng %>'
     >
-      <%= possibleAddresses[i].short_address %>
+      <%= addr.display_name %>
     </a>
   </li>
   <% } %>
