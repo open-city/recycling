@@ -3,7 +3,7 @@ My Building Doesn't Recycle
 
 Crowdsourcing data about which residential buildings do not have recycling in a given area. I am attempting to modify this fork to be generic, so instead of being Chicago-centric, it is possible to deploy this application for a new city looking to document recycling needs.
 
-The app can currently be found at http://mybuildingdoesntrecycle.com
+The app can currently be found at http://recycling.samacohen.com
 
 Dependencies
 ------------
