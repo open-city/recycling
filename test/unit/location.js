@@ -1,12 +1,10 @@
 process.env.NODE_ENV = 'test';
 require('../../models/Location');
-require('../../models/Ward');
 
 var app = require('../../server')
   , expect = require('chai').expect
   , mongoose = require('mongoose')
   , Location = mongoose.model('Location')
-  , Ward = mongoose.model('Ward')
   ;
 
 describe('Unit Tests - Location', function(){
@@ -20,11 +18,10 @@ describe('Unit Tests - Location', function(){
         coordinates: [0.0, 0.0]
       }
     });
-    location.save(function(err, location){
-      expect(err).to.equal(null);
+    location.save().then(location => {
       expect(location._id.toString()).to.match(/[\w\d]{24}/);
       done();
-    });
+    }, null);
   });
 
   it("should require an address", function(done){
@@ -36,7 +33,7 @@ describe('Unit Tests - Location', function(){
         coordinates: [0.0, 0.0]
       }
     });
-    location.save(function(err, location){
+    location.save().then(null, err => {
       expect(err).to.exist;
       done();
     });
@@ -51,7 +48,7 @@ describe('Unit Tests - Location', function(){
         coordinates: [0.0, 0.0]
       }
     });
-    location.save(function(err, location){
+    location.save().then(null, err => {
       expect(err).to.exist;
       // err.message.to.equal('Must provide an address');
       done();
@@ -120,9 +117,5 @@ describe('Unit Tests - Location', function(){
       expect(location.geoJsonPoint.coordinates[0]).to.equal(-88);
       done();
     })
-  });
-
-  it("should add _id to corresponding ward's locations array", function(done) {
-    done();
   });
 });

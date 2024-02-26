@@ -53,25 +53,30 @@
   };
 
   $(document).ready(function(){
-
+    WIMR.config = null
     if ($('#map').length) {
-
-      // WIMR is simply an application namespace,
-      // defined in /views/_footer.ejs
-      WIMR.map = WIMR.createMap('map');
+      $(window).one('locationsLoaded', function(){
+        $("#mapSpinner").hide();
+        WIMR.dialog.hashChange();
+      });
       $("#mapSpinner .show").spin("show");
 
-      WIMR.dialog.showTemplate('search_form', {}, function(){
-        $(window).one('locationsLoaded', function(){
-          $("#mapSpinner").hide();
-          WIMR.dialog.hashChange();
-        });
+      $.getJSON("/config.json")
+        .done(cc => {
+          WIMR.config = cc;
+
+          // WIMR is simply an application namespace,
+          // defined in /views/_footer.ejs
+          WIMR.map = WIMR.createMap('map');
+        })
+        .always(() => {
+          WIMR.dialog.showTemplate('search_form', {config: WIMR.config});
       });
 
       $('body').on('click', '.start-over', function(e){
         e.preventDefault();
         WIMR.map.wimrReset();
-        WIMR.dialog.showTemplate('search_form');
+        WIMR.dialog.showTemplate('search_form', {config: WIMR.config});
         window.location.hash = "";
       });
 
@@ -88,12 +93,8 @@
 
     WIMR.getCounts();
 
-    $('form#contact-form').submit(WIMR.contactFormHandler);
     $('#fb-share').on('click', WIMR.fbShareHandler);
     $('#tw-share').on('click', WIMR.twShareHandler);
-    if ($('#reports_by_ward').length) {
-      var ts = new SortableTable('#reports_by_ward');
-    }
   });
 
 
@@ -129,70 +130,6 @@
     var m = months[ date.getMonth() ];
     var y = date.getFullYear();
     return m + " " + d + ", " + y;
-  };
-
-  WIMR.contactFormHandler = function (e) {
-
-    e.preventDefault();
-    var $form = $(this),
-        action = $(this).attr('action'),
-        $resMsg = $(document).find('#response'),
-        data = {
-          name: $form.find('#name').val(),
-          email: $form.find('#email').val(),
-          subject: $form.find('#subject').val(),
-          message: $form.find('#message').val(),
-          g_recaptcha_response: grecaptcha.getResponse()
-        };
-
-    $form.wimrLoading();
-
-    $.post(action, data, function (res) {
-      $form.wimrLoading('clear');
-      var clearForm = false;
-      var response = '';
-      if (res.status == '200') {
-        response = '<strong>Thanks!</strong> Your message has been sent!';
-        $resMsg.html(response);
-        $resMsg.addClass('bg-success');
-        clearForm = true;
-      } else {
-        response = '<strong>Oh no! An error occurred!</strong> ';
-        response += '<br>' + res.message;
-        $resMsg.html(response);
-        $resMsg.addClass('bg-danger');
-      }
-      if (clearForm) {
-        $('#name').val('');
-        $('#email').val('');
-        $('#message').val('');
-      }
-    });
-
-  };
-
-  /**
-   * Parses the returned address from the Google Maps api
-   * into an object with properties 'street_number', 'route',
-   * 'city', 'state', 'zip'
-   */
-  WIMR.parseGoogleAddress = function(addr) {
-    var ret = {};
-    var propMap = {
-      'administrative_area_level_1': 'state',
-      'administrative_area_level_2': 'county',
-      'locality': 'city',
-      'postal_code': 'zip',
-      'postal_code_suffix': 'zip_plus_four'
-    };
-    addr.address_components.forEach(function(part){
-      var googleProp = part.types[0];
-      var prop = propMap[googleProp] || googleProp;
-      ret[prop] = part.long_name;
-    });
-    ret.number_and_route = ret.street_number + ' ' + ret.route;
-    ret.geometry = addr.geometry;
-    return ret;
   };
 
 })(jQuery);

@@ -3,7 +3,6 @@ var async = require('async')
   , crypto = require('crypto')
   , mongoose = require('mongoose')
   , Report = require('./Report')
-  , Ward = require('./Ward')
   , Schema = mongoose.Schema
   ;
 
@@ -13,13 +12,13 @@ var LocationSchema = new Schema({
     type: String,
     required: true
   },
-  
+
   reports: [{
     type: Schema.ObjectId,
     ref: 'Report',
     index: true
   }],
-  
+
   geoJsonPoint: {
     type: 'Mixed',
     required: true,
@@ -32,31 +31,24 @@ var LocationSchema = new Schema({
 
 LocationSchema.virtual('latitude').get(function(){
   return this.geoJsonPoint.coordinates[1];
-}) 
+})
 
 LocationSchema.virtual('latitude').set(function(lat){
   this.geoJsonPoint.coordinates[1] = lat;
-}) 
+})
 
 LocationSchema.virtual('longitude').get(function(){
   return this.geoJsonPoint.coordinates[0];
-}) 
+})
 
 LocationSchema.virtual('longitude').set(function(lat){
   this.geoJsonPoint.coordinates[0] = lat;
-}) 
+})
 
 
 
 LocationSchema.post('save', function(loc){
   var pt = loc.geoJsonPoint;
-  Ward.findOne({geometry: { $geoIntersects: { $geometry: pt }}}, function(err, ward){
-    if (err) return console.error(err);
-    if (ward) {
-      ward.locations.addToSet(loc._id);
-      ward.save(); // triggers flush of appropriate ward cache entry
-    }
-  });
 
   cacheIdx = 'locations.' + loc._id.toString();
   async.series([
@@ -64,7 +56,7 @@ LocationSchema.post('save', function(loc){
     function(cb){ cache.delete(cacheIdx, cb); },
   ])
 
-})
+});
 
 LocationSchema.path('address').validate(function (address) {
   return !(address == "")

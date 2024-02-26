@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+ recycling:
+  image: ghcr.io/samc1213/recycling:latest
+  ports:
+   - 3000:3000
+  environment:
+   - PORT=3000
+   - MONGO_URI=mongodb://mongo:27017/recycling_production
+   - MEMCACHE_SERVERS=memcached:11211
+  command: node server.js
+
+ mongo:
+  image: mongo:7.0.0
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+
+ memcached:
+  image: memcached:1.6.14
+
+volumes:
+ mongodb:
+ mongodb_config:

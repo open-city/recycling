@@ -2,7 +2,7 @@
   WIMR.createMap = function(id) {
     var map = L.map(id, {
       maxZoom: 20
-    }).setView([41.881, -87.629], 11);
+    }).setView(WIMR.config.citycentercoordinates, 11);
     var self = this;
     self.locations = {};
     self.pending = [];
@@ -118,7 +118,7 @@
 
     map.wimrReset = function(done) {
 
-      map.setView([41.881, -87.629], 11);
+      map.setView(WIMR.config.citycentercoordinates, 11);
       map.wimrRefreshLocations(function(){
         for (var loc in self.locations) {
           var mkr = self.locations[loc];
@@ -161,9 +161,9 @@
       return self.locations[id];
     };
 
-    L.tileLayer('http://api.tiles.mapbox.com/v4/smartchicagocollaborative.l45jl5j8/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic21hcnRjaGljYWdvY29sbGFib3JhdGl2ZSIsImEiOiJ5MzB1MHFNIn0.190SObdn-P8VvOWu7AQvVA', {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      attribution: 'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     map.wimrRefreshLocations();
